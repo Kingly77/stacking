@@ -1,10 +1,10 @@
-const home = require('express').Router();
+const index = require('express').Router();
 
-home.get('/',(req,res)=>
+index.get('/',(req, res)=>
 {
 
 res.render('home');
 
 });
 
-module.exports = home;
+module.exports = index;
