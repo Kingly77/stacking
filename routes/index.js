@@ -7,4 +7,13 @@ res.render('home');
 
 });
 
+
+index.get(`/upgrade`,((req, res) => {
+
+    res.render('home');
+
+}));
+
+
+
 module.exports = index;
