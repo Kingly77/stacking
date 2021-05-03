@@ -25,7 +25,7 @@ upgrades.init(
 
     },
     {
-        sql
+        sequelize: sql
     }
 )
 
