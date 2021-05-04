@@ -1,11 +1,7 @@
 const {Model, DataTypes} = require("sequelize");
-const sql = require("./connections");
+const sequelize = require("./connections");
 
-class upgrades extends Model {
-
-
-
-}
+class upgrades extends Model {}
 
 upgrades.init(
     {
@@ -24,10 +20,7 @@ upgrades.init(
 
 
     },
-    {
-        sequelize: sql
-    }
+    {sequelize}
 )
-
 
 module.exports = upgrades;

@@ -1,29 +1,26 @@
 
+
+let mod = 1;
+
+
 const thing = Vue.createApp({
 
     data(){
         return{
-            chips:0,
+            chips:0
         }
-    }
-
-});
-
-thing.component('fish',{
-
-    data(){
-       return{
-           chips:0
-       }
     },
-    props:{'num':Number},
-
     template:`
-      <h1>{{chips}}</h1>
-     <button @click="chips++">MAKE CHIP</button>
+      <h3>{{chips}}</h3>
+      <button @click="chips++"></button>
     `
-})
+}).mount('#chip')
+
+
+console.log(thing);
+
 thing.mount('#chip');
 
 
-$.get('/upgrades',{lvl:0, cookies:2000})
+
+//$.get('/upgrades',{lvl:0, cookies:2000})
