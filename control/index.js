@@ -16,13 +16,13 @@ const unlocks = Vue.createApp({
                     lvl : 1,
                     cost: {
                         boards:0,
-                        res:150,
+                        res:1,
                         chips:0,
                         cpus:0,
                     },
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
-                    mod: 1
+                    doBuy:()=>{  boardsApp.ishide = false }
                 },
 
                 {
@@ -35,7 +35,7 @@ const unlocks = Vue.createApp({
                     },
                     name: "Unlock Chip",
                     usage: "Allows to make Chips",
-                    mod: 1
+                    doBuy:()=>{  thing.ishide = false }
                 },
 
                 {
@@ -47,26 +47,39 @@ const unlocks = Vue.createApp({
                         cpus:0,
                     },
                     name: "Unlock CPUS",
-                    usage: "Allows to make Cpus"
+                    usage: "Allows to make Cpus",
+                    // TODO ADD WHEN IMPLEMENTED
+                    doBuy:()=>{  console.log('NOT IMPLEMENTED') }
                 }
             ],
         }
     },
     methods:{
+        doUnlock(){
+
+            const {cost , doBuy} = this.listoupgrade[this.curUpgrade];
+            console.log(cost.res);
+            if(cost.boards > boardsApp.count || cost.chips > thing.chips  || cost.res > compApp.count ) return;
+            cost.boards += -boardsApp.count;
+            cost.chips += -thing.chips
+            cost.res += -compApp.count
+            doBuy();
+            this.curUpgrade++;
+        }
     },
 
     template:
         `
           <tr>
           <td >
-            <button @click="">
-              {{}}
+            <button @click="doUnlock">
+              {{listoupgrade[curUpgrade].name}}
             </button>
           </td>
           </tr>
         `
 
-}).mount('.listV')
+}).mount('#unlocky')
 
 
 const compApp = Vue.createApp({
@@ -78,7 +91,7 @@ const compApp = Vue.createApp({
     },
     template: `
       <h3>resister<br>{{count}}</h3>
-      <button @click='count++'>Do Click</button>;
+      <button @click='count++'>Do Click</button>
     `
 
 }).mount('#comp');
@@ -97,7 +110,7 @@ const boardsApp = Vue.createApp({
     template: `
       <div v-if="!ishide">
       <h3>Boards<br>{{count}}</h3>
-    <button @click='count++'>Do Click</button>;
+    <button @click='count++'>Do Click</button>
       </div>
     `
 
@@ -123,8 +136,10 @@ const thing = Vue.createApp({
     },
 
     template:`
+      <div v-if="!ishide">
       <h3>{{chips}}</h3>
       <button @click="addchip">DO CHIP</button>
+      </div>
     `
 }).mount('#chip')
 
@@ -222,6 +237,6 @@ const resist = Vue.createApp({
 </td>
 </tr>
 `
-}).mount('.listV')
+}).mount('#listV')
 
 //$.get('/upgrades',{lvl:0, cookies:2000})
