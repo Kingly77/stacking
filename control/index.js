@@ -2,38 +2,52 @@ let clickmodifier = {
     chip:0,
     comp:0
 };
-let list;
+
 let perSecModifer= 0;
 
-(async ()=>{
-
-    list = await $.get('/upgrades');
-
-    console.log(list)
-
-})();
-
+//TODO FIX COSTS
 const unlocks = Vue.createApp({
 
     data(){
         return{
-
-            boards:false,
-
+            curUpgrade:0,
             listoupgrade: [
-
                 {
                     lvl : 1,
-                    cost: 10,
-                    name: "Unlock Chip",
-                    usage: "Makes +1 Chip per Click",
+                    cost: {
+                        boards:0,
+                        res:150,
+                        chips:0,
+                        cpus:0,
+                    },
+                    name: "Unlock Boards",
+                    usage: "Allows to make boards",
                     mod: 1
                 },
+
                 {
                     lvl : 5,
-                    cost: 20,
+                    cost: {
+                        boards:30,
+                        res:30,
+                        chips:0,
+                        cpus:0,
+                    },
+                    name: "Unlock Chip",
+                    usage: "Allows to make Chips",
+                    mod: 1
+                },
+
+                {
+                    lvl : 10,
+                    cost: {
+                        boards:0,
+                        res:0,
+                        chips:100,
+                        cpus:0,
+                    },
                     name: "Unlock CPUS",
-                    usage: "Makes +5 Chip per Click"
+                    usage: "Allows to make Cpus"
                 }
             ],
         }
@@ -55,8 +69,6 @@ const unlocks = Vue.createApp({
 }).mount('.listV')
 
 
-
-
 const compApp = Vue.createApp({
 
     data(){
@@ -66,7 +78,7 @@ const compApp = Vue.createApp({
     },
     template: `
       <h3>resister<br>{{count}}</h3>
-    <button @click='count++'>Do Click</button>;
+      <button @click='count++'>Do Click</button>;
     `
 
 }).mount('#comp');
@@ -76,7 +88,7 @@ const boardsApp = Vue.createApp({
     data(){
         return{
             count:0,
-            ishide:true
+            ishide:true,
         }
     },
     methods:{
@@ -96,7 +108,8 @@ const thing = Vue.createApp({
 
     data(){
         return{
-            chips:0
+            chips:0,
+            ishide:true,
         }
     },
 
@@ -111,7 +124,7 @@ const thing = Vue.createApp({
 
     template:`
       <h3>{{chips}}</h3>
-      <button @click="chips+=1">DO CHIP</button>
+      <button @click="addchip">DO CHIP</button>
     `
 }).mount('#chip')
 
@@ -137,19 +150,7 @@ data(){
                 usage: "Makes +1 resistor per Click",
                 mod: 1
             },
-            {
-                lvl : 1,
-                cost: 10,
-                name: "Unlock Chip",
-                usage: "Makes +1 Chip per Click",
-                mod: 1
-            },
-            {
-                lvl : 5,
-                cost: 20,
-                name: "Unlock CPUS",
-                usage: "Makes +5 Chip per Click"
-            }
+
         ],
     }
 },
@@ -169,7 +170,6 @@ data(){
 
 template:
 `
-
 <button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
   {{listoupgrade[curUpgrade].name}}
 </button>
@@ -182,6 +182,7 @@ const resist = Vue.createApp({
 
     data(){
         return{
+            curUp:0,
             listoupgrade: [
                 {
                     lvl : 1,
@@ -197,41 +198,30 @@ const resist = Vue.createApp({
                     usage: "Makes +1 resistor per Click",
                     mod: 1
                 },
-                {
-                    lvl : 1,
-                    cost: 10,
-                    name: "Unlock Chip",
-                    usage: "Makes +1 Chip per Click",
-                    mod: 1
-                },
-                {
-                    lvl : 5,
-                    cost: 20,
-                    name: "Unlock CPUS",
-                    usage: "Makes +5 Chip per Click"
-                }
+
             ],
         }
     },
-
     methods:{
+        checkupgrade(price){
+
+            if(compApp.count < price ) return;
+            compApp.count-= price;
+            this.curUpgrade++;
+
+        }
 
     },
-
     template:
         `
 <tr>
 <td >
-<button @click="">
-  {{}}
+<button @click="checkupgrade(this.listoupgrade[this.curUp].cost)">
+  {{this.listoupgrade[this.curUp].name}}
 </button>
 </td>
 </tr>
 `
-
 }).mount('.listV')
-
-
-
 
 //$.get('/upgrades',{lvl:0, cookies:2000})
