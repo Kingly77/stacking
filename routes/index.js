@@ -1,10 +1,11 @@
 const index = require('express').Router();
 const upgrades = require('./upgrades')
+const list = require('../Seed/seedData')
 
 index.get('/',(req, res)=>
 {
 
-res.render('home');
+res.render('home',{list});
 
 });
 

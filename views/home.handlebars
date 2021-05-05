@@ -2,21 +2,14 @@
 <h1>IT WORKS</h1>
 
 {{>doClick}}
-{{>upgrade}}
+
 
 </div>
 
 <table>
 
-  <tr>
-
-    <td>
-      <div id="WHAT AM I">
-        <p>hello</p>
-      </div>
-
-    </td>
-
-  </tr>
+      {{#each list}}
+      {{>upgrade}}
+      {{/each}}
 
 </table>
