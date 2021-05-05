@@ -7,7 +7,7 @@ let clickmodifier = {
 let perSec= {
     chips:0,
     boards:0,
-    comps:1
+    comps:0
 };
 
 
@@ -19,7 +19,7 @@ setInterval(()=>{
 
 },1000)
 
-//TODO ADD PER SECOND INCRES AND BUILDINGS OR EQUIVLANT
+//TODO ADD PER SECOND INCRES AND BUILDINGS OR EQUIVALENT
 const unlocks = Vue.createApp({
 
     data(){
@@ -74,9 +74,9 @@ const unlocks = Vue.createApp({
             const {cost , doBuy} = this.listoupgrade[this.curUpgrade];
             console.log(cost.res);
             if(cost.boards > boardsApp.count || cost.chips > thing.chips  || cost.res > compApp.count ) return;
-            cost.boards += -boardsApp.count;
-            cost.chips += -thing.chips
-            cost.res += -compApp.count
+            boardsApp.count -= cost.boards;
+            thing.chips -= cost.chips;
+            compApp.count -= cost.res;
             doBuy();
             this.curUpgrade++;
         }
@@ -111,7 +111,7 @@ const compApp = Vue.createApp({
     },
 
     template: `
-      <h3>resister<br>{{count}}</h3>
+      <h3>Resister<br>{{count}}</h3>
       <button @click='addComp'>Do Click</button>
     `
 
@@ -150,7 +150,7 @@ const thing = Vue.createApp({
     methods:{
 
       addchip(){
-          if(board <= 1.2*(1.09)^this.chips && resist <= 2*(1.09)^this.chips) return;
+          if(boardsApp.count <= 1.2*(1.09)^this.chips && compApp.count <= 2*(1.09)^this.chips) return;
           this.chips+= clickmodifier.chip + 1;
       }
 
@@ -158,6 +158,7 @@ const thing = Vue.createApp({
 
     template:`
       <div v-if="!ishide">
+      <h3>Chips</h3>
       <h3>{{chips}}</h3>
       <button @click="addchip">DO CHIP</button>
       </div>
@@ -188,14 +189,12 @@ data(){
             },
 
         ],
+        ishide:true,
     }
 },
 
     methods:{
         checkupgrade(price){
-
-            console.log(thing.chips)
-            console.log(price)
 
             if(thing.chips < price ) return;
             thing.chips-= price;
@@ -206,9 +205,11 @@ data(){
 
 template:
 `
+  <div v-if="!ishide">
 <button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
   {{listoupgrade[curUpgrade].name}}
 </button>
+  </div>
 `
 
 }).mount('#chipUp')
@@ -236,7 +237,7 @@ const resist = Vue.createApp({
                 },
 
             ],
-            ishide:true,
+            ishide:false,
         }
     },
     methods:{
@@ -244,8 +245,7 @@ const resist = Vue.createApp({
 
             if(compApp.count < price ) return;
             compApp.count-= price;
-            this.curUpgrade++;
-
+            this.curUp++;
         }
 
     },
@@ -258,4 +258,4 @@ const resist = Vue.createApp({
           </div>
 
 `
-}).mount('#listV')
+}).mount('#compUp')
