@@ -27,6 +27,20 @@ const compApp = Vue.createApp({
 
 }).mount('#comp');
 
+const boardsApp = Vue.createApp({
+
+    data(){
+        return{
+            count:0,
+        }
+    },
+    template: `
+      <h3>Boards<br>{{count}}</h3>
+    <button @click='count++'>Do Click</button>;
+    `
+
+}).mount('#boards');
+
 
 const thing = Vue.createApp({
 
@@ -35,6 +49,18 @@ const thing = Vue.createApp({
             chips:0
         }
     },
+
+    methods:{
+
+      addchip(){
+          if(board <= 1.2*(1.09)^this.chips && resist <= 2*(1.09)^this.chips) return;
+
+          this.chips++;
+
+      }
+
+    },
+
     template:`
       <h3>{{chips}}</h3>
       <button @click="chips+=1">DO CHIP</button>
@@ -42,7 +68,7 @@ const thing = Vue.createApp({
 }).mount('#chip')
 
 
-const updot = Vue.createApp({
+const chips = Vue.createApp({
 
 data(){
     return{
@@ -106,7 +132,7 @@ template:
 }).mount('.list')
 
 
-const updot2 = Vue.createApp({
+const resist = Vue.createApp({
 
     data(){
         return{
@@ -156,6 +182,60 @@ const updot2 = Vue.createApp({
 </td>
 </tr>
 `
+
+}).mount('.listV')
+
+
+const unlocks = Vue.createApp({
+
+    data(){
+        return{
+            listoupgrade: [
+                {
+                    lvl : 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Resistors faster",
+                    mod: 1
+                },
+                {
+                    lvl : 1,
+                    cost:5,
+                    name: "Make MORE",
+                    usage: "Makes +1 resistor per Click",
+                    mod: 1
+                },
+                {
+                    lvl : 1,
+                    cost: 10,
+                    name: "Unlock Chip",
+                    usage: "Makes +1 Chip per Click",
+                    mod: 1
+                },
+                {
+                    lvl : 5,
+                    cost: 20,
+                    name: "Unlock CPUS",
+                    usage: "Makes +5 Chip per Click"
+                }
+            ],
+        }
+    },
+
+    methods:{
+
+    },
+
+    template:
+        `
+          <tr>
+          <td >
+            <button @click="">
+              {{}}
+            </button>
+          </td>
+          </tr>
+        `
 
 }).mount('.listV')
 
