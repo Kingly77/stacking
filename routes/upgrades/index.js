@@ -3,7 +3,7 @@ const upgrades = require('./upgrades');
 
 
 
-index.use('/upgrades', upgrades);
+index.use('/', upgrades);
 
 
 module.exports = index;

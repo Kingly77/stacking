@@ -1,6 +1,8 @@
 const index = require('express').Router();
 const db = require('../../models');
+const list = require('../../Seed/seedData')
 
+//TODO move
 index.get('/:level', (async (req, res) => {
 
 
@@ -8,24 +10,16 @@ index.get('/:level', (async (req, res) => {
 
     const a =await  db.upgrade.findAll({where: {lvl: level}});
 
-
     res.json(a);
 
 }));
 
-index.get('/upgrades', (async(req, res) => {
-
-    const list = db.upgrade.list;
+index.get('/', (async(req, res) => {
     res.json(list);
-
-
 }))
 
-
-
+//todo MOVE ROUTE
 index.put('/save',(async (req,res)=>{
-
-
 
 
 }))
