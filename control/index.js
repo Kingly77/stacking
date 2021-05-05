@@ -13,6 +13,50 @@ let perSecModifer= 0;
 
 })();
 
+const unlocks = Vue.createApp({
+
+    data(){
+        return{
+
+            boards:false,
+
+            listoupgrade: [
+
+                {
+                    lvl : 1,
+                    cost: 10,
+                    name: "Unlock Chip",
+                    usage: "Makes +1 Chip per Click",
+                    mod: 1
+                },
+                {
+                    lvl : 5,
+                    cost: 20,
+                    name: "Unlock CPUS",
+                    usage: "Makes +5 Chip per Click"
+                }
+            ],
+        }
+    },
+    methods:{
+    },
+
+    template:
+        `
+          <tr>
+          <td >
+            <button @click="">
+              {{}}
+            </button>
+          </td>
+          </tr>
+        `
+
+}).mount('.listV')
+
+
+
+
 const compApp = Vue.createApp({
 
     data(){
@@ -32,11 +76,17 @@ const boardsApp = Vue.createApp({
     data(){
         return{
             count:0,
+            ishide:true
         }
     },
+    methods:{
+    },
+
     template: `
+      <div v-if="!ishide">
       <h3>Boards<br>{{count}}</h3>
     <button @click='count++'>Do Click</button>;
+      </div>
     `
 
 }).mount('#boards');
@@ -54,9 +104,7 @@ const thing = Vue.createApp({
 
       addchip(){
           if(board <= 1.2*(1.09)^this.chips && resist <= 2*(1.09)^this.chips) return;
-
           this.chips++;
-
       }
 
     },
@@ -68,7 +116,7 @@ const thing = Vue.createApp({
 }).mount('#chip')
 
 
-const chips = Vue.createApp({
+const chipsUpgrades = Vue.createApp({
 
 data(){
     return{
@@ -121,12 +169,10 @@ data(){
 
 template:
 `
-<td >
+
 <button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
   {{listoupgrade[curUpgrade].name}}
 </button>
-</td>
-
 `
 
 }).mount('.list')
@@ -185,59 +231,6 @@ const resist = Vue.createApp({
 
 }).mount('.listV')
 
-
-const unlocks = Vue.createApp({
-
-    data(){
-        return{
-            listoupgrade: [
-                {
-                    lvl : 1,
-                    cost: 1,
-                    name: "Make Faster",
-                    usage: "Makes Resistors faster",
-                    mod: 1
-                },
-                {
-                    lvl : 1,
-                    cost:5,
-                    name: "Make MORE",
-                    usage: "Makes +1 resistor per Click",
-                    mod: 1
-                },
-                {
-                    lvl : 1,
-                    cost: 10,
-                    name: "Unlock Chip",
-                    usage: "Makes +1 Chip per Click",
-                    mod: 1
-                },
-                {
-                    lvl : 5,
-                    cost: 20,
-                    name: "Unlock CPUS",
-                    usage: "Makes +5 Chip per Click"
-                }
-            ],
-        }
-    },
-
-    methods:{
-
-    },
-
-    template:
-        `
-          <tr>
-          <td >
-            <button @click="">
-              {{}}
-            </button>
-          </td>
-          </tr>
-        `
-
-}).mount('.listV')
 
 
 
