@@ -13,6 +13,14 @@ index.get('/:level', (async (req, res) => {
 
 }));
 
+index.get('/upgrades', (async(req, res) => {
+
+    const list = db.upgrade.list;
+    res.json(list);
+
+
+}))
+
 
 
 index.put('/save',(async (req,res)=>{
