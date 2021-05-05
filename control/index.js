@@ -1,11 +1,25 @@
 let clickmodifier = {
     chip:0,
-    comp:0
+    comp:0,
+    board:0
 };
 
-let perSecModifer= 0;
+let perSec= {
+    chips:0,
+    boards:0,
+    comps:1
+};
 
-//TODO FIX COSTS
+
+setInterval(()=>{
+    boardsApp.count += perSec.boards
+    thing.chips+= perSec.chips;
+    compApp.count+=perSec.comps;
+
+
+},1000)
+
+//TODO ADD PER SECOND INCRES AND BUILDINGS OR EQUIVLANT
 const unlocks = Vue.createApp({
 
     data(){
@@ -89,9 +103,16 @@ const compApp = Vue.createApp({
             count:0,
         }
     },
+    methods:{
+        addComp()
+        {
+            this.count += clickmodifier.comp + 1;
+        }
+    },
+
     template: `
       <h3>resister<br>{{count}}</h3>
-      <button @click='count++'>Do Click</button>
+      <button @click='addComp'>Do Click</button>
     `
 
 }).mount('#comp');
@@ -130,7 +151,7 @@ const thing = Vue.createApp({
 
       addchip(){
           if(board <= 1.2*(1.09)^this.chips && resist <= 2*(1.09)^this.chips) return;
-          this.chips++;
+          this.chips+= clickmodifier.chip + 1;
       }
 
     },
@@ -190,7 +211,7 @@ template:
 </button>
 `
 
-}).mount('.list')
+}).mount('#chipUp')
 
 
 const resist = Vue.createApp({
@@ -215,6 +236,7 @@ const resist = Vue.createApp({
                 },
 
             ],
+            ishide:true,
         }
     },
     methods:{
@@ -229,14 +251,11 @@ const resist = Vue.createApp({
     },
     template:
         `
-<tr>
-<td >
+          <div v-if="!this.ishide">
 <button @click="checkupgrade(this.listoupgrade[this.curUp].cost)">
   {{this.listoupgrade[this.curUp].name}}
 </button>
-</td>
-</tr>
+          </div>
+
 `
 }).mount('#listV')
-
-//$.get('/upgrades',{lvl:0, cookies:2000})
