@@ -8,6 +8,9 @@ upgrades.init(
         lvl: {
             type: DataTypes.INTEGER,
         },
+        cost:{
+            type:DataTypes.INTEGER,
+        },
         name: {
             type: DataTypes.STRING,
         },
