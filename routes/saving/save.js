@@ -5,7 +5,9 @@ const db = require('../../models');
 
 async function savepersec(saveID , rest)
 {
-    const didwork = await db.save.savPerSec.findOne({where:{id: rest.saveID }});
+
+
+    const didwork = await db.save.savPerSec.findOne({where:{saveID}});
 
     const {chips:chipsPS,board:boardPS, cpu:cpuPS} = rest.persec;
 
@@ -37,7 +39,10 @@ async function savepersec(saveID , rest)
 async function saveupgrade(saveID, rest)
 {
 
-    const didwork = await db.save.savUpgrade.findOne({where:{id: rest.saveID }});
+    const didwork = await db.save.savUpgrade.findOne({where:{saveID }});
+
+    const {chips, comps, boards}= rest.units.persec;
+
 
     if(didwork === null)
     {
@@ -66,7 +71,7 @@ rSave.post('/',(async (req,res)=>{
 
 
     const {rest} = req.body;
-    const didWork = await db.save.savUnits.findOne({where:{id: rest.saveID }});
+    const didWork = await db.save.savUnits.findOne({where:{saveID }});
 
     const {saveID} = rest;
     const {chips,comps,board,cpus} = rest.units;
