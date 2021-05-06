@@ -1,0 +1,2 @@
+$('#save').click();
+$('#load').click();

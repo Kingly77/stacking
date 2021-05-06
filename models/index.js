@@ -1,6 +1,6 @@
 const connect = require('./connections');
 
-const upgrade = require('./upgrade');
+const save = require('./saveTble');
 
 
-module.exports = {connect, upgrade};
+module.exports = {connect, save};

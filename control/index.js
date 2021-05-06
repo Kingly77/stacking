@@ -10,12 +10,10 @@ let perSec= {
     comps:0
 };
 
-
 setInterval(()=>{
     boardsApp.count += perSec.boards
     thing.chips+= perSec.chips;
     compApp.count+=perSec.comps;
-
 
 },1000)
 
