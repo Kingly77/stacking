@@ -7,7 +7,7 @@ $('#save').click((async () =>
             chips:thing.chips,
             boards:boardsApp.count,
             comps:compApp.count,
-            cpus:0, //TODO CHANGE
+            cpus:cpuApp.count, //TODO CHANGE
             },
         click:clickmodifier,
         persec: perSec,
@@ -28,6 +28,27 @@ $('#save').click((async () =>
 }));
 $('#load').click((async ()=>{
     await $.get('/api/load', {
+    rest:{
+        saveID: $('#id').val(),
+        units:{
+        chips:thing.chips,
+        boards:boardsApp.count,
+        comps:compApp.count,
+        cpus:cpuApp.count, //TODO CHANGE
+        },
+    click:clickmodifier,
+    persec: perSec,
+    upgrade:{
+        chip:chipsUpgrades.curUpgrade,
+        comp:resist.curUp,
+
+    },
 
     }
+    },
+    () =>
+    {
+
+    }
+    )
 }));

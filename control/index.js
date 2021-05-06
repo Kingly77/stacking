@@ -1,19 +1,23 @@
 let clickmodifier = {
     chip:0,
     comp:0,
-    board:0
+    board:0,
+    cpu:0
 };
 
 let perSec= {
     chips:0,
     boards:0,
-    comps:0
+    comps:0,
+    cpus:0
 };
 
 setInterval(()=>{
     boardsApp.count += perSec.boards
     thing.chips+= perSec.chips;
     compApp.count+=perSec.comps;
+    cpuApp.count+=perSec.cpus;
+
 
 },1000)
 
@@ -53,15 +57,15 @@ const unlocks = Vue.createApp({
                 {
                     lvl : 10,
                     cost: {
-                        boards:0,
-                        res:0,
-                        chips:100,
+                        boards:30,
+                        res:30,
+                        chips:30,
                         cpus:0,
                     },
                     name: "Unlock CPUS",
                     usage: "Allows to make Cpus",
                     // TODO ADD WHEN IMPLEMENTED
-                    doBuy:()=>{  console.log('NOT IMPLEMENTED') }
+                    doBuy:()=>{ thing.ishide = false }
                 }
             ],
         }
@@ -134,6 +138,27 @@ const boardsApp = Vue.createApp({
     `
 
 }).mount('#boards');
+
+const cpuApp = Vue.createApp({
+
+    data(){
+        return{
+            count:0,
+            ishide:true,
+        }
+    },
+    methods:{
+    },
+
+    template: `
+      <div v-if="!ishide">
+      <h3>CPUs<br>{{count}}</h3>
+    <button @click='count++'>Do Click</button>
+      </div>
+    `
+
+}).mount('#cpus');
+
 
 
 const thing = Vue.createApp({

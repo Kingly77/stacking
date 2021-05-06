@@ -61,6 +61,7 @@ savPerSec.init({
     chipUPSLvl: DataTypes.INTEGER,
     compUPSLvl: DataTypes.INTEGER,
     boardUPSLvl: DataTypes.INTEGER,
+    cpusUPSLvl: DataTypes.INTEGER
 
 }, {sequelize})
 
@@ -92,10 +93,23 @@ savUnits.init({
         defaultValue:0,
         type:DataTypes.INTEGER
     },
-    // compsEx: DataTypes.INTEGER ,
-    // chipsEx: DataTypes.INTEGER,
-    // boardsEx: DataTypes.INTEGER,
-    // cpusEx: DataTypes.INTEGER,
+    compsEx: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    chipsEx: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    boardsEx: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    cpusEx: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    }
+
 
 
 }, {sequelize})
