@@ -85,7 +85,7 @@ sqlite3 -  allows the user to manually enter and execute SQL statements against 
 
 ## Contributing
 
-If you would like to contribute to this application, please feel free to email me via the email found in the questions section and we can discuss how to collaborate and enhance this application
+If you would like to contribute to this application, please feel free to contact us to the gitHub link found in the questions section and we can discuss how to collaborate and enhance this application.
 
 ## Tests
 
@@ -97,5 +97,5 @@ N/A
 
 -   Please use this link to access our Github Profile: [GitHub-Shellby-Jordan](https://github.com/Kingly77)
                                                        [GitHub-Cynthia](https://github.com/CynthiaMohan)
-                                                       [GitHub-Jesus](https://github.com/JR1994-CA)
+                                                       [GitHub-Jesus-Ramirez-Arroyo](https://github.com/JR1994-CA)
                                                        [GitHub-Senait-Gerezgiher](https://github.com/senait77)
