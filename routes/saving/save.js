@@ -22,9 +22,8 @@ async function savepersec(rest)
             compUPSLvl:0,
             boardUPSLvl:0
         });
-
-        return;
         console.log("testing")
+        return;
         //create new data
     }
 
@@ -70,12 +69,15 @@ async function saveupgrade(rest)
 rSave.post('/',(async (req,res)=>{
 
 
+
+
     const {rest} = req.body;
     const {saveID} = rest;
+    if(saveID === '') return res.status(400);
     console.log(rest);
     const didWork = await db.save.savUnits.findOne({where:{saveID}});
 
-    const {chips,comps,board,cpus} = rest.units;
+    const {chips,comps,boards,cpus} = rest.units;
 
         if(didWork === null)
         {
@@ -83,14 +85,14 @@ rSave.post('/',(async (req,res)=>{
                 saveID,
                 chips,
                 comps,
-                board,
+                boards,
                 cpus
 
             });
 
             await saveupgrade(rest);
             await savepersec(rest);
-
+            res.status(200);
             return;
         }
 

@@ -5,7 +5,7 @@ $('#save').click((async () =>
         saveID: $('#id').val(),
             units:{
             chips:thing.chips,
-            board:boardsApp.count,
+            boards:boardsApp.count,
             comps:compApp.count,
             cpus:0, //TODO CHANGE
             },
@@ -26,4 +26,8 @@ $('#save').click((async () =>
 )
 
 }));
-$('#load').click();
+$('#load').click((async ()=>{
+    await $.get('/api/load', {
+
+    }
+}));
