@@ -10,12 +10,12 @@ savUpgrade.init({
         saveID: DataTypes.STRING(15),
         compULvl: DataTypes.INTEGER,
         chipULvl: DataTypes.INTEGER,
-        cpusULVL: DataTypes.INTEGER,
-        resULvl: DataTypes.INTEGER,
+        cpusULVl: DataTypes.INTEGER,
+        boardsULvl: DataTypes.INTEGER,
         compPc: DataTypes.INTEGER,
         chipPc: DataTypes.INTEGER,
         cpusPc: DataTypes.INTEGER,
-        resPc: DataTypes.INTEGER,
+        boardPC: DataTypes.INTEGER,
 
     },
     {sequelize})

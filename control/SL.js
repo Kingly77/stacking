@@ -2,7 +2,7 @@ $('#save').click((async () =>
 {
     await $.post('/api/save', {
     rest:{
-        saveID: $('#text').val(),
+        saveID: $('#id').val(),
             units:{
             chips:thing.chips,
             board:boardsApp.count,
