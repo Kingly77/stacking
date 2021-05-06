@@ -16,6 +16,9 @@ app.set('view engine','handlebars');
 app.use(expr.urlencoded({extended:true}))
 app.use(expr.json())
 
+//middleware for using the css file
+app.use(expr.static('public'));
+
 app.use(expr.static(path.join(__dirname,'control')))
 // app.use(session({
 //     resave: false,
