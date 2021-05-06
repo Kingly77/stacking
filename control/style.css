@@ -1,0 +1,7 @@
+.title{
+    color: grey;
+}
+#stack-img img{
+    display: flex;
+    justify-content: center;
+}
