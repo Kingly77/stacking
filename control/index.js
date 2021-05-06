@@ -17,7 +17,7 @@ setInterval(()=>{
 
 },1000)
 
-//TODO ADD PER SECOND INCRES AND BUILDINGS OR EQUIVALENT
+//TODO ADD PER SECOND INCRESS AND BUILDINGS OR EQUIVALENT
 const unlocks = Vue.createApp({
 
     data(){
@@ -169,7 +169,6 @@ const chipsUpgrades = Vue.createApp({
 data(){
     return{
         curUpgrade:0,
-
         listoupgrade: [
             {
                 lvl : 1,
