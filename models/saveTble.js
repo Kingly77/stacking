@@ -7,15 +7,42 @@ class savUpgrade extends Model
 
 savUpgrade.init({
 
-        saveID: DataTypes.STRING(15),
-        compULvl: DataTypes.INTEGER,
-        chipULvl: DataTypes.INTEGER,
-        cpusULVL: DataTypes.INTEGER,
-        resULvl: DataTypes.INTEGER,
-        compPc: DataTypes.INTEGER,
-        chipPc: DataTypes.INTEGER,
-        cpusPc: DataTypes.INTEGER,
-        resPc: DataTypes.INTEGER,
+        saveID: {
+            type:DataTypes.STRING(15),
+            allowNull:false
+        },
+        compULvl:{
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        chipULvl:{
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        cpusULVl:{
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        boardsULvl: {
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        compPc: {
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        chipPc: {
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        cpusPc: {
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        boardPC: {
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
 
     },
     {sequelize})
@@ -45,11 +72,26 @@ class savUnits extends Model
 savUnits.init({
 
 
-    saveID: DataTypes.STRING(15),
-    comps: DataTypes.INTEGER,
-    chips: DataTypes.INTEGER,
-    boards: DataTypes.INTEGER,
-    cpus: DataTypes.INTEGER,
+    saveID: {
+        type:DataTypes.STRING(15),
+        allowNull:false
+    },
+    comps: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    chips: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    boards: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    cpus: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
     // compsEx: DataTypes.INTEGER ,
     // chipsEx: DataTypes.INTEGER,
     // boardsEx: DataTypes.INTEGER,

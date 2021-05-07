@@ -1,0 +1,18 @@
+.title{
+    color: grey;
+}
+#stack-img img{
+    display: flex;
+    justify-content: center;
+    height: 450px;
+}
+#btn-doUnlock{
+    
+    color: tomato;
+}
+
+#button-div{
+    /* display:flex; */
+    justify-content:space-between;
+    margin: auto;
+}
