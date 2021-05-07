@@ -40,9 +40,10 @@ $('#load').click((async ()=>{
     perSecComps = data.perSec.comps
     perSecCpus = data.perSec.cpus
 
-    chipsUpgrades.curUpgrade = data.upgrade.chip
-    resist.curUpgrade = data.upgrade.comp
-    robotUpgrades = data.upgrade.qty    
+    chipsUpgrades = data.curUpgrade
+    boardUpgrades = data.curUpgrade
+    compUpgrades = data.curUpgrade
+    robotUpgrades = data.curUpgrade
 
 
 
