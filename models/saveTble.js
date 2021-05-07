@@ -43,6 +43,10 @@ savUpgrade.init({
             defaultValue:0,
             type:DataTypes.INTEGER
         },
+        robotsUp:{
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
 
     },
     {sequelize})
@@ -102,6 +106,10 @@ savUnits.init({
         allowNull:false
     },
     comps: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    robot:{
         defaultValue:0,
         type:DataTypes.INTEGER
     },

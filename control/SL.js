@@ -8,12 +8,14 @@ $('#save').click(async () =>
             boards:boardsApp.count,
             comps:compApp.count,
             cpus:cpuApp.count,
+            robot:robot.qty
             },
         click:clickmodifier,
         persec: perSec,
         upgrade:{
             chip:chipsUpgrades.curUpgrade,
             comp:resist.curUpgrade,
+            robotUp:robotUpgrades.curUpgrade,
         },
     }
     },() =>{
