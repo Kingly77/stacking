@@ -1,19 +1,23 @@
 let clickmodifier = {
-    chip: 0,
-    comp: 0,
-    board: 0
+    chip:0,
+    comp:0,
+    board:0,
+    cpu:0
 };
 
-let perSec = {
-    chips: 0,
-    boards: 0,
-    comps: 0
+let perSec= {
+    chips:0,
+    boards:0,
+    comps:0,
+    cpus:0
 };
 
 setInterval(() => {
     boardsApp.count += perSec.boards
-    thing.chips += perSec.chips;
-    compApp.count += perSec.comps;
+    thing.chips+= perSec.chips;
+    compApp.count+=perSec.comps;
+    cpuApp.count+=perSec.cpus;
+
 
 }, 1000)
 
@@ -53,15 +57,15 @@ const unlocks = Vue.createApp({
                 {
                     lvl: 10,
                     cost: {
-                        boards: 0,
-                        res: 0,
-                        chips: 100,
-                        cpus: 0,
+                        boards:30,
+                        res:30,
+                        chips:30,
+                        cpus:0,
                     },
                     name: "Unlock CPUS",
                     usage: "Allows to make Cpus",
                     // TODO ADD WHEN IMPLEMENTED
-                    doBuy: () => { console.log('NOT IMPLEMENTED') }
+                    doBuy:()=>{ thing.ishide = false }
                 }
             ],
         }
@@ -133,6 +137,27 @@ const boardsApp = Vue.createApp({
     `
 
 }).mount('#boards');
+
+const cpuApp = Vue.createApp({
+
+    data(){
+        return{
+            count:0,
+            ishide:true,
+        }
+    },
+    methods:{
+    },
+
+    template: `
+      <div v-if="!ishide">
+      <h3>CPUs<br>{{count}}</h3>
+    <button @click='count++'>Do Click</button>
+      </div>
+    `
+
+}).mount('#cpus');
+
 
 
 const thing = Vue.createApp({
@@ -213,9 +238,9 @@ const chipsUpgrades = Vue.createApp({
 
 const resist = Vue.createApp({
 
-    data() {
-        return {
-            curUp: 0,
+    data(){
+        return{
+            curUpgrade:0,
             listoupgrade: [
                 {
                     lvl: 1,
@@ -239,19 +264,18 @@ const resist = Vue.createApp({
     methods: {
         checkupgrade(price) {
 
-            if (compApp.count < price) return;
-            compApp.count -= price;
-            this.curUp++;
+            if(compApp.count < price ) return;
+            compApp.count-= price;
+            this.curUpgrade++;
         }
 
     },
     template:
         `
           <div v-if="!this.ishide">
-<button @click="checkupgrade(this.listoupgrade[this.curUp].cost)" class="btn btn-light mt-2">
-  {{this.listoupgrade[this.curUp].name}}
+<button @click="checkupgrade(this.listoupgrade[this.curUpgrade].cost)">
+  {{this.listoupgrade[this.curUpgrade].name}}
 </button>
           </div>
-
 `
 }).mount('#compUp')

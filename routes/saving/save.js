@@ -26,29 +26,33 @@ async function savepersec(rest)
         return;
         //create new data
     }
-
-
-    didwork.comps = rest.units.comps;
+    didwork={
+        saveID,
+        chipsPS:0,
+        compsPS:0,
+        boardPS:0,
+        cpuPS:0,
+        chipsUPSLvl:0,
+        compUPSLvl:0,
+        boardUPSLvl:0
+    }
+    await didwork.save();
 
 }
-
-
 
 async function saveupgrade(rest)
 {
     const {saveID} = rest;
     console.log(rest);
-    const didwork = await db.save.savUpgrade.findOne({where:{saveID }});
-
+    const didWork = await db.save.savUpgrade.findOne({where:{saveID}});
     const {chips, comps, boards}= rest.click;
 
-
-    if(didwork === null)
+    if(didWork === null)
     {
         await db.save.savUpgrade.create({
             saveID,
-            chipULvl:0,
-            compULvl:0,
+            chipULvl:rest.upgrade.chip,
+            compULvl:rest.upgrade.comp,
             cpusULVl:0,
             boardsULvl:0,
             compPc:comps,
@@ -58,17 +62,24 @@ async function saveupgrade(rest)
         });
         console.log("testing")
         return;
-
     }
 
+    didWork = {
+        saveID,
+        chipULvl:rest.upgrade.chip,
+        compULvl:rest.upgrade.comp,
+        cpusULVl:0,
+        boardsULvl:0,
+        compPc:comps,
+        chipPc:chips,
+        boardsPc:boards,
+        cpusPc:0,
+    };
 
-    didwork.comps = rest.units.comps;
-
+    await didWork.save();
 }
 
 rSave.post('/',(async (req,res)=>{
-
-
 
 
     const {rest} = req.body;
@@ -87,7 +98,6 @@ rSave.post('/',(async (req,res)=>{
                 comps,
                 boards,
                 cpus
-
             });
 
             await saveupgrade(rest);
@@ -102,7 +112,6 @@ rSave.post('/',(async (req,res)=>{
 
         await didWork.save();
         //change data
-
     await saveupgrade(rest);
     await savepersec(rest);
     res.status(200);
