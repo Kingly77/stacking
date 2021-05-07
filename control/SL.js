@@ -4,7 +4,7 @@ $('#save').click(async () =>
         rest: {
             saveID: $('#id').val(),
             units: {
-                chips: thing.chips,
+                chips: chips.count,
                 boards: boardsApp.count,
                 comps: compApp.count,
                 cpus: cpuApp.count,
@@ -17,7 +17,7 @@ $('#save').click(async () =>
             click: clickmodifier,
             persec: perSec,
             upgrade: {
-                chip: thing.curUpgrade,
+                chip: chips.curUpgrade,
                 comp: resist.curUpgrade,
                 robotUp: robot.curUpgrade,
                 printer: printer.curUpgrade,
@@ -34,9 +34,9 @@ $('#save').click(async () =>
 
 $('#load').click((async ()=>{
    const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
-           thing.chips = data.units;
+           chips.chips = data.units;
 
-    thing.chips = data.units.chips
+    chips.chips = data.units.chips
     boardsApp.count = data.units.boards
     compApp.count = data.units.comps
     cpuApp.count = data.units.cpus
