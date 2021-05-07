@@ -1,84 +1,84 @@
 let clickmodifier = {
-    chip:0,
-    comp:0,
-    board:0,
-    cpu:0
+    chip: 0,
+    comp: 0,
+    board: 0,
+    cpu: 0
 };
 
-let perSec= {
-    chips:0,
-    boards:0,
-    comps:0,
-    cpus:0
+let perSec = {
+    chips: 0,
+    boards: 0,
+    comps: 0,
+    cpus: 0
 };
 
 
 
-setInterval(()=>{
+setInterval(() => {
     console.log(perSec)
     boardsApp.count += perSec.boards;
-    thing.chips+= perSec.chips+ robot.addx();
-    compApp.count+=perSec.comps;
-    cpuApp.count+=perSec.cpus;
+    thing.chips += perSec.chips + robot.addx();
+    compApp.count += perSec.comps;
+    cpuApp.count += perSec.cpus;
 
 
-},1000)
+}, 1000)
 
 //TODO ADD PER SECOND INCRESS AND BUILDINGS OR EQUIVALENT
 const unlocks = Vue.createApp({
 
-    data(){
-        return{
-            curUpgrade:0,
+    data() {
+        return {
+            curUpgrade: 0,
             listoupgrade: [
                 {
-                    lvl : 1,
+                    lvl: 1,
                     cost: {
-                        boards:0,
-                        res:100,
-                        chips:0,
-                        cpus:0,
+                        boards: 0,
+                        res: 100,
+                        chips: 0,
+                        cpus: 0,
                     },
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
-                    doBuy:()=>{  boardsApp.ishide = false }
+                    doBuy: () => { boardsApp.ishide = false }
                 },
 
                 {
-                    lvl : 5,
+                    lvl: 5,
                     cost: {
-                        boards:30,
-                        res:100,
-                        chips:0,
-                        cpus:0,
+                        boards: 30,
+                        res: 100,
+                        chips: 0,
+                        cpus: 0,
                     },
                     name: "Unlock Chip",
                     usage: "Allows to make Chips",
-                    doBuy:()=>{  thing.ishide = false }
+                    doBuy: () => { thing.ishide = false }
                 },
 
                 {
-                    lvl : 10,
+                    lvl: 10,
                     cost: {
-                        boards:100,
-                        res:100,
-                        chips:30,
-                        cpus:0,
+                        boards: 100,
+                        res: 100,
+                        chips: 30,
+                        cpus: 0,
                     },
                     name: "Unlock CPUS",
                     usage: "Allows to make Cpus",
                     // TODO ADD WHEN IMPLEMENTED
-                    doBuy:()=>{ cpuApp.ishide = false}
+                    doBuy: () => { cpuApp.ishide = false }
                 }
             ],
         }
     },
-    methods:{
-        doUnlock(){
+    methods: {
+        doUnlock() {
 
-            const {cost , doBuy} = this.listoupgrade[this.curUpgrade];
+            const { cost, doBuy } = this.listoupgrade[this.curUpgrade];
             console.log(cost.res);
-            if(cost.boards > boardsApp.count || cost.chips > thing.chips  || cost.res > compApp.count ) return;
+            if (cost.boards > boardsApp.count || cost.chips > thing.chips || cost.res > compApp.count) return;
             boardsApp.count -= cost.boards;
             thing.chips -= cost.chips;
             compApp.count -= cost.res;
@@ -103,37 +103,84 @@ const unlocks = Vue.createApp({
 
 const compApp = Vue.createApp({
 
-    data(){
-        return{
-            count:0,
+    data() {
+        return {
+            count: 0,
+            curUpgrade: 0,
+            listoupgrade: [
+                {
+                    lvl: 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Resistors faster",
+                    mod: 1
+                },
+                {
+                    lvl: 1,
+                    cost: 5,
+                    name: "Make MORE",
+                    usage: "Makes +1 resistor per Click",
+                    mod: 1
+                },
+
+            ],
+            ishide: false,
 
         }
     },
-    methods:{
-        addComp()
-        {
-            this.count += clickmodifier.comp + 1;
-        }
-    },
+        methods: {
+            addComp()
+            {
+                this.count += clickmodifier.comp + 1;
+            }
+        },
 
-    template: `
+        template: `
       <h3>Resister<br>{{count}}</h3>
       <button @click='addComp'>Do Click</button>
     `
+    
 
-}).mount('#comp');
+    }).mount('#comp');
+
+
 
 const boardsApp = Vue.createApp({
 
-    data(){
-        return{
-            count:0,
-            ishide:true,
+    data() {
+        return {
+            count: 0,
+            ishide: true,
+            curUp: 0,
+            listoupgrade: [
+                {
+                    lvl: 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Boards faster",
+                    mod: 1
+                },
+                {
+                    lvl: 1,
+                    cost: 5,
+                    name: "Make MORE",
+                    usage: "Makes +1 board per Click",
+                    mod: 1
+                },
+
+            ],
+            ishide: false,
         }
     },
-    methods:{
-        addComp()
-        {
+    methods: {
+        checkupgrade(price) {
+
+            if (boardsApp.count < price) return;
+            boardsApp.count -= price;
+            this.curUp++;
+        },
+
+        addComp() {
             this.count += clickmodifier.board + 1;
         }
     },
@@ -143,21 +190,25 @@ const boardsApp = Vue.createApp({
       <h3>Boards<br>{{count}}</h3>
     <button @click='count++'>Do Click</button>
       </div>
+      <div v-if="!this.ishide">
+<button @click="checkupgrade(this.listoupgrade[this.curUp].cost)">
+  {{this.listoupgrade[this.curUp].name}}
+</button>
+          </div>
     `
 
 }).mount('#boards');
 
 const cpuApp = Vue.createApp({
 
-    data(){
-        return{
-            count:0,
-            ishide:true,
+    data() {
+        return {
+            count: 0,
+            ishide: true,
         }
     },
-    methods:{
-        addComp()
-        {
+    methods: {
+        addComp() {
             this.count += clickmodifier.cpu + 1;
         }
     },
@@ -167,6 +218,11 @@ const cpuApp = Vue.createApp({
       <h3>CPUs<br>{{count}}</h3>
     <button @click='count++'>Do Click</button>
       </div>
+      <div v-if="!this.ishide">
+      <button @click="checkupgrade(this.listoupgrade[this.curUpgrade].cost)">
+        {{this.listoupgrade[this.curUpgrade].name}}
+      </button>
+    </div>
     `
 
 }).mount('#cpus');
@@ -175,28 +231,60 @@ const cpuApp = Vue.createApp({
 
 const thing = Vue.createApp({
 
-    data(){
-        return{
-            chips:0,
-            ishide:true,
+    data() {
+        return {
+            chips: 0,
+            ishide: true,
+            curUpgrade: 0,
+            listoupgrade: [
+                {
+                    lvl: 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Chips faster",
+                    mod: 1
+                },
+                {
+                    lvl: 1,
+                    cost: 5,
+                    name: "Make MORE",
+                    usage: "Makes +1 resistor per Click",
+                    mod: 1
+                },
+
+            ],
+            ishide: true,
         }
     },
 
-    methods:{
+    methods: {
+        checkupgrade(price){
 
-      addchip(){
-          if(boardsApp.count <= 1.2*(1.09)^this.chips && compApp.count <= 2*(1.09)^this.chips) return;
-          this.chips+= clickmodifier.chip + 1;
-      }
+            if (thing.chips < price) return;
+            thing.chips -= price;
+            this.curUpgrade++;
+
+        },
+
+        addchip() {
+           
+            if (boardsApp.count <= 1.2 * (1.09) ^ this.chips && compApp.count <= 2 * (1.09) ^ this.chips) return;
+            this.chips += clickmodifier.chip + 1;
+        }
 
     },
 
-    template:`
+    template: `
       <div v-if="!ishide">
       <h3>Chips</h3>
       <h3>{{chips}}</h3>
       <button @click="addchip">DO CHIP</button>
       </div>
+      <div v-if="!ishide">
+      <button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
+        {{listoupgrade[curUpgrade].name}}
+      </button>
+        </div>
     `
 }).mount('#chip')
 
@@ -204,25 +292,52 @@ const thing = Vue.createApp({
 
 const robot = Vue.createApp({
 
-    data(){
-        return{
-           qty:0,
-            ishide:false,
-            per :1
+    data() {
+        return {
+            qty: 0,
+            ishide: false,
+            per: 1,
+            curUpgrade: 0,
+            listoupgrade: [
+                {
+                    lvl: 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Resistors faster",
+                    mod: 1
+                },
+                {
+                    lvl: 1,
+                    cost: 5,
+                    name: "Make MORE",
+                    usage: "Makes +1 resistor per Click",
+                    mod: 1
+                },
+            ],
+
         }
     },
 
-    methods:{
-        checkupgrade(price){
+    methods: {
+        checkupgrade(price) {
 
-            if(thing.chips < price ) return;
-            thing.chips-= price;
+            if (thing.chips < price) return;
+            thing.chips -= price;
             this.curUpgrade++;
             this.qty++
         },
-        addx(){
+        addx() {
             return this.per * this.qty;
+        },
+        checkupgrade(price) {
+
+            if (thing.chips < price) return;
+            thing.chips -= price;
+            this.curUpgrade++;
+            robot.per++;
+
         }
+
     },
 
     template:
@@ -232,49 +347,6 @@ const robot = Vue.createApp({
   Robots {{1.2*(1.09)^qty}} Chips
 </button>
   </div>
-`
-
-}).mount('#robot')
-
-const robotUpgrades = Vue.createApp({
-
-    data(){
-        return{
-            curUpgrade:0,
-            listoupgrade: [
-                {
-                    lvl : 1,
-                    cost: 1,
-                    name: "Make Faster",
-                    usage: "Makes Resistors faster",
-                    mod: 1
-                },
-                {
-                    lvl : 1,
-                    cost:5,
-                    name: "Make MORE",
-                    usage: "Makes +1 resistor per Click",
-                    mod: 1
-                },
-
-            ],
-            ishide:true,
-        }
-    },
-
-    methods:{
-        checkupgrade(price){
-
-            if(thing.chips < price ) return;
-            thing.chips-= price;
-            this.curUpgrade++;
-            robot.per++;
-
-        }
-    },
-
-    template:
-        `
   <div v-if="!ishide">
 <button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
   {{listoupgrade[curUpgrade].name}}
@@ -282,145 +354,5 @@ const robotUpgrades = Vue.createApp({
   </div>
 `
 
-}).mount('#robotUp')
+}).mount('#robot');
 
-
-
-
-
-const chipsUpgrades = Vue.createApp({
-
-data(){
-    return{
-        curUpgrade:0,
-        listoupgrade: [
-            {
-                lvl : 1,
-                cost: 1,
-                name: "Make Faster",
-                usage: "Makes Chips faster",
-                mod: 1
-            },
-            {
-                lvl : 1,
-                cost:5,
-                name: "Make MORE",
-                usage: "Makes +1 resistor per Click",
-                mod: 1
-            },
-
-        ],
-        ishide:true,
-    }
-},
-
-    methods:{
-        checkupgrade(price){
-
-            if(thing.chips < price ) return;
-            thing.chips-= price;
-            this.curUpgrade++;
-
-        }
-    },
-
-template:
-`
-  <div v-if="!ishide">
-<button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
-  {{listoupgrade[curUpgrade].name}}
-</button>
-  </div>
-`
-
-}).mount('#chipUp')
-
-
-const boardUpgrades = Vue.createApp({
-
-    data(){
-        return{
-            curUp:0,
-            listoupgrade: [
-                {
-                    lvl : 1,
-                    cost: 1,
-                    name: "Make Faster",
-                    usage: "Makes Boards faster",
-                    mod: 1
-                },
-                {
-                    lvl : 1,
-                    cost:5,
-                    name: "Make MORE",
-                    usage: "Makes +1 board per Click",
-                    mod: 1
-                },
-
-            ],
-            ishide:false,
-        }
-    },
-    methods:{
-        checkupgrade(price){
-
-            if(boardsApp.count < price ) return;
-            boardsApp.count-= price;
-            this.curUp++;
-        }
-
-    },
-    template:
-        `
-          <div v-if="!this.ishide">
-<button @click="checkupgrade(this.listoupgrade[this.curUp].cost)">
-  {{this.listoupgrade[this.curUp].name}}
-</button>
-          </div>
-
-`
-}).mount('#boardUp')
-
-const resist = Vue.createApp({
-
-    data(){
-        return{
-            curUpgrade:0,
-            listoupgrade: [
-                {
-                    lvl : 1,
-                    cost: 1,
-                    name: "Make Faster",
-                    usage: "Makes Resistors faster",
-                    mod: 1
-                },
-                {
-                    lvl : 1,
-                    cost:5,
-                    name: "Make MORE",
-                    usage: "Makes +1 resistor per Click",
-                    mod: 1
-                },
-
-            ],
-            ishide:false,
-        }
-    },
-    methods:{
-        checkupgrade(price){
-
-            if(compApp.count < price ) return;
-            compApp.count-= price;
-            this.curUpgrade++;
-        }
-
-    },
-    template:
-        `
-          <div v-if="!this.ishide">
-<button @click="checkupgrade(this.listoupgrade[this.curUpgrade].cost)">
-  {{this.listoupgrade[this.curUpgrade].name}}
-</button>
-          </div>
-`
-}).mount('#compUp')
