@@ -100,37 +100,16 @@ async function saveupgrade(rest)
     });
 }
 
-rSave.post('/',(async (req,res)=>{
 
 
-    const {rest} = req.body;
-    const {saveID} = rest;
-    if(saveID === '') return res.status(400);
-    console.log(rest);
+async function saveunit(rest){
     const didWork = await db.save.savunit.findOne({where:{saveID}});
 
     const {chips,comps,boards,cpus,robot,assembler,fabricator} = rest.units;
 
-        if(didWork === null)
-        {
-            await db.save.savunit.create({
-                saveID,
-                chips,
-                comps,
-                boards,
-                robot,
-                cpus,
-                assembler,
-                fabricator
-            });
-
-            await saveupgrade(rest);
-            await savepersec(rest);
-            res.status(200);
-            return;
-        }
-
-        await didWork.save({
+    if(didWork === null)
+    {
+        await db.save.savunit.create({
             saveID,
             chips,
             comps,
@@ -140,7 +119,33 @@ rSave.post('/',(async (req,res)=>{
             assembler,
             fabricator
         });
+
+        await saveupgrade(rest);
+        await savepersec(rest);
+        res.status(200);
+        return;
+    }
+
+    await didWork.save({
+        saveID,
+        chips,
+        comps,
+        boards,
+        robot,
+        cpus,
+        assembler,
+        fabricator
+    });
+}
+
+rSave.post('/',(async (req,res)=>{
+
+    const {rest} = req.body;
+    const {saveID} = rest;
+    if(saveID === '') return res.status(400);
+    console.log(rest);
         //change data
+    await saveunit(rest);
     await saveupgrade(rest);
     await saveperclick(rest);
     await savepersec(rest);
