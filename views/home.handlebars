@@ -1,8 +1,17 @@
-<div>
+<div class="container">
 
   {{>navbar}}
   {{!-- {{>doSave}} --}}
-  {{>image}}
-  {{>doClick}}
+  <div class="row">
+    <div class="col-3">
+      <div id="button-div">
+        {{>doClick}}
+      </div>
+    </div>
+    <div class="col-6">{{>image}}</div>
+    <div class="col-3"></div>
+  </div>
+
+
 
 </div>
