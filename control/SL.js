@@ -26,7 +26,17 @@ $('#save').click(async () =>
 $('#load').click((async ()=>{
    const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
 
-       console.log(data);
+    thing.chips = data.units.chips
+    boardsApp.count = data.units.boards
+    compApp.count = data.units.comps
+    cpuApp.count = data.units.cpus
+
+    perSec = data.persec
+
+    chipsUpgrades.curUpgrade = data.upgrade.chip
+    resist.curUp = data.upgrade.comp
+
+
    })
 
 }));
