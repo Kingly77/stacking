@@ -1,4 +1,4 @@
-# Stacking
+# Clicker-Game
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
@@ -60,7 +60,7 @@ sqlite3 -  allows the user to manually enter and execute SQL statements against 
 
 
 ## License
-
+                          GPL V2
     				Copyright (C) 2021  Shellby-Jordan
                                         Cynthia-Mohan
                                         Jesus-Ramirez-Arroyo
