@@ -1,9 +1,7 @@
 const {Model, DataTypes} = require("sequelize");
 const sequelize = require("./connections");
 
-class savUpgrade extends Model
-{
-}
+class savUpgrade extends Model{}
 
 savUpgrade.init({
 
