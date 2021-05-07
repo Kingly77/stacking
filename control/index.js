@@ -12,8 +12,6 @@ let perSec= {
     cpus:0
 };
 
-
-
 setInterval(()=>{
     console.log(perSec)
     boardsApp.count += perSec.boards;
@@ -41,7 +39,7 @@ const unlocks = Vue.createApp({
                     },
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
-                    doBuy:()=>{  boardsApp.ishide = false }
+                    doBuy:()=>{boardsApp.ishide = false }
                 },
 
                 {
@@ -162,7 +160,14 @@ const cpuApp = Vue.createApp({
 
 }).mount('#cpus');
 
+const printer= Vue.createApp({
+data(){
+    return{
+        curUpgrade:0,
+    }
+}
 
+})
 
 const thing = Vue.createApp({
 
