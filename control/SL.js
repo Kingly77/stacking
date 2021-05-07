@@ -1,4 +1,4 @@
-$('#save').click((async () =>
+$('#save').click(async () =>
 {
     await $.post('/api/save', {
     rest:{
@@ -7,7 +7,7 @@ $('#save').click((async () =>
             chips:thing.chips,
             boards:boardsApp.count,
             comps:compApp.count,
-            cpus:cpuApp.count, //TODO CHANGE
+            cpus:cpuApp.count,
             },
         click:clickmodifier,
         persec: perSec,
@@ -16,25 +16,22 @@ $('#save').click((async () =>
             comp:resist.curUp,
 
         },
+    }
+    },() =>{
 
-    }
-    }
-,
-    () =>
-    {
-    }
-)
+    })
 
-}));
+});
+
 $('#load').click((async ()=>{
-    await $.get('/api/load', {
+    await $.get('/api/load', ()=>{
     rest:{
         saveID: $('#id').val(),
         units:{
         chips:thing.chips,
         boards:boardsApp.count,
         comps:compApp.count,
-        cpus:cpuApp.count, //TODO CHANGE
+        cpus:cpuApp.count,
         },
     click:clickmodifier,
     persec: perSec,
@@ -44,7 +41,8 @@ $('#load').click((async ()=>{
 
     },
 
-    }
+    })
+
     },
     () =>
     {

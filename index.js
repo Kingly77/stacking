@@ -17,6 +17,7 @@ app.use(expr.urlencoded({extended:true}))
 app.use(expr.json())
 
 app.use(expr.static(path.join(__dirname,'control')))
+
 // app.use(session({
 //     resave: false,
 //     saveUninitialized:false,
@@ -30,7 +31,7 @@ app.use('/',def);
 
 //SERVER CREATION
 (async()=>{
-    await sql.sync({force:true});
+    await sql.sync({force:false});
 
     app.listen(port ,()=>{
         console.log(`listening on port ${port}`)
