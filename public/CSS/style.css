@@ -29,7 +29,7 @@
 .title{
     color: grey;
 }
-#stack-img img{
+#stack-img{
     display: flex;
     justify-content: center;
     height: 450px;
@@ -38,10 +38,12 @@
     color: black;
 }
 
-/* .block{
-	box-shadow:2px 2px 2px #401f44;
-	border:1px solid #401f44;
-} */
+.block{
+	margin-top: 25px;
+	padding: 50px;
+	box-shadow:2px 2px 2px #0B0A1E;
+	/* border:1px solid #401f44; */
+}
 
 /* 
 .click {

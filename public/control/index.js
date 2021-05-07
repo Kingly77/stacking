@@ -187,7 +187,7 @@ const thing = Vue.createApp({
       <h3>{{chips}}</h3>
       <button @click="addchip" class="btn btn-light mt-2">
       DO CHIP
-      <img src="../../image/circuit.jpg" class="img-fluid mx-auto">
+      <img src="../../image/circuit.jpg" id="#stack-img" class="img-fluid mx-auto">
       </button>
       </div>
     `
