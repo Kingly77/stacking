@@ -90,11 +90,7 @@ const unlocks = Vue.createApp({
 
             const {cost , doBuy} = this.listoupgrade[this.curUpgrade];
             console.log(cost.res);
-            if(!checkCost(this.listoupgrade[this.curUpgrade].cost)) return
-            //if(cost.boards > boardsApp.count || cost.chips > chips.count  || cost.res > compApp.count ) return;
-            boardsApp.count -= cost.boards;
-            chips.chips -= cost.chips;
-            compApp.count -= cost.res;
+            if(!DoCost(this.listoupgrade[this.curUpgrade].cost)) return
             doBuy();
             this.curUpgrade++;
         }
@@ -154,10 +150,13 @@ const compApp = Vue.createApp({
         methods: {
             checkupgrade(price) {
 
-                cost.res = 20 + this.curUpgrade * 1.5;
-                if(!boardsApp.ishide || this.curUpgrade > 50) cost.boards = 5 + this.curUpgrade *1.6
-                if(!chips.ishide || this.curUpgrade > 200) cost.chips = 1 + this.curUpgrade *1.1
-                if(!cpuApp.ishide || this.curUpgrade > 500) cost.cpus = 1 + this.curUpgrade * 1.001
+                this.cost.res = 20 + this.curUpgrade * 1.5;
+                if(!boardsApp.ishide || this.curUpgrade > 50) this.cost.boards = 5 + this.curUpgrade *1.6
+                if(!chips.ishide || this.curUpgrade > 200) this.cost.chips = 1 + this.curUpgrade *1.1
+                if(!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpus = 1 + this.curUpgrade * 1.001
+                this.mod.sec = 1 + this.curUpgrade * 1.01;
+                this.mod.click = 1 + this.curUpgrade * 1.05;
+
 
                 if (DoCost) return;
                 boardsApp.count -= price;
