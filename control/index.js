@@ -12,9 +12,12 @@ let perSec= {
     cpus:0
 };
 
+
+
 setInterval(()=>{
-    boardsApp.count += perSec.boards
-    thing.chips+= perSec.chips;
+    console.log(perSec)
+    boardsApp.count += perSec.boards;
+    thing.chips+= perSec.chips+ robot.addx();
     compApp.count+=perSec.comps;
     cpuApp.count+=perSec.cpus;
 
@@ -32,7 +35,7 @@ const unlocks = Vue.createApp({
                     lvl : 1,
                     cost: {
                         boards:0,
-                        res:1,
+                        res:100,
                         chips:0,
                         cpus:0,
                     },
@@ -45,7 +48,7 @@ const unlocks = Vue.createApp({
                     lvl : 5,
                     cost: {
                         boards:30,
-                        res:30,
+                        res:100,
                         chips:0,
                         cpus:0,
                     },
@@ -57,15 +60,15 @@ const unlocks = Vue.createApp({
                 {
                     lvl : 10,
                     cost: {
-                        boards:30,
-                        res:30,
+                        boards:100,
+                        res:100,
                         chips:30,
                         cpus:0,
                     },
                     name: "Unlock CPUS",
                     usage: "Allows to make Cpus",
                     // TODO ADD WHEN IMPLEMENTED
-                    doBuy:()=>{ thing.ishide = false }
+                    doBuy:()=>{ cpuApp.ishide = false}
                 }
             ],
         }
@@ -103,6 +106,7 @@ const compApp = Vue.createApp({
     data(){
         return{
             count:0,
+
         }
     },
     methods:{
@@ -127,8 +131,7 @@ const boardsApp = Vue.createApp({
             ishide:true,
         }
     },
-    methods:{
-    },
+    methods:{},
 
     template: `
       <div v-if="!ishide">
@@ -187,6 +190,93 @@ const thing = Vue.createApp({
       </div>
     `
 }).mount('#chip')
+
+
+
+const robot = Vue.createApp({
+
+    data(){
+        return{
+           qty:0,
+            ishide:false,
+            per :1
+        }
+    },
+
+    methods:{
+        checkupgrade(price){
+
+            if(thing.chips < price ) return;
+            thing.chips-= price;
+            this.curUpgrade++;
+            this.qty++
+        },
+        addx(){
+            return this.per * this.qty;
+        }
+    },
+
+    template:
+        `
+  <div v-if="!ishide">
+<button @click="checkupgrade( 1.2*(1.09)^qty);">
+  Robots {{1.2*(1.09)^qty}} Chips
+</button>
+  </div>
+`
+
+}).mount('#robot')
+
+const robotUpgrades = Vue.createApp({
+
+    data(){
+        return{
+            curUpgrade:0,
+            listoupgrade: [
+                {
+                    lvl : 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Resistors faster",
+                    mod: 1
+                },
+                {
+                    lvl : 1,
+                    cost:5,
+                    name: "Make MORE",
+                    usage: "Makes +1 resistor per Click",
+                    mod: 1
+                },
+
+            ],
+            ishide:true,
+        }
+    },
+
+    methods:{
+        checkupgrade(price){
+
+            if(thing.chips < price ) return;
+            thing.chips-= price;
+            this.curUpgrade++;
+            robot.per++;
+
+        }
+    },
+
+    template:
+        `
+  <div v-if="!ishide">
+<button @click="checkupgrade(listoupgrade[curUpgrade].cost)">
+  {{listoupgrade[curUpgrade].name}}
+</button>
+  </div>
+`
+
+}).mount('#robotUp')
+
+
+
 
 
 const chipsUpgrades = Vue.createApp({
