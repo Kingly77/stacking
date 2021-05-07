@@ -1,10 +1,13 @@
-
+*{
+	font-family: 'Merriweather', serif;
+}
 .body {
     background: linear-gradient(to left, #401f44, #916ea5);
 	width: 100%;
 	height: 100vh;
     
-}
+ }
+ /*
 #load {
     font-style: italic;
     font-family: cursive;
@@ -20,10 +23,11 @@
     color: white;
     background: linear-gradient(to right, #332c41, #68acda);
     
-}
+} */
+
 .click {
-    font-style: italic;
-    font-family: cursive;
+    /* font-style: italic; */
+    /* font-family: cursive; */
     color: white;
     
 }
@@ -163,3 +167,23 @@
 		opacity: 0;
 	}
 }
+
+.title{
+    color: grey;
+}
+#stack-img img{
+    display: flex;
+    justify-content: center;
+    height: 450px;
+}
+#btn-doUnlock{
+    
+    color: black;
+}
+
+#button-div{
+    /* display:flex; */
+    justify-content:space-between;
+    margin: auto;
+}
+
