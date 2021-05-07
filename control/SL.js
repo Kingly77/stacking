@@ -13,7 +13,9 @@ $('#save').click(async () =>
         persec: perSec,
         upgrade:{
             chip:chipsUpgrades.curUpgrade,
-            comp:resist.curUp,
+            board:boardUpgrades.curUpgrade,
+            comp:resist.curUpgrade,
+            cpu:robotUpgrades.robot
 
         },
     }
@@ -25,11 +27,13 @@ $('#save').click(async () =>
 
 $('#load').click((async ()=>{
    const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
+           thing.chips = data.units;
 
     thing.chips = data.units.chips
     boardsApp.count = data.units.boards
     compApp.count = data.units.comps
     cpuApp.count = data.units.cpus
+
 
     perSecChips = data.perSec.chips
     perSecBoards = data.perSec.boards
@@ -38,6 +42,8 @@ $('#load').click((async ()=>{
 
     chipsUpgrades.curUpgrade = data.upgrade.chip
     resist.curUpgrade = data.upgrade.comp
+    robotUpgrades = data.upgrade.qty    
+
 
 
    })
