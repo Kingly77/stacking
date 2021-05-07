@@ -14,8 +14,9 @@ app.set('view engine', 'handlebars');
 app.use(expr.urlencoded({ extended: true }))
 app.use(expr.json())
 
+app.use(expr.static(path.join(__dirname, 'public')));
 app.use(expr.static(path.join(__dirname, 'public/control')));
-app.use(expr.static('public'));
+
 
 // app.use(session({
 //     resave: false,

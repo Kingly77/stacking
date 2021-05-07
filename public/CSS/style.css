@@ -1,3 +1,4 @@
+/* Animations file */
 *{
 	font-family: 'Merriweather', serif;
 }
@@ -25,6 +26,26 @@
     
 } */
 
+.title{
+    color: grey;
+}
+#stack-img img{
+    display: flex;
+    justify-content: center;
+    height: 450px;
+}
+#btn-doUnlock{
+    
+    color: black;
+}
+
+#button-div{
+    /* display:flex; */
+    justify-content:space-between;
+    margin: auto;
+}
+
+
 .click {
     /* font-style: italic; */
     /* font-family: cursive; */
@@ -39,6 +60,7 @@
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	z-index: -1;
 }
 .box-area li {
 	position: absolute;
@@ -167,23 +189,3 @@
 		opacity: 0;
 	}
 }
-
-.title{
-    color: grey;
-}
-#stack-img img{
-    display: flex;
-    justify-content: center;
-    height: 450px;
-}
-#btn-doUnlock{
-    
-    color: black;
-}
-
-#button-div{
-    /* display:flex; */
-    justify-content:space-between;
-    margin: auto;
-}
-
