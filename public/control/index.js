@@ -35,7 +35,7 @@ const unlocks = Vue.createApp({
                     lvl: 1,
                     cost: {
                         boards: 0,
-                        res: 100,
+                        res: 20,
                         chips: 0,
                         cpus: 0,
                     },
@@ -47,8 +47,8 @@ const unlocks = Vue.createApp({
                 {
                     lvl: 5,
                     cost: {
-                        boards: 30,
-                        res: 100,
+                        boards: 20,
+                        res: 20,
                         chips: 0,
                         cpus: 0,
                     },
@@ -60,8 +60,8 @@ const unlocks = Vue.createApp({
                 {
                     lvl: 10,
                     cost: {
-                        boards: 100,
-                        res: 100,
+                        boards: 20,
+                        res: 20,
                         chips: 30,
                         cpus: 0,
                     },
@@ -200,7 +200,7 @@ const robot = Vue.createApp({
     data() {
         return {
             qty: 0,
-            ishide: false,
+            ishide: true,
             per: 1
         }
     },
