@@ -29,14 +29,30 @@ $('#save').click(async () =>
     {
 
     })
+
 });
 
-$('#load').click((async () =>
-{
-    const isload = await $.get(`/api/load/${$('#id').val()}`, (data) =>
-    {
-        thing.chips = data.units;
+$('#load').click((async ()=>{
+   const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
+           thing.chips = data.units;
 
-    })
+    thing.chips = data.units.chips
+    boardsApp.count = data.units.boards
+    compApp.count = data.units.comps
+    cpuApp.count = data.units.cpus
+
+
+    perSecChips = data.perSec.chips
+    perSecBoards = data.perSec.boards
+    perSecComps = data.perSec.comps
+    perSecCpus = data.perSec.cpus
+
+    chipsUpgrades.curUpgrade = data.upgrade.chip
+    resist.curUpgrade = data.upgrade.comp
+    robotUpgrades = data.upgrade.qty
+
+
+
+   })
 
 }));
