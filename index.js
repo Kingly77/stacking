@@ -29,7 +29,7 @@ app.use('/',def);
 
 //SERVER CREATION
 (async()=>{
-    await sql.sync({force:false});
+    await sql.sync({force:true});
 
     app.listen(port ,()=>{
         console.log(`listening on port ${port}`)

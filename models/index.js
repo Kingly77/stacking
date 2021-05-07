@@ -1,5 +1,5 @@
 const connect = require('./connections');
 
-const save = require('./saveTble');
+const save = require('./savTabls');
 
 module.exports = {connect, save};
