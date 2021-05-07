@@ -1,5 +1,3 @@
-const {Sequelize} = require('sequelize');
-
 stuff = {
     host:'localhost',
     database:process.env.DB_NAME,

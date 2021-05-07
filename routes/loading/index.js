@@ -10,7 +10,6 @@ load.use('/load',upgrades);
 
 load.get('/load/:id',async (req,res)=>{
 
-
     console.log('DO LOAD');
     const {id: saveID} = req.params;
     const perSec = await db.save.savPerSec.findOne({where: {saveID}})

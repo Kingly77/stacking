@@ -241,7 +241,7 @@ const resist = Vue.createApp({
 
     data(){
         return{
-            curUp:0,
+            curUpgrade:0,
             listoupgrade: [
                 {
                     lvl : 1,
@@ -267,17 +267,16 @@ const resist = Vue.createApp({
 
             if(compApp.count < price ) return;
             compApp.count-= price;
-            this.curUp++;
+            this.curUpgrade++;
         }
 
     },
     template:
         `
           <div v-if="!this.ishide">
-<button @click="checkupgrade(this.listoupgrade[this.curUp].cost)">
-  {{this.listoupgrade[this.curUp].name}}
+<button @click="checkupgrade(this.listoupgrade[this.curUpgrade].cost)">
+  {{this.listoupgrade[this.curUpgrade].name}}
 </button>
           </div>
-
 `
 }).mount('#compUp')

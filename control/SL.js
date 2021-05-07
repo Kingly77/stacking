@@ -13,7 +13,7 @@ $('#save').click(async () =>
         persec: perSec,
         upgrade:{
             chip:chipsUpgrades.curUpgrade,
-            comp:resist.curUp,
+            comp:resist.curUpgrade,
 
         },
     }
@@ -25,8 +25,8 @@ $('#save').click(async () =>
 
 $('#load').click((async ()=>{
    const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
+           thing.chips = data.units;
 
-       console.log(data);
    })
 
 }));
