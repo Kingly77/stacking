@@ -53,14 +53,38 @@ class savPerSec extends Model
 
 savPerSec.init({
 
-    saveID: DataTypes.STRING(15),
-    chipPS: DataTypes.INTEGER,
-    compPS: DataTypes.INTEGER,
-    boardPS: DataTypes.INTEGER,
-    cpusPS: DataTypes.INTEGER,
-    chipUPSLvl: DataTypes.INTEGER,
-    compUPSLvl: DataTypes.INTEGER,
-    boardUPSLvl: DataTypes.INTEGER,
+    saveID:  {
+        type:DataTypes.STRING(15),
+        allowNull:false
+    },
+    chipPS: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    compPS: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    boardPS: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    cpusPS: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    chipUPSLvl: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    compUPSLvl: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    boardUPSLvl: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
     cpusUPSLvl: DataTypes.INTEGER
 
 }, {sequelize})
