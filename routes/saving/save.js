@@ -26,7 +26,7 @@ async function savepersec(rest)
         return;
         //create new data
     }
-    await didwork= {
+    didwork={
         saveID,
         chipsPS:0,
         compsPS:0,
@@ -51,8 +51,8 @@ async function saveupgrade(rest)
     {
         await db.save.savUpgrade.create({
             saveID,
-            chipULvl:,
-            compULvl:0,
+            chipULvl:rest.upgrade.chip,
+            compULvl:rest.upgrade.comp,
             cpusULVl:0,
             boardsULvl:0,
             compPc:comps,
@@ -64,10 +64,10 @@ async function saveupgrade(rest)
         return;
     }
 
-    await didWork = {
+    didWork = {
         saveID,
-        chipULvl:0,
-        compULvl:0,
+        chipULvl:rest.upgrade.chip,
+        compULvl:rest.upgrade.comp,
         cpusULVl:0,
         boardsULvl:0,
         compPc:comps,

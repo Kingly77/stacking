@@ -14,7 +14,6 @@ $('#save').click(async () =>
         upgrade:{
             chip:chipsUpgrades.curUpgrade,
             comp:resist.curUpgrade,
-
         },
     }
     },() =>{

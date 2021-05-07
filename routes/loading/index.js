@@ -1,12 +1,5 @@
 const load = require('express').Router();
-const units = require('./loadUnits');
-const persec = require('./loadPerSec')
-const upgrades = require('./loadUpgrade');
 const db = require('../../models');
-
-load.use('/load',units);
-load.use('/load',persec);
-load.use('/load',upgrades);
 
 load.get('/load/:id',async (req,res)=>{
 
