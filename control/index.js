@@ -12,8 +12,6 @@ let perSec= {
     cpus:0
 };
 
-
-
 setInterval(()=>{
     console.log(perSec)
     boardsApp.count += perSec.boards;

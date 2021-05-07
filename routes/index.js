@@ -14,5 +14,4 @@ res.render('home');
 
 });
 
-
 module.exports = index;
