@@ -1,9 +1,7 @@
 require('dotenv').config();
 const expr = require('express')
 const session = require('express-session')
-const {Sequelize} = require('sequelize')
 const hdbar = require('express-handlebars');
-const config = require('./config')
 const sql  = require('./models/connections');
 const app = expr();
 const port = 3001 || process.env.PORT;
@@ -22,7 +20,7 @@ app.use(expr.static(path.join(__dirname,'control')))
 //     resave: false,
 //     saveUninitialized:false,
 //     cookie:{},
-//     secret:'fineheresaSecret'
+//     secret:'FineHeresASecret'
 //     })
 // );
 
