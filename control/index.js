@@ -128,6 +128,10 @@ const boardsApp = Vue.createApp({
         }
     },
     methods:{
+        addComp()
+        {
+            this.count += clickmodifier.board + 1;
+        }
     },
 
     template: `
@@ -148,6 +152,10 @@ const cpuApp = Vue.createApp({
         }
     },
     methods:{
+        addComp()
+        {
+            this.count += clickmodifier.cpu + 1;
+        }
     },
 
     template: `
@@ -236,6 +244,51 @@ template:
 
 }).mount('#chipUp')
 
+
+const boardUpgrades = Vue.createApp({
+
+    data(){
+        return{
+            curUp:0,
+            listoupgrade: [
+                {
+                    lvl : 1,
+                    cost: 1,
+                    name: "Make Faster",
+                    usage: "Makes Resistors faster",
+                    mod: 1
+                },
+                {
+                    lvl : 1,
+                    cost:5,
+                    name: "Make MORE",
+                    usage: "Makes +1 resistor per Click",
+                    mod: 1
+                },
+
+            ],
+            ishide:false,
+        }
+    },
+    methods:{
+        checkupgrade(price){
+
+            if(compApp.count < price ) return;
+            compApp.count-= price;
+            this.curUp++;
+        }
+
+    },
+    template:
+        `
+          <div v-if="!this.ishide">
+<button @click="checkupgrade(this.listoupgrade[this.curUp].cost)">
+  {{this.listoupgrade[this.curUp].name}}
+</button>
+          </div>
+
+`
+}).mount('#compUp')
 
 const resist = Vue.createApp({
 

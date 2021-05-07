@@ -31,10 +31,13 @@ $('#load').click((async ()=>{
     compApp.count = data.units.comps
     cpuApp.count = data.units.cpus
 
-    perSec = data.persec
+    perSecChips = data.perSec.chips
+    perSecBoards = data.perSec.boards
+    perSecComps = data.perSec.comps
+    perSecCpus = data.perSec.cpus
 
     chipsUpgrades.curUpgrade = data.upgrade.chip
-    resist.curUp = data.upgrade.comp
+    resist.curUpgrade = data.upgrade.comp
 
 
    })
