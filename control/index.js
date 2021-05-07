@@ -151,7 +151,7 @@ const boardsApp = Vue.createApp({
         return {
             count: 0,
             ishide: true,
-            curUp: 0,
+            curUpgrade: 0,
             listoupgrade: [
                 {
                     lvl: 1,
