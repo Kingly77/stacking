@@ -1,23 +1,21 @@
 const rSave = require('express').Router();
 const db = require('../../models');
 
-
-
 async function savepersec(rest)
 {
     const {saveID} = rest;
     const didwork = await db.save.savPerSec.findOne({where:{saveID}});
 
-    const {chips:chipsPS,board:boardPS, cpu:cpuPS} = rest.persec;
+    const {chips:chipsPS,board:boardPS,comps:compsPS, cpu:cpuPS} = rest.persec;
 
     if(didwork === null)
     {
         await db.save.savPerSec.create({
             saveID,
-            chipsPS:0,
-            compsPS:0,
-            boardPS:0,
-            cpuPS:0,
+            chipsPS,
+            compsPS,
+            boardPS,
+            cpuPS,
             chipsUPSLvl:0,
             compUPSLvl:0,
             boardUPSLvl:0
@@ -26,17 +24,16 @@ async function savepersec(rest)
         return;
         //create new data
     }
-    didwork={
+    await didwork.save({
         saveID,
-        chipsPS:0,
-        compsPS:0,
-        boardPS:0,
-        cpuPS:0,
+        chipsPS,
+        compsPS,
+        boardPS,
+        cpuPS,
         chipsUPSLvl:0,
         compUPSLvl:0,
         boardUPSLvl:0
-    }
-    await didwork.save();
+    });
 
 }
 
@@ -64,8 +61,7 @@ async function saveupgrade(rest)
         return;
     }
 
-    didWork = {
-        saveID,
+    await didWork.save({
         chipULvl:rest.upgrade.chip,
         compULvl:rest.upgrade.comp,
         cpusULVl:0,
@@ -74,9 +70,7 @@ async function saveupgrade(rest)
         chipPc:chips,
         boardsPc:boards,
         cpusPc:0,
-    };
-
-    await didWork.save();
+    });
 }
 
 rSave.post('/',(async (req,res)=>{
@@ -88,7 +82,7 @@ rSave.post('/',(async (req,res)=>{
     console.log(rest);
     const didWork = await db.save.savUnits.findOne({where:{saveID}});
 
-    const {chips,comps,boards,cpus} = rest.units;
+    const {chips,comps,boards,cpus,robot} = rest.units;
 
         if(didWork === null)
         {
@@ -97,6 +91,7 @@ rSave.post('/',(async (req,res)=>{
                 chips,
                 comps,
                 boards,
+                robot,
                 cpus
             });
 

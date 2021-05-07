@@ -1,9 +1,7 @@
 const {Model, DataTypes} = require("sequelize");
 const sequelize = require("./connections");
 
-class savUpgrade extends Model
-{
-}
+class savUpgrade extends Model{}
 
 savUpgrade.init({
 
@@ -40,6 +38,10 @@ savUpgrade.init({
             type:DataTypes.INTEGER
         },
         boardPC: {
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
+        robotsUp:{
             defaultValue:0,
             type:DataTypes.INTEGER
         },
@@ -102,6 +104,10 @@ savUnits.init({
         allowNull:false
     },
     comps: {
+        defaultValue:0,
+        type:DataTypes.INTEGER
+    },
+    robot:{
         defaultValue:0,
         type:DataTypes.INTEGER
     },
