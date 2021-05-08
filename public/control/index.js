@@ -203,7 +203,6 @@ const compApp = Vue.createApp({
    <br>
       <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
     </td>
-    
     <td>  
        <div >Board: {{cost.board}}</div>
        <div>Cpu: {{cost.cpu}}</div>
@@ -353,12 +352,12 @@ const cpuApp = Vue.createApp({
     <button @click='addComp' class="btn btn-light">Do Click</button>
     <div>
     <button @click="DoBuy" class="btn btn-light me-md-2"> <img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-     <p>click: {{mod.click}}</p>
+      <p>click: {{mod.click}}</p>
       <p>per sec: {{mod.per}}</p>
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
+      <div>Board: {{cost.board}}</div>
+      <div>Cpu: {{cost.cpu}}</div>
+      <div>Resisters: {{cost.comp}}</div>
+      <div> Chips: {{cost.chip}}</div>
   </div>
   </div>
     `
