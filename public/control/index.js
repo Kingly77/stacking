@@ -1,4 +1,3 @@
-const { default: ModelManager } = require("sequelize/types/lib/model-manager");
 
 const clickModifier = {
     comp: 0,
@@ -198,12 +197,12 @@ const compApp = Vue.createApp({
       <h3>{{what}}<span class="m-2">{{count}}</span></h3>
       <button @click='addComp' class="btn btn-light me-md-2">Do Click</button> 
       <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-      <p>click {{mod.click}}</p>
-      <p>per sec {{mod.per}}</p>
-       <div >Board {{cost.board}}</div>
-  <div >Cpu {{cost.cpu}}</div>
-  <div >resisters {{cost.comp}}</div>
-  <div> Chips {{cost.chip}}</div>
+      <p>click: {{mod.click}}</p>
+      <p>per sec: {{mod.per}}</p>
+       <div >Board: {{cost.board}}</div>
+       <div>Cpu: {{cost.cpu}}</div>
+       <div>Resisters: {{cost.comp}}</div>
+       <div> Chips: {{cost.chip}}</div>
       <!--//DISPLAY If cost  > 0-->
     </div>
     `
@@ -273,14 +272,12 @@ const boardsApp = Vue.createApp({
     <button @click='addComp'class="btn btn-light me-md-2">Do Click</button>
     <div>
     <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-    <p>click {{mod.click}}</p>
-    <p>per sec {{mod.per}} </p>
-    <!--//DISPLAY If cost  > 0-->
-    
- <div >Board {{cost.board}}</div>
-  <div >Cpu {{cost.cpu}}</div>
-  <div >resisters {{cost.comp}}</div>
-  <div> Chips {{cost.chip}}</div>
+    <p>click: {{mod.click}}</p>
+      <p>per sec: {{mod.per}}</p>
+       <div >Board: {{cost.board}}</div>
+       <div>Cpu: {{cost.cpu}}</div>
+       <div>Resisters: {{cost.comp}}</div>
+       <div> Chips: {{cost.chip}}</div>
   </div>
   </div>
     `
@@ -348,14 +345,12 @@ const cpuApp = Vue.createApp({
     <button @click='addComp' class="btn btn-light">Do Click</button>
     <div>
     <button @click="DoBuy" class="btn btn-light me-md-2"> <img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-    <p>click {{mod.click}}</p>
-    <p>per sec {{mod.per}} </p>
-    <!--//DISPLAY If cost  > 0-->
-    
-  <div >Board {{cost.board}}</div>
-  <div >Cpu {{cost.cpu}}</div>
-  <div >resisters {{cost.comp}}</div>
-  <div> Chips {{cost.chip}}</div>
+     <p>click: {{mod.click}}</p>
+      <p>per sec: {{mod.per}}</p>
+       <div >Board: {{cost.board}}</div>
+       <div>Cpu: {{cost.cpu}}</div>
+       <div>Resisters: {{cost.comp}}</div>
+       <div> Chips: {{cost.chip}}</div>
   </div>
   </div>
     `
@@ -432,12 +427,12 @@ const chips = Vue.createApp({
       <h3>{{count}}</h3>
       <button @click="addchip" class="btn btn-light me-md-2">DO CHIP</button>
     <button @click="DoBuy" class="btn btn-light "> <img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-    <p>click {{mod.click}}</p>
-    <p>per sec {{mod.per}} </p>
-   <div >Board {{cost.board}}</div>
-  <div >Cpu {{cost.cpu}}</div>
-  <div >resisters {{cost.comp}}</div>
-  <div> Chips {{cost.chip}}</div>
+   <p>click: {{mod.click}}</p>
+      <p>per sec: {{mod.per}}</p>
+       <div >Board: {{cost.board}}</div>
+       <div>Cpu: {{cost.cpu}}</div>
+       <div>Resisters: {{cost.comp}}</div>
+       <div> Chips: {{cost.chip}}</div>
       </div>
      
     `
@@ -510,12 +505,12 @@ const robot = Vue.createApp({
   </div>
   <div v-if="!ishide">
 <button @click="DoBuy" class="btn btn-light me-md-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-    <p>click {{mod.click}}</p>
-    <p>per sec {{mod.per}} </p>
- <div >Board {{cost.board}}</div>
-  <div >Cpu {{cost.cpu}}</div>
-  <div >resisters {{cost.comp}}</div>
-  <div> Chips {{cost.chip}}</div>
+   <p>click: {{mod.click}}</p>
+      <p>per sec: {{mod.per}}</p>
+       <div >Board: {{cost.board}}</div>
+       <div>Cpu: {{cost.cpu}}</div>
+       <div>Resisters: {{cost.comp}}</div>
+       <div> Chips: {{cost.chip}}</div>
   </div>
 `
 
