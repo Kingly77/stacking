@@ -4,7 +4,7 @@ const session = require('express-session')
 const hdbar = require('express-handlebars');
 const sql  = require('./models/connections');
 const app = expr();
-const port = 3001 || process.env.PORT;
+const port =process.env.PORT || 3001;
 const def = require('./routes');
 const path = require('path');
 
