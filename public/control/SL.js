@@ -10,13 +10,13 @@ $('#save').click(async () =>
                 comps: compApp.count,
                 cpus: cpuApp.count,
                 robot: robot.count,
-                //assembler:assembler.count,
-                //fabricator:fabricator.count,
-                //printer:   printer.count,
+                assembler:0,
+                fabricator:0,
+                printer:  0
 
             },
             click: clickModifier,
-            perSec: perSec,
+            persec: perSec,
             upgrade: {
                 chip: chips.curUpgrade,
                 comp: compApp.curUpgrade,
@@ -38,10 +38,12 @@ $('#save').click(async () =>
 $('#load').click((async ()=>{
    const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
 
+       console.log(data);
     chips.count = data.units.chips
     boardsApp.count = data.units.boards
     compApp.count = data.units.comps
     cpuApp.count = data.units.cpus
+
 
        clickModifier.comp = data.perclick.comp
        clickModifier.chip = data.perclick.chip
@@ -54,11 +56,13 @@ $('#load').click((async ()=>{
     perSec.comp = data.persec.comp
     perSec.cpu = data.persec.cpu
 
-    chips.curUpgrade = data.upgrade.chip
-    compApp.curUpgrade = data.upgrade.comp
-    robot.curUpgrade = data.upgrade.robot
-    cpuApp.curUpgrade = data.upgrade.cpu
-    boardsApp.curUpgrade = data.upgrade.board
+       console.log(perSec.cpu,data.persec.cpu )
+
+    chips.curUpgrade = data.upgrade.chipULvl
+    compApp.curUpgrade = data.upgrade.compULvl
+    robot.curUpgrade = data.upgrade.robotULvl
+    cpuApp.curUpgrade = data.upgrade.cpuULvl
+    boardsApp.curUpgrade = data.upgrade.boardULvl
 
 
    })

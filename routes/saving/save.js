@@ -6,21 +6,18 @@ async function saveperclick(rest)
     const {saveID} = rest;
     const didwork = await db.save.savpc.findOne({where:{saveID}});
 
-    const { chip:chipPc, comp:compPc, board:boardPc, cpu:cpuPc} = rest.click;
+    const { chip, comp, board, cpu} = rest.click;
 
     await didwork?.destroy();
 
         await db.save.savpc.create({
             saveID,
-            chipPc,
-            compPc,
-            boardPc,
-            cpuPc
+            chip,
+            comp,
+            board,
+            cpu
         });
         console.log("testing")
-
-
-
 
 }
 
@@ -29,15 +26,15 @@ async function savepersec(rest)
     const {saveID} = rest;
     const didwork = await db.save.savps.findOne({where:{saveID}});
 
-    const {chip:chipsPS,board:boardPS,comps:compsPS, cpu:cpuPS} = rest.perSec;
+    const {chip,board,comp, cpu} = rest.persec;
 
     await didwork?.destroy();
         await db.save.savps.create({
             saveID,
-            chipsPS,
-            compsPS,
-            boardPS,
-            cpuPS,
+            chip,
+            comp,
+            board,
+            cpu,
 
         });
         console.log("testing")

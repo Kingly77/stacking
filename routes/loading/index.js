@@ -11,6 +11,10 @@ load.get('/load/:id',async (req,res)=>{
     const upgrades = await db.save.savUp.findOne({where: {saveID}})
     const perClick = await db.save.savpc.findOne({where: {saveID}})
 
+    if(units === null) return res.status(400).json({});
+
+    console.log(upgrades.toJSON())
+
     res.json(
         {
             persec:{...(perSec.toJSON())},

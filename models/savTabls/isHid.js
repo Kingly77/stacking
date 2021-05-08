@@ -14,7 +14,7 @@ savHid.init({
             defaultValue:0,
             type:DataTypes.BOOLEAN
         },
-        cpus: {
+        cpu: {
             defaultValue:0,
             type:DataTypes.BOOLEAN
         },

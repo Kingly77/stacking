@@ -20,7 +20,7 @@ savPerSec.init({
         defaultValue:0,
         type:DataTypes.INTEGER
     },
-    cpus: {
+    cpu: {
         defaultValue:0,
         type:DataTypes.INTEGER
     }

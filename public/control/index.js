@@ -15,7 +15,7 @@ const perSec= {
 function DoCost(cost){
 
     console.log(cost);
-    if(!(chips.chips >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu )) return false
+    if(!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu )) return false
 
     chips.chips -= cost.chip;
     boardsApp.count -= cost.board;
@@ -187,7 +187,7 @@ const compApp = Vue.createApp({
 
             addComp()
             {
-                this.count += 1//clickModifier.comp + 1;
+                this.count +=clickModifier.comp + 1;
             }
         },
 
@@ -243,8 +243,8 @@ const boardsApp = Vue.createApp({
         },
             applyStat(){
 
-            clickModifier.comp += this.mod.click;
-            perSec.comp += this.mod.per;
+            clickModifier.board += this.mod.click;
+            perSec.board += this.mod.per;
             },
 
             DoBuy(){
@@ -262,7 +262,7 @@ const boardsApp = Vue.createApp({
 
             addComp()
             {
-                this.count += clickModifier.comp + 1;
+                this.count += clickModifier.board + 1;
             }
     },
 
@@ -319,8 +319,8 @@ const cpuApp = Vue.createApp({
         },
             applyStat(){
 
-            clickModifier.comp += this.mod.click;
-            perSec.comp += this.mod.per;
+            clickModifier.cpu += this.mod.click;
+            perSec.cpu += this.mod.per;
             },
 
             DoBuy(){
@@ -338,7 +338,7 @@ const cpuApp = Vue.createApp({
 
             addComp()
             {
-                this.count += clickModifier.comp + 1;
+                this.count += clickModifier.cpu + 1;
             }
          },
 
@@ -404,8 +404,8 @@ const chips = Vue.createApp({
         },
         applyStat(){
 
-        clickModifier.comp += this.mod.click;
-        perSec.comp += this.mod.per;
+        clickModifier.chip += this.mod.click;
+        perSec.chip += this.mod.per;
         },
 
         DoBuy(){
@@ -423,7 +423,7 @@ const chips = Vue.createApp({
 
         addComp()
         {
-            this.count += 1//clickModifier.comp + 1;
+            this.count += clickModifier.chip + 1;
         }
     },
 
@@ -480,7 +480,7 @@ const robot = Vue.createApp({
              this.cost.board =  1.2*(1.09)^this.count;
             this.cost.chip =  1.04*(1.09)^this.count
             this.cost.cpu =  1.01*(1.09)^this.count
-            this.mod.per = this.curUpgrade;
+            this.per = this.curUpgrade;
         },
             applyStat(){
             perSec.comp += this.mod.per;
@@ -523,18 +523,13 @@ const robot = Vue.createApp({
 
 }).mount('#robot');
 
-
-function debugShow()
-{
-}
-
 compApp.start();
  boardsApp.start();
  chips.start();
  robot.start();
 
 setInterval(()=>{
-    boardsApp.count += perSec.board + printer.getMod();
+    boardsApp.count += perSec.board
     chips.count += perSec.chip;
     compApp.count += perSec.comp + robot.getMod();
     cpuApp.count += perSec.cpu;
