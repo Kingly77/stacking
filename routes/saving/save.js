@@ -8,8 +8,8 @@ async function saveperclick(rest)
 
     const { chip:chipPc, comp:compPc, board:boardPc, cpu:cpuPc} = rest.click;
 
-    if(didwork === null)
-    {
+    await didwork?.destroy();
+
         await db.save.savpc.create({
             saveID,
             chipPc,
@@ -18,18 +18,9 @@ async function saveperclick(rest)
             cpuPc
         });
         console.log("testing")
-        return;
-        //create new data
-    }
-    await didwork.save(
-        {
-            saveID,
-            chipPc,
-            compPc,
-            boardPc,
-            cpuPc
-        }
-    );
+
+
+
 
 }
 
@@ -40,8 +31,7 @@ async function savepersec(rest)
 
     const {chip:chipsPS,board:boardPS,comps:compsPS, cpu:cpuPS} = rest.perSec;
 
-    if(didwork === null)
-    {
+    await didwork?.destroy();
         await db.save.savps.create({
             saveID,
             chipsPS,
@@ -51,16 +41,7 @@ async function savepersec(rest)
 
         });
         console.log("testing")
-        return;
-        //create new data
-    }
-    await didwork.save({
-        saveID,
-        chipsPS,
-        compsPS,
-        boardPS,
-        cpuPS,
-    });
+
 
 }
 
@@ -68,36 +49,23 @@ async function saveupgrade(rest)
 {
     const {saveID} = rest;
     console.log(rest);
-    const didWork = await db.save.savUp.findOne({where:{saveID}});
+    const didwork = await db.save.savUp.findOne({where:{saveID}});
 
-    if(didWork === null)
-    {
+    await didwork?.destroy();
         await db.save.savUp.create({
             saveID,
             compULvl:rest.upgrade.comp,
             chipULvl:rest.upgrade.chip,
-            cpusULVl:0,
-            boardsULvl:0,
-            robotsULvl:0,
+            cpusULVl:rest.upgrade.cpu,
+            boardsULvl:rest.upgrade.board,
+            robotsULvl:rest.upgrade.robot,
             assemblerULvl:0,
             fabricatorULvl:0,
             printerULvl:0
 
         });
-        return;
-    }
 
-    await didWork.save({
-        chipULvl:rest.upgrade.chip,
-        compULvl:rest.upgrade.comp,
-        cpusULVl:0,
-        boardsULvl:0,
-        robotsULvl:0,
-        assemblerULvl:0,
-        fabricatorULvl:0,
-        printerULvl:0
 
-    });
 }
 
 
@@ -109,8 +77,8 @@ async function saveunit(rest){
 
     const {chips,comps,boards,cpus,robot,assembler,fabricator} = rest.units;
 
-    if(didWork === null)
-    {
+    await didWork?.destroy();
+
         await db.save.savunit.create({
             saveID,
             chips,
@@ -122,19 +90,6 @@ async function saveunit(rest){
             fabricator
         });
 
-        return;
-    }
-
-    await didWork.save({
-        saveID,
-        chips,
-        comps,
-        boards,
-        robot,
-        cpus,
-        assembler,
-        fabricator
-    });
 }
 
 rSave.post('/',(async (req,res)=>{

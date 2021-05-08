@@ -10,10 +10,6 @@ load.get('/load/:id',async (req,res)=>{
     const units = await db.save.savunit.findOne({where: {saveID}})
     const upgrades = await db.save.savUp.findOne({where: {saveID}})
     const perClick = await db.save.savpc.findOne({where: {saveID}})
-    console.log(perSec)
-
-
-
 
     res.json(
         {
