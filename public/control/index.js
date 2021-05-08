@@ -125,10 +125,10 @@ const unlocks = Vue.createApp({
               {{listoupgrade[curUpgrade].name}}
             </button>
         
-  <div>Board {{getCost().board}}</div>
-  <div>Cpu {{getCost().cpu}}</div>
-  <div>Resister {{getCost().comp}}</div>
-  <div> Chips {{getCost().chip}}</div>
+  <div>Board: {{getCost().board}}</div>
+  <div>Cpu: {{getCost().cpu}}</div>
+  <div>Resister: {{getCost().comp}}</div>
+  <div> Chips: {{getCost().chip}}</div>
           </td>
           </tr>
         `
@@ -194,11 +194,12 @@ const compApp = Vue.createApp({
             this.count += clickModifier.comp + 1;
         }
     },
-
+//class="btn btn-light me-md-2 m-2"
+    //
     template: `
     <div>
-      <h3>{{what}}<span class="m-2">{{count}}</span></h3>
-      <button @click='addComp' class="btn btn-light me-md-2">Do Click</button> 
+      <h3>{{what}}: <span class=""> {{count}}</span></h3>
+      <button @click='addComp' >Do Click</button> 
       <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
       <p>click: {{mod.click}}</p>
       <p>per sec: {{mod.per}}</p>
@@ -272,7 +273,7 @@ const boardsApp = Vue.createApp({
     template: `
     <div v-if="!ishide">
     <h3>{{what}}<br>{{count}}</h3>
-    <button @click='addComp'class="btn btn-light me-md-2">Do Click</button>
+    <button @click='addComp' class="btn btn-light me-md-2">Do Click</button>
     <div>
     <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
     <p>click: {{mod.click}}</p>
