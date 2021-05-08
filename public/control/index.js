@@ -1,36 +1,34 @@
-let clickmodifier = {
-    comps:0,
-    boards:0,
-    chips:0,
-    cpus:0
+const clickModifier = {
+    comp:0,
+    board:0,
+    chip:0,
+    cpu:0
 };
 
-let perSec= {
-    comps:0,
-    boards:0,
-    chips:0,
-    cpus:0
+const perSec= {
+    comp:0,
+    board:0,
+    chip:0,
+    cpu:0
 };
-
 
 
 setInterval(()=>{
-    console.log(perSec)
-    boardsApp.count += perSec.boards;
-    chips.count += perSec.chips + robot.addx();
-    compApp.count += perSec.comps;
-    cpuApp.count += perSec.cpus;
-
+    boardsApp.count += perSec.board;
+    chips.count += perSec.chip + robot.addx();
+    compApp.count += perSec.comp;
+    cpuApp.count += perSec.cpu;
 
 },1000)
 
 
 function DoCost(cost){
 
-    if(!(chips.chips >= cost.chips && boardsApp.count >= cost.boards && compApp.count >= cost.comp && cpuApp.count >= cost.cpu )) return false
+    console.log(cost);
+    if(!(chips.chips >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu )) return false
 
-    chips.chips -= cost.chips;
-    boardsApp.count -= cost.boards;
+    chips.chips -= cost.chip;
+    boardsApp.count -= cost.board;
     compApp.count -= cost.comp;
     cpuApp.count -= cost.cpu
     return true;
@@ -115,71 +113,82 @@ const compApp = Vue.createApp({
 
     data() {
         return {
+            what:"Resister",
             cost:{
-                rest: 0,
+                comp: 0,
                 board:0,
                 chip:0,
                 cpu:0
             },
+            mod:{
+                click:0,
+                per:0
+            },
+
             count: 0,
             curUpgrade: 0,
-            listoupgrade: [
-                {
-
-                    name: "Make Faster",
-                    usage: "Makes Resistors faster",
-                    mod: {
-                        click:0,
-                        sec:1
-                    }
-                },
-                {
-
-                    name: "Make Faster",
-                    usage: "Makes Resistors faster",
-                    mod: {
-                        click:0,
-                        sec:2
-                    }
-                },
-            ],
             ishide: false,
 
         }
+
     },
         methods: {
-            checkupgrade(price) {
 
-                this.cost.res = 20 + this.curUpgrade * 1.5;
-                if(!boardsApp.ishide || this.curUpgrade > 50) this.cost.boards = 5 + this.curUpgrade *1.6
-                if(!chips.ishide || this.curUpgrade > 200) this.cost.chips = 1 + this.curUpgrade *1.1
-                if(!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpus = 1 + this.curUpgrade * 1.001
-                this.mod.sec = 1 + this.curUpgrade * 1.01;
-                this.mod.click = 1 + this.curUpgrade * 1.05;
+        updateStat(){
+            this.cost.comp = 20 + this.curUpgrade * 1.5;
+            if(!boardsApp.ishide || this.curUpgrade > 50) this.cost.board = 5 + this.curUpgrade *1.6
+            if(!chips.ishide || this.curUpgrade > 200) this.cost.chip = 1 + this.curUpgrade *1.1
+            if(!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = 1 + this.curUpgrade * 1.001
+            this.mod.click = 1 + this.curUpgrade * 1.1;
+            this.mod.per = this.curUpgrade * 1.01;
+        },
+            applyStat(){
 
+            clickModifier.comp += this.mod.click;
+            perSec.comp += this.mod.per;
 
-                if (DoCost) return;
-                boardsApp.count -= price;
-                this.curUpgrade++;
             },
+
+            DoBuy(){
+                if (!DoCost(this.cost)) return;
+                console.log('hi')
+                this.applyStat()
+                this.curUpgrade++;
+                this.updateStat();
+                compApp.count;
+            },
+
+            start(){
+            this.updateStat();
+            },
+
             addComp()
             {
-                this.count += clickmodifier.comp + 1;
+                this.count += 1//clickModifier.comp + 1;
             }
         },
 
         template: `
-      <h3>Resister<br>{{count}}</h3>
+      <h3>{{what}}<br>{{count}}</h3>
       <button @click='addComp'>Do Click</button>
       <div>
-      <button @click="checkupgrade(this.listoupgrade[this.curUpgrade].cost)">
-        {{this.listoupgrade[this.curUpgrade%2].name}}
-      </button>
-      </div>
+      <button @click="DoBuy">UPGRADE {{what}}</button>
+      <p>click {{mod.click}}</p>
+      <p>per sec {{mod.per}} </p>
+      <!--//DISPLAY If cost  > 0-->
+      
+    <div >COST {{cost.board}}</div>
+    <div >COST {{cost.cpu}}</div>
+    <div >COST {{cost.comp}}</div>
+    <div> COST {{cost.chip}}</div>
+    </div>
     `
 
     }).mount('#comp');
-// 0 1 0 1 0 1 0
+
+
+
+
 const boardsApp = Vue.createApp({
 
     data() {
@@ -394,3 +403,4 @@ const robot = Vue.createApp({
 
 }).mount('#robot');
 
+compApp.start();
