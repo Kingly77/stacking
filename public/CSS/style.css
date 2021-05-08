@@ -3,18 +3,91 @@
 	font-family: 'Merriweather', serif;
 }
 .body {
-    background: linear-gradient(to left, #401f44, #916ea5);
+    background: linear-gradient(to right,#4A1139 , #0B0A1E);
 	width: 100%;
 	height: 100vh;
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+	overflow: hidden;
     
  }
+
+ .glowing {
+	 position: relative;
+	 width: 750px;
+	 height: 750px;
+ }
+
+ .glowing span {
+	 position: absolute;
+	 top: calc(80px * var(--i));
+	 left: calc(80px * var(--i));
+	 bottom: calc(80px * var(--i));
+	 right: calc(80px * var(--i));
+ }
+
+ .glowing span:before {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: -8px;
+   width: 15px;
+   height: 15px;
+   background: rgb(151, 112, 187);
+   border-radius: 50%;
+ }
+
+ .glowing span:nth-child(3n + 1):before {
+	 background: rgba(134, 255, 0, 1);
+	 box-shadow: 0 0 20px rgba(134, 255, 0, 1),
+				0 0 40px rgba(134, 255, 0, 1),
+				0 0 60px rgba(134, 255, 0, 1),
+				0 0 80px rgba(134, 255, 0, 1),
+				0 0 0 8px rgba(134, 255, 0, 1),
+ }
+ .glowing span:nth-child(3n + 2):before {
+	background: rgba(255, 214, 0, 1);
+	box-shadow: 0 0 20px rgba(255, 214, 0, 1),
+			   0 0 40px rgba(255, 214, 0, 1),
+			   0 0 60px rgba(255, 214, 0, 1),
+			   0 0 80px rgba(255, 214, 0, 1),
+			   0 0 0 8px rgba(255, 214, 0, 1),
+}
+
+.glowing span:nth-child(3n + 3):before {
+	background: rgba(0, 226,255,1);
+	box-shadow: 0 0 20px rgba(0, 226,255,1),
+			   0 0 40px rgba(0, 226,255,1),
+			   0 0 60px rgba(0, 226,255,1),
+			   0 0 80px rgba(0, 226,255,1),
+			   0 0 0 8px rgba(0, 226,255,.1),
+}
+.glowing span:nth-child(3n + 1) {
+	animation:  animate 10s alternate infinite;
+}
+.glowing span:nth-child(3n + 2) {
+	animation: animate-reverse 10s alternate infinite;
+}
+@keyframes animate 
+{
+	0%
+	{
+		transform: rotate(0deg);
+	}
+	100%
+	{
+		transform: rotate(360deg);
+	}
+}
+
  /*
 #load {
     font-style: italic;
     font-family: cursive;
     font-weight: bold;
     color: white;
-    background: linear-gradient(to right, #322e3a, #68acda);
+    background: linear-gradient(to right, #411b42, #a363ac);
     
 }
 #save {
@@ -52,6 +125,8 @@
     color: white;
     
 } */
+
+
 
 .box-area {
 	position: absolute;
