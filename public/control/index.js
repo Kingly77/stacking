@@ -146,7 +146,6 @@ const compApp = Vue.createApp({
 
             clickModifier.comp += this.mod.click;
             perSec.comp += this.mod.per;
-
             },
 
             DoBuy(){
