@@ -12,10 +12,6 @@ const perSec= {
     cpu:0
 };
 
-
-
-
-
 function DoCost(cost){
 
     console.log(cost);
