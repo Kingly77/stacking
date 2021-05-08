@@ -44,6 +44,10 @@
 	box-shadow:2px 2px 2px #0B0A1E;
 	/* border:1px solid #401f44; */
 }
+.upgrade{
+    width:25px;
+    height:25px;
+}
 
 /* 
 .click {
