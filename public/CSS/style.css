@@ -13,6 +13,7 @@
     
  }
 
+
  .glowing {
 	 position: relative;
 	 width: 750px;
@@ -81,26 +82,22 @@
 	}
 }
 
- /*
-#load {
-    font-style: italic;
+#load,#save  {
+    /* font-style: italic;
     font-family: cursive;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(to right, #411b42, #a363ac);
-    
+    font-weight: bold;*/
+    color: white; 
+    background: linear-gradient(to right, #322e3a, #68acda); 
 }
-#save {
-    font-style: italic;
-    font-family: cursive;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(to right, #332c41, #68acda);
-    
-} */
-
-.title{
-    color: grey;
+#load:hover,#save:hover{
+	background: linear-gradient(to right, #45b2a3, #4545b2); 
+}
+.title-img{
+	background-image: '/image/circuit.jpg';
+	background-color: #45b2a3;
+}
+.title-img:hover{
+    background: linear-gradient(to right, #45b2a3, #4545b2); 
 }
 #stack-img{
     display: flex;
@@ -117,7 +114,17 @@
 	box-shadow:2px 2px 2px #0B0A1E;
 	/* border:1px solid #401f44; */
 }
+.upgrade{
+    width:25px;
+    height:25px;
+}
 
+.lock{
+	background-image: '/image/lock.jpg';
+}
+.unlock{
+	background-image: '/image/unlock.jpg';
+}
 /* 
 .click {
     font-style: italic;
