@@ -155,7 +155,7 @@ const compApp = Vue.createApp({
                 this.applyStat()
                 this.curUpgrade++;
                 this.updateStat();
-                compApp.count;
+
             },
 
             start(){
