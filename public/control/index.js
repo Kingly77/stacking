@@ -192,15 +192,26 @@ const compApp = Vue.createApp({
 
     template: `
     <div>
-      <h3>{{what}}: <span class=""> {{count}}</span></h3>
-      <button @click='addComp' class="btn btn-light me-md-2 m-2" >Do Click</button> 
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-      <p>click: {{mod.click}}</p>
-      <p>per sec: {{mod.per}}</p>
+     <h3>{{what}}: <span class=""> {{count}}</span></h3>
+     <div>
+     click: {{mod.click}} &nbsp;&nbsp;&nbsp;&nbsp; per sec: {{mod.per}}
+     </div>
+    <table>
+    <tr>
+    <td>
+      <button @click='addComp' class="btn btn-light" >Do Click</button> 
+   <br>
+      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+    </td>
+    
+    <td>  
        <div >Board: {{cost.board}}</div>
        <div>Cpu: {{cost.cpu}}</div>
        <div>Resisters: {{cost.comp}}</div>
        <div> Chips: {{cost.chip}}</div>
+       </td>
+     </tr>
+       </table>
     </div>
     `
 }).mount('#comp');
@@ -223,7 +234,7 @@ const boardsApp = Vue.createApp({
             },
 
             count: 0,
-            ishide: true,
+            ishide: false,
             curUpgrade: 0,
 
 
@@ -380,7 +391,7 @@ const chips = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: true,
+            ishide: false,
 
         }
 
@@ -422,14 +433,15 @@ const chips = Vue.createApp({
       <div v-if="!ishide">
       <h3>Chips</h3>
       <h3>{{count}}</h3>
-      <button @click="addchip" class="btn btn-light me-md-2">DO CHIP</button>
+      <button @click="addComp" class="btn btn-light me-md-2">DO CHIP</button>
     <button @click="DoBuy" class="btn btn-light "> <img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-   <p>click: {{mod.click}}</p>
-      <p>per sec: {{mod.per}}</p>
+       <div>click: {{mod.click}}</div>
+       <div>per sec: {{mod.per}}</div>
        <div >Board: {{cost.board}}</div>
        <div>Cpu: {{cost.cpu}}</div>
        <div>Resisters: {{cost.comp}}</div>
        <div> Chips: {{cost.chip}}</div>
+       
       </div>
      
     `
