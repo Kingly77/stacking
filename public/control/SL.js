@@ -23,10 +23,20 @@ $('#save').click(async () =>
                 board:boardsApp.curUpgrade,
                 cpu:cpuApp.curUpgrade,
                 robot: robot.curUpgrade,
-                //printer: printer.curUpgrade,
-                //fabricator: fabricator.curUpgrade,
-                //assembler: assembler.curUpgrade,
+                printer: 0,
+                fabricator: 0,
+                assembler: 0,
             },
+            hide:{
+                chip: chips.ishide,
+                comp: compApp.ishide,
+                board:boardsApp.ishide,
+                cpu:cpuApp.ishide,
+                robot: robot.ishide,
+                printer: 0,
+                fabricator: 0,
+                assembler: 0,
+            }
         }
     }, () =>
     {
@@ -43,7 +53,12 @@ $('#load').click((async ()=>{
     boardsApp.count = data.units.boards
     compApp.count = data.units.comps
     cpuApp.count = data.units.cpus
+    robot.count =data.units.robot
 
+       //printer.count =data.units.printer
+       //assembler.count =data.units.assembler
+       //fabricator.count =data.units.fabricator
+       //TODO ADD OTHER HERE
 
        clickModifier.comp = data.perclick.comp
        clickModifier.chip = data.perclick.chip
@@ -56,7 +71,7 @@ $('#load').click((async ()=>{
     perSec.comp = data.persec.comp
     perSec.cpu = data.persec.cpu
 
-       console.log(perSec.cpu,data.persec.cpu )
+
 
     chips.curUpgrade = data.upgrade.chipULvl
     compApp.curUpgrade = data.upgrade.compULvl
@@ -64,6 +79,17 @@ $('#load').click((async ()=>{
     cpuApp.curUpgrade = data.upgrade.cpuULvl
     boardsApp.curUpgrade = data.upgrade.boardULvl
 
+       //printer.curUpgrade =data.upgrade.printer
+       //assembler.curUpgrade =data.upgrade.assembler
+       //fabricator.curUpgrade =data.upgrade.fabricator
+
+       //TODO UNCOMMENT ADD OTHER HERE
+
+       chips.ishide = data.hide.chip
+       compApp.ishide = data.hide.comp
+       robot.ishide = data.hide.robot
+       cpuApp.ishide = data.hide.cpu
+       boardsApp.ishide = data.hide.board
 
    })
 

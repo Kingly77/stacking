@@ -89,6 +89,28 @@ async function saveunit(rest){
 
 }
 
+
+async function savehide(rest){
+    const {saveID} = rest;
+    const didWork = await db.save.savhid.findOne({where:{saveID}});
+
+    const {chip,comp,board,cpus,robot,assembler:assemble,fabricator:fab} = rest.hide;
+
+    await didWork?.destroy();
+
+    await db.save.savhid.create({
+        saveID,
+        chip,
+        comp,
+        board,
+        robot,
+        cpus,
+        assemble,
+        fab
+    });
+
+}
+
 rSave.post('/',(async (req,res)=>{
 
     const {rest} = req.body;
@@ -100,6 +122,7 @@ rSave.post('/',(async (req,res)=>{
     await saveupgrade(rest);
     await saveperclick(rest);
     await savepersec(rest);
+    await savehide(rest);
     res.status(200);
 
 }));
