@@ -26,6 +26,7 @@
 	 left: calc(80px * var(--i));
 	 bottom: calc(80px * var(--i));
 	 right: calc(80px * var(--i));
+	 z-index: -2;
  }
 
  .glowing span:before {
