@@ -174,12 +174,12 @@ const compApp = Vue.createApp({
         },
 
         template: `
+    <div>
       <h3>{{what}}<br>{{count}}</h3>
-      <button @click='addComp'>Do Click</button>
-      <div>
+      <button @click='addComp'>Do Click</button> 
       <button @click="DoBuy">UPGRADE {{what}}</button>
       <p>click {{mod.click}}</p>
-      <p>per sec {{mod.per}} </p>
+      <p>per sec {{mod.per}}</p>
       <!--//DISPLAY If cost  > 0-->
       
     <div >COST {{cost.board}}</div>
@@ -189,8 +189,6 @@ const compApp = Vue.createApp({
     </div>
     `
 }).mount('#comp');
-
-
 
 
 const boardsApp = Vue.createApp({
