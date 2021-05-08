@@ -220,8 +220,8 @@ const boardsApp = Vue.createApp({
         },
             applyStat(){
 
-            clickModifier.comp += this.mod.click;
-            perSec.comp += this.mod.per;
+            clickModifier.board += this.mod.click;
+            perSec.board += this.mod.per;
             },
 
             DoBuy(){
@@ -295,8 +295,8 @@ const cpuApp = Vue.createApp({
         },
             applyStat(){
 
-            clickModifier.comp += this.mod.click;
-            perSec.comp += this.mod.per;
+            clickModifier.cpu += this.mod.click;
+            perSec.cpu += this.mod.per;
             },
 
             DoBuy(){
@@ -337,13 +337,82 @@ const cpuApp = Vue.createApp({
 }).mount('#cpus');
 
 const printer= Vue.createApp({
-data(){
-    return{
-        curUpgrade:0,
-    }
-}
+    data() {
+        return {
+            what:"Printer",
+            cost:{
+                comp: 0,
+                board:0,
+                chip:0,
+                cpu:0
+            },
+            mod:{
+                click:0,
+                per:0
+            },
 
-})
+            count: 0,
+            curUpgrade: 0,
+            ishide: false,
+
+        }
+
+    },
+    methods: {
+        updateStat(){
+            this.cost.comp = 20 + this.curUpgrade * 1.5;
+             this.cost.board = 5 + this.curUpgrade *1.6
+            this.cost.chip = 1 + this.curUpgrade *1.1
+            this.cost.cpu = 1 + this.curUpgrade * 1.001
+            this.mod.click = 1 + this.curUpgrade * 1.1;
+            this.mod.per = this.curUpgrade * 1.01;
+        },
+            applyStat(){
+
+            clickModifier.board += this.mod.click;
+            perSec.board += this.mod.per;
+            },
+
+            DoBuy(){
+                if (!DoCost(this.cost)) return;
+                console.log('hi')
+                this.applyStat()
+                this.curUpgrade++;
+                this.updateStat();
+
+            },
+
+            start(){
+            this.updateStat();
+            },
+
+            addComp()
+            {
+                this.count += 1//clickModifier.comp + 1;
+            }
+        },
+    template:
+        `
+  <div v-if="!ishide">
+<button @click="checkupgrade( 1.2*(1.09)^qty);">
+  Printers {{1.2*(1.09)^qty}} Boards
+</button>
+  </div>
+  <div v-if="!ishide">
+<button @click="DoBuy">UPGRADE {{what}}</button>
+    <p>click {{mod.click}}</p>
+    <p>per sec {{mod.per}} </p>
+ <div >Board {{cost.board}}</div>
+  <div >Cpu {{cost.cpu}}</div>
+  <div >resisters {{cost.comp}}</div>
+  <div> Chips {{cost.chip}}</div>
+  </div>
+`
+
+}).mount('#printer');
+
+
+
 
 const chips = Vue.createApp({
     data() {
@@ -378,8 +447,8 @@ const chips = Vue.createApp({
         },
         applyStat(){
 
-        clickModifier.comp += this.mod.click;
-        perSec.comp += this.mod.per;
+        clickModifier.chip += this.mod.click;
+        perSec.chip += this.mod.per;
         },
 
         DoBuy(){
@@ -496,6 +565,162 @@ const robot = Vue.createApp({
 `
 
 }).mount('#robot');
+
+const assembler = Vue.createApp({
+
+    data() {
+        return {
+            what:"Assembler",
+            cost:{
+                comp: 0,
+                board:0,
+                chip:0,
+                cpu:0
+            },
+            mod:{
+                click:0,
+                per:0
+            },
+
+            count: 0,
+            curUpgrade: 0,
+            ishide: false,
+
+        }
+
+    },
+
+    methods: {
+        updateStat(){
+            this.cost.comp = 20 + this.curUpgrade * 1.5;
+             this.cost.board = 5 + this.curUpgrade *1.6
+            this.cost.chip = 1 + this.curUpgrade *1.1
+            this.cost.cpu = 1 + this.curUpgrade * 1.001
+            this.mod.click = 1 + this.curUpgrade * 1.1;
+            this.mod.per = this.curUpgrade * 1.01;
+        },
+            applyStat(){
+
+            clickModifier.chips += this.mod.click;
+            perSec.chips += this.mod.per;
+            },
+
+            DoBuy(){
+                if (!DoCost(this.cost)) return;
+                console.log('hi')
+                this.applyStat()
+                this.curUpgrade++;
+                this.updateStat();
+
+            },
+
+            start(){
+            this.updateStat();
+            },
+
+            addComp()
+            {
+                this.count += 1//clickModifier.comp + 1;
+            }
+        },
+    template:
+        `
+  <div v-if="!ishide">
+<button @click="checkupgrade( 1.2*(1.09)^qty);">
+  Assemblers {{1.2*(1.09)^qty}} Comps
+</button>
+  </div>
+  <div v-if="!ishide">
+<button @click="DoBuy">UPGRADE {{what}}</button>
+    <p>click {{mod.click}}</p>
+    <p>per sec {{mod.per}} </p>
+ <div >Board {{cost.board}}</div>
+  <div >Cpu {{cost.cpu}}</div>
+  <div >resisters {{cost.comp}}</div>
+  <div> Chips {{cost.chip}}</div>
+  </div>
+`
+
+}).mount('#assembler');
+
+const fabricator = Vue.createApp({
+
+    data() {
+        return {
+            what:"Fabrocator",
+            cost:{
+                comp: 0,
+                board:0,
+                chip:0,
+                cpu:0
+            },
+            mod:{
+                click:0,
+                per:0
+            },
+
+            count: 0,
+            curUpgrade: 0,
+            ishide: false,
+
+        }
+
+    },
+
+    methods: {
+        updateStat(){
+            this.cost.comp = 20 + this.curUpgrade * 1.5;
+             this.cost.board = 5 + this.curUpgrade *1.6
+            this.cost.chip = 1 + this.curUpgrade *1.1
+            this.cost.cpu = 1 + this.curUpgrade * 1.001
+            this.mod.click = 1 + this.curUpgrade * 1.1;
+            this.mod.per = this.curUpgrade * 1.01;
+        },
+            applyStat(){
+
+            clickModifier.cpus += this.mod.click;
+            perSec.cpus += this.mod.per;
+            },
+
+            DoBuy(){
+                if (!DoCost(this.cost)) return;
+                console.log('hi')
+                this.applyStat()
+                this.curUpgrade++;
+                this.updateStat();
+
+            },
+
+            start(){
+            this.updateStat();
+            },
+
+            addComp()
+            {
+                this.count += 1//clickModifier.comp + 1;
+            }
+        },
+    template:
+        `
+  <div v-if="!ishide">
+<button @click="checkupgrade( 1.2*(1.09)^qty);">
+  Fabricators {{1.2*(1.09)^qty}} Cpus
+</button>
+  </div>
+  <div v-if="!ishide">
+<button @click="DoBuy">UPGRADE {{what}}</button>
+    <p>click {{mod.click}}</p>
+    <p>per sec {{mod.per}} </p>
+ <div >Board {{cost.board}}</div>
+  <div >Cpu {{cost.cpu}}</div>
+  <div >resisters {{cost.comp}}</div>
+  <div> Chips {{cost.chip}}</div>
+  </div>
+`
+
+}).mount('#fabricator');
+
+
 
 compApp.start();
  boardsApp.start();
