@@ -273,19 +273,29 @@ const boardsApp = Vue.createApp({
     },
 
     template: `
+    
     <div v-if="!ishide">
-    <h3>{{what}}<br>{{count}}</h3>
-    <button @click='addComp' class="btn btn-light me-md-2">Do Click</button>
-    <div>
-    <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-    <p>click: {{mod.click}}</p>
-      <p>per sec: {{mod.per}}</p>
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-  </div>
-  </div>
+    <div class="container-fluid mybox mt-5">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row">
+        <div class="col">click: {{mod.click}} </div>
+        <div class="col">per sec: {{mod.per}} </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+                <button @click='addComp' class="btn btn-dark me-2" >Do Click</button> 
+          
+                <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+        </div>
+        <div class="col">
+        <div >Board: {{cost.board}}</div>
+   <div>Cpu: {{cost.cpu}}</div>
+   <div>Resisters: {{cost.comp}}</div>
+   <div> Chips: {{cost.chip}}</div>
+        </div>
+    </div>
+    </div>
     `
 }).mount('#boards');
 
@@ -347,18 +357,27 @@ const cpuApp = Vue.createApp({
 
     template: `
     <div v-if="!ishide">
-    <h3>{{what}}<br>{{count}}</h3>
-    <button @click='addComp' class="btn btn-light">Do Click</button>
-    <div>
-    <button @click="DoBuy" class="btn btn-light me-md-2"> <img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-     <p>click: {{mod.click}}</p>
-      <p>per sec: {{mod.per}}</p>
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-  </div>
-  </div>
+    <div class="container-fluid mybox mt-5">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row">
+        <div class="col">click: {{mod.click}} </div>
+        <div class="col">per sec: {{mod.per}} </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+                <button @click='addComp' class="btn btn-dark me-2" >Do Click</button> 
+          
+                <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+        </div>
+        <div class="col">
+        <div >Board: {{cost.board}}</div>
+   <div>Cpu: {{cost.cpu}}</div>
+   <div>Resisters: {{cost.comp}}</div>
+   <div> Chips: {{cost.chip}}</div>
+        </div>
+    </div>
+    </div>
     `
 
 }).mount('#cpus');
@@ -429,18 +448,27 @@ const chips = Vue.createApp({
 
     template: `
       <div v-if="!ishide">
-      <h3>Chips</h3>
-      <h3>{{count}}</h3>
-      <button @click="addComp" class="btn btn-light me-md-2">DO CHIP</button>
-    <button @click="DoBuy" class="btn btn-light "> <img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-       <div>click: {{mod.click}}</div>
-       <div>per sec: {{mod.per}}</div>
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       
-      </div>
+      <div class="container-fluid mybox mt-5">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row">
+        <div class="col">click: {{mod.click}} </div>
+        <div class="col">per sec: {{mod.per}} </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+                <button @click='addComp' class="btn btn-dark me-2" >Do Click</button> 
+          
+                <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+        </div>
+        <div class="col">
+        <div >Board: {{cost.board}}</div>
+   <div>Cpu: {{cost.cpu}}</div>
+   <div>Resisters: {{cost.comp}}</div>
+   <div> Chips: {{cost.chip}}</div>
+        </div>
+    </div>
+    </div>
      
     `
 }).mount('#chip');
@@ -506,18 +534,26 @@ const robot = Vue.createApp({
     template:
         `
   <div v-if="!ishide">
-<button @click="DoBuy" class="btn btn-light">
-  Robots 
-</button>
+  <div class="container-fluid mybox mt-5">
+  <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+  <div class="row">
+      <div class="col">click: {{mod.click}} </div>
+      <div class="col">per sec: {{mod.per}} </div>
   </div>
-  <div v-if="!ishide">
-<button @click="DoBuy" class="btn btn-light me-md-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-   <p>click: {{mod.click}}</p>
-      <p>per sec: {{mod.per}}</p>
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
+
+  <div class="row mt-3">
+      <div class="col">
+              <button @click='addComp' class="btn btn-dark me-2" >Do Click</button> 
+        
+              <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+      </div>
+      <div class="col">
+      <div >Board: {{cost.board}}</div>
+ <div>Cpu: {{cost.cpu}}</div>
+ <div>Resisters: {{cost.comp}}</div>
+ <div> Chips: {{cost.chip}}</div>
+      </div>
+  </div>
   </div>
 `
 
