@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> b51b304312a3da2dcf911a401cd03ea447f4afdd
 const clickModifier = {
     comp: 0,
     board: 0,
@@ -119,11 +115,11 @@ const unlocks = Vue.createApp({
 
     template:
         `
-          <tr>
-          <td >
+       <div class="row">
             <button @click="doUnlock" id="doUnlock" class="btn btn-dark">
               {{listoupgrade[curUpgrade].name}}
             </button>
+            </div>
         
   <div>Board: {{getCost().board}}</div>
   <div>Cpu: {{getCost().cpu}}</div>
@@ -194,28 +190,27 @@ const compApp = Vue.createApp({
     },
 
     template: `
-    <div>
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
-     <div>
-     click: {{mod.click}} &nbsp;&nbsp;&nbsp;&nbsp; per sec: {{mod.per}}
-     </div>
-    <table>
-    <tr>
-    <td>
-      <button @click='addComp' class="btn btn-light" >Do Click</button> 
-   <br>
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-    </td>
-    
-    <td>  
-       <div >Board: {{cost.board}}</div>
+    <div class="container-fluid mybox">
+        <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+        <div class="row">
+            <div class="col">click: {{mod.click}} </div>
+            <div class="col">per sec: {{mod.per}} </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                    <button @click='addComp' class="btn btn-dark me-2" >Do Click</button> 
+              
+                    <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+            </div>
+            <div class="col">
+            <div >Board: {{cost.board}}</div>
        <div>Cpu: {{cost.cpu}}</div>
        <div>Resisters: {{cost.comp}}</div>
        <div> Chips: {{cost.chip}}</div>
-       </td>
-     </tr>
-       </table>
-    </div>
+            </div>
+        </div>
+        </div>
     `
 }).mount('#comp');
 
