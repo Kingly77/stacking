@@ -22,6 +22,7 @@
  }
 
  .glowing span {
+	 z-index: -2;
 	 position: absolute;
 	 top: calc(80px * var(--i));
 	 left: calc(80px * var(--i));
