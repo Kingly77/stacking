@@ -9,19 +9,19 @@ savPerClick.init({
             type:DataTypes.STRING(15),
             allowNull:false
         },
-        compPc: {
+        comp: {
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        chipPc: {
+        chip: {
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        cpusPc: {
+        cpus: {
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        boardPC: {
+        board: {
             defaultValue:0,
             type:DataTypes.INTEGER
         },

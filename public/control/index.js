@@ -12,10 +12,6 @@ const perSec= {
     cpu:0
 };
 
-
-
-
-
 function DoCost(cost){
 
     console.log(cost);
@@ -35,6 +31,19 @@ const unlocks = Vue.createApp({
         return{
             curUpgrade:0,
             listoupgrade: [
+
+                {
+                    lvl : 1,
+                    cost: {
+                        board:0,
+                        comp:100,
+                        chip:0,
+                        cpu:0,
+                    },
+                    name: "Unlock Robots",
+                    usage: "Allows to make boards",
+                    doBuy: () => { robot.ishide = false; }
+                },
                 {
                     lvl : 1,
                     cost: {
@@ -46,6 +55,18 @@ const unlocks = Vue.createApp({
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
                     doBuy: () => { boardsApp.ishide = false }
+                },
+                {
+                    lvl : 1,
+                    cost: {
+                        board:0,
+                        comp:100,
+                        chip:0,
+                        cpu:0,
+                    },
+                    name: "Unlock Printing",
+                    usage: "Allows to make boards",
+                    doBuy: () => { printer.ishide = false; }
                 },
 
                 {
@@ -143,7 +164,6 @@ const compApp = Vue.createApp({
             if(!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = 1 + this.curUpgrade * 1.001
             this.mod.click = 1 + this.curUpgrade * 1.1;
             this.mod.per = this.curUpgrade * 1.01;
-            $.post('/comp/cost',this.cost);
 
         },
             applyStat(){
@@ -178,8 +198,11 @@ const compApp = Vue.createApp({
       <button @click="DoBuy">UPGRADE {{what}}</button>
       <p>click {{mod.click}}</p>
       <p>per sec {{mod.per}}</p>
+       <div >Board {{cost.board}}</div>
+  <div >Cpu {{cost.cpu}}</div>
+  <div >resisters {{cost.comp}}</div>
+  <div> Chips {{cost.chip}}</div>
       <!--//DISPLAY If cost  > 0-->
-      
     </div>
     `
 }).mount('#comp');
@@ -204,7 +227,7 @@ const boardsApp = Vue.createApp({
             count: 0,
             ishide: true,
             curUpgrade: 0,
-            ishide: false,
+
 
         }
 
@@ -244,6 +267,7 @@ const boardsApp = Vue.createApp({
     },
 
     template: `
+    <div v-if="!ishide">
     <h3>{{what}}<br>{{count}}</h3>
     <button @click='addComp'>Do Click</button>
     <div>
@@ -257,15 +281,15 @@ const boardsApp = Vue.createApp({
   <div >resisters {{cost.comp}}</div>
   <div> Chips {{cost.chip}}</div>
   </div>
+  </div>
     `
-
 }).mount('#boards');
 
 const cpuApp = Vue.createApp({
 
     data() {
         return {
-            what:"Resister",
+            what:"Cpu",
             cost:{
                 comp: 0,
                 board:0,
@@ -279,7 +303,7 @@ const cpuApp = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
@@ -319,6 +343,7 @@ const cpuApp = Vue.createApp({
          },
 
     template: `
+    <div v-if="!ishide">
     <h3>{{what}}<br>{{count}}</h3>
     <button @click='addComp'>Do Click</button>
     <div>
@@ -331,6 +356,7 @@ const cpuApp = Vue.createApp({
   <div >Cpu {{cost.cpu}}</div>
   <div >resisters {{cost.comp}}</div>
   <div> Chips {{cost.chip}}</div>
+  </div>
   </div>
     `
 
@@ -362,7 +388,7 @@ const chips = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
@@ -404,7 +430,7 @@ const chips = Vue.createApp({
     template: `
       <div v-if="!ishide">
       <h3>Chips</h3>
-      <h3>{{chips}}</h3>
+      <h3>{{count}}</h3>
       <button @click="addchip">DO CHIP</button>
     <button @click="DoBuy">UPGRADE {{what}}</button>
     <p>click {{mod.click}}</p>
@@ -431,37 +457,37 @@ const robot = Vue.createApp({
                 chip:0,
                 cpu:0
             },
-            mod:{
-                click:0,
-                per:0
-            },
+
+            per:0,
+
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
     },
 
     methods: {
+
+        getMod(){
+            return this.per * this.count;
+
+        },
         updateStat(){
-            this.cost.comp = 20 + this.curUpgrade * 1.5;
-             this.cost.board = 5 + this.curUpgrade *1.6
-            this.cost.chip = 1 + this.curUpgrade *1.1
-            this.cost.cpu = 1 + this.curUpgrade * 1.001
-            this.mod.click = 1 + this.curUpgrade * 1.1;
-            this.mod.per = this.curUpgrade * 1.01;
+            this.cost.comp = 1.5*(1.09)^this.count;
+             this.cost.board =  1.2*(1.09)^this.count;
+            this.cost.chip =  1.04*(1.09)^this.count
+            this.cost.cpu =  1.01*(1.09)^this.count
+            this.mod.per = this.curUpgrade;
         },
             applyStat(){
-
-            clickModifier.comp += this.mod.click;
             perSec.comp += this.mod.per;
             },
 
             DoBuy(){
                 if (!DoCost(this.cost)) return;
-                console.log('hi')
                 this.applyStat()
                 this.curUpgrade++;
                 this.updateStat();
@@ -474,14 +500,14 @@ const robot = Vue.createApp({
 
             addComp()
             {
-                this.count += 1//clickModifier.comp + 1;
+                this.count += 1;
             }
         },
     template:
         `
   <div v-if="!ishide">
-<button @click="checkupgrade( 1.2*(1.09)^qty);">
-  Robots {{1.2*(1.09)^qty}} Chips
+<button @click="DoBuy">
+  Robots 
 </button>
   </div>
   <div v-if="!ishide">
@@ -497,15 +523,20 @@ const robot = Vue.createApp({
 
 }).mount('#robot');
 
+
+function debugShow()
+{
+}
+
 compApp.start();
  boardsApp.start();
  chips.start();
  robot.start();
 
 setInterval(()=>{
-    boardsApp.count += perSec.board;
+    boardsApp.count += perSec.board + printer.getMod();
     chips.count += perSec.chip;
-    compApp.count += perSec.comp;
+    compApp.count += perSec.comp + robot.getMod();
     cpuApp.count += perSec.cpu;
 
 },1000)
