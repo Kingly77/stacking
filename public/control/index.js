@@ -35,6 +35,19 @@ const unlocks = Vue.createApp({
         return{
             curUpgrade:0,
             listoupgrade: [
+
+                {
+                    lvl : 1,
+                    cost: {
+                        board:0,
+                        comp:100,
+                        chip:0,
+                        cpu:0,
+                    },
+                    name: "Unlock Robots",
+                    usage: "Allows to make boards",
+                    doBuy: () => { robot.ishide = false; }
+                },
                 {
                     lvl : 1,
                     cost: {
@@ -46,6 +59,18 @@ const unlocks = Vue.createApp({
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
                     doBuy: () => { boardsApp.ishide = false }
+                },
+                {
+                    lvl : 1,
+                    cost: {
+                        board:0,
+                        comp:100,
+                        chip:0,
+                        cpu:0,
+                    },
+                    name: "Unlock Printing",
+                    usage: "Allows to make boards",
+                    doBuy: () => { printer.ishide = false; }
                 },
 
                 {
@@ -182,7 +207,6 @@ const compApp = Vue.createApp({
   <div >resisters {{cost.comp}}</div>
   <div> Chips {{cost.chip}}</div>
       <!--//DISPLAY If cost  > 0-->
-      
     </div>
     `
 }).mount('#comp');
@@ -207,7 +231,7 @@ const boardsApp = Vue.createApp({
             count: 0,
             ishide: true,
             curUpgrade: 0,
-            ishide: false,
+
 
         }
 
@@ -247,6 +271,7 @@ const boardsApp = Vue.createApp({
     },
 
     template: `
+    <div v-if="!ishide">
     <h3>{{what}}<br>{{count}}</h3>
     <button @click='addComp'>Do Click</button>
     <div>
@@ -259,6 +284,7 @@ const boardsApp = Vue.createApp({
   <div >Cpu {{cost.cpu}}</div>
   <div >resisters {{cost.comp}}</div>
   <div> Chips {{cost.chip}}</div>
+  </div>
   </div>
     `
 }).mount('#boards');
@@ -281,7 +307,7 @@ const cpuApp = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
@@ -321,6 +347,7 @@ const cpuApp = Vue.createApp({
          },
 
     template: `
+    <div v-if="!ishide">
     <h3>{{what}}<br>{{count}}</h3>
     <button @click='addComp'>Do Click</button>
     <div>
@@ -333,6 +360,7 @@ const cpuApp = Vue.createApp({
   <div >Cpu {{cost.cpu}}</div>
   <div >resisters {{cost.comp}}</div>
   <div> Chips {{cost.chip}}</div>
+  </div>
   </div>
     `
 
@@ -364,7 +392,7 @@ const chips = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
@@ -439,7 +467,7 @@ const robot = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
@@ -464,7 +492,6 @@ const robot = Vue.createApp({
 
             DoBuy(){
                 if (!DoCost(this.cost)) return;
-                console.log('hi')
                 this.applyStat()
                 this.curUpgrade++;
                 this.updateStat();
@@ -477,7 +504,7 @@ const robot = Vue.createApp({
 
             addComp()
             {
-                this.count += 1//clickModifier.comp + 1;
+                this.count += 1;
             }
         },
     template:
@@ -499,6 +526,11 @@ const robot = Vue.createApp({
 `
 
 }).mount('#robot');
+
+
+function debugShow()
+{
+}
 
 compApp.start();
  boardsApp.start();
