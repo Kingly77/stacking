@@ -9,10 +9,7 @@ index.use('/api',reset);
 
 index.get('/',(req, res)=>
 {
-
 res.render('home');
-
 });
-
 
 module.exports = index;

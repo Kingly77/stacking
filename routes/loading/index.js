@@ -19,5 +19,4 @@ load.get('/load/:id',async (req,res)=>{
 
 })
 
-
 module.exports = load;
