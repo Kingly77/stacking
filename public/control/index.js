@@ -258,14 +258,13 @@ const boardsApp = Vue.createApp({
   <div> Chips {{cost.chip}}</div>
   </div>
     `
-
 }).mount('#boards');
 
 const cpuApp = Vue.createApp({
 
     data() {
         return {
-            what:"Resister",
+            what:"Cpu",
             cost:{
                 comp: 0,
                 board:0,

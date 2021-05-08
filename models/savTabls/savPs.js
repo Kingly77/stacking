@@ -8,19 +8,19 @@ savPerSec.init({
         type:DataTypes.STRING(15),
         allowNull:false
     },
-    chipPS: {
+    chip: {
         defaultValue:0,
         type:DataTypes.INTEGER
     },
-    compPS: {
+    comp: {
         defaultValue:0,
         type:DataTypes.INTEGER
     },
-    boardPS: {
+    board: {
         defaultValue:0,
         type:DataTypes.INTEGER
     },
-    cpusPS: {
+    cpus: {
         defaultValue:0,
         type:DataTypes.INTEGER
     }

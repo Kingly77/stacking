@@ -1,5 +1,6 @@
 $('#save').click(async () =>
 {
+    console.log('save');
     await $.post('/api/save', {
         rest: {
             saveID: $('#id').val(),
@@ -8,21 +9,23 @@ $('#save').click(async () =>
                 boards: boardsApp.count,
                 comps: compApp.count,
                 cpus: cpuApp.count,
-                robot: robot.qty,
-                assembler:assembler.qty,
-                fabricator:fabricator.qty,
-                printer:   printer.qty,
+                robot: robot.count,
+                //assembler:assembler.count,
+                //fabricator:fabricator.count,
+                //printer:   printer.count,
 
             },
-            click: clickmodifier,
-            persec: perSec,
+            click: clickModifier,
+            perSec: perSec,
             upgrade: {
                 chip: chips.curUpgrade,
-                comp: resist.curUpgrade,
-                robotUp: robot.curUpgrade,
-                printer: printer.curUpgrade,
-                fabricator: fabricator.curUpgrade,
-                assembler: assembler.curUpgrade,
+                comp: compApp.curUpgrade,
+                board:boardsApp.curUpgrade,
+                cpu:cpuApp.curUpgrade,
+                robot: robot.curUpgrade,
+                //printer: printer.curUpgrade,
+                //fabricator: fabricator.curUpgrade,
+                //assembler: assembler.curUpgrade,
             },
         }
     }, () =>
@@ -34,23 +37,28 @@ $('#save').click(async () =>
 
 $('#load').click((async ()=>{
    const isload = await $.get(`/api/load/${$('#id').val()}`, (data)=>{
-           chips.chips = data.units;
 
-    chips.chips = data.units.chips
+    chips.count = data.units.chips
     boardsApp.count = data.units.boards
     compApp.count = data.units.comps
     cpuApp.count = data.units.cpus
 
+       clickModifier.comp = data.perclick.comp
+       clickModifier.chip = data.perclick.chip
+       clickModifier.board = data.perclick.board
+       clickModifier.cpu = data.perclick.cpu
 
-    perSecChips = data.perSec.chips
-    perSecBoards = data.perSec.boards
-    perSecComps = data.perSec.comps
-    perSecCpus = data.perSec.cpus
 
-    chipsUpgrades.curUpgrade = data.upgrade.chip
-    resist.curUpgrade = data.upgrade.comp
-    robotUpgrades = data.upgrade.qty
+    perSec.chip = data.persec.chip
+    perSec.board = data.persec.board
+    perSec.comp = data.persec.comp
+    perSec.cpu = data.persec.cpu
 
+    chips.curUpgrade = data.upgrade.chip
+    compApp.curUpgrade = data.upgrade.comp
+    robot.curUpgrade = data.upgrade.robot
+    cpuApp.curUpgrade = data.upgrade.cpu
+    boardsApp.curUpgrade = data.upgrade.board
 
 
    })

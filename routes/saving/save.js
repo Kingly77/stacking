@@ -4,13 +4,13 @@ const db = require('../../models');
 async function saveperclick(rest)
 {
     const {saveID} = rest;
-    const didwork = await db.save.savPerSec.findOne({where:{saveID}});
+    const didwork = await db.save.savpc.findOne({where:{saveID}});
 
     const { chip:chipPc, comp:compPc, board:boardPc, cpu:cpuPc} = rest.click;
 
     if(didwork === null)
     {
-        await db.save.savps.create({
+        await db.save.savpc.create({
             saveID,
             chipPc,
             compPc,
@@ -36,9 +36,9 @@ async function saveperclick(rest)
 async function savepersec(rest)
 {
     const {saveID} = rest;
-    const didwork = await db.save.savpc.findOne({where:{saveID}});
+    const didwork = await db.save.savps.findOne({where:{saveID}});
 
-    const {chips:chipsPS,board:boardPS,comps:compsPS, cpu:cpuPS} = rest.persec;
+    const {chip:chipsPS,board:boardPS,comps:compsPS, cpu:cpuPS} = rest.perSec;
 
     if(didwork === null)
     {
@@ -103,6 +103,8 @@ async function saveupgrade(rest)
 
 
 async function saveunit(rest){
+
+    const {saveID} = rest;
     const didWork = await db.save.savunit.findOne({where:{saveID}});
 
     const {chips,comps,boards,cpus,robot,assembler,fabricator} = rest.units;
@@ -120,9 +122,6 @@ async function saveunit(rest){
             fabricator
         });
 
-        await saveupgrade(rest);
-        await savepersec(rest);
-        res.status(200);
         return;
     }
 
