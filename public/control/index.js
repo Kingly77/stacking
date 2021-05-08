@@ -1,5 +1,3 @@
-const { default: ModelManager } = require("sequelize/types/lib/model-manager");
-
 const clickModifier = {
     comp: 0,
     board: 0,
