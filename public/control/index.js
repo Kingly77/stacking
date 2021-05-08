@@ -44,35 +44,34 @@ const unlocks = Vue.createApp({
                 {
                     lvl : 1,
                     cost: {
-                        boards:0,
-                        res:100,
-                        chips:0,
-                        cpus:0,
+                        board:0,
+                        comp:100,
+                        chip:0,
+                        cpu:0,
                     },
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
-                    doBuy: () => { boardsApp.ishide = false }
+                    doBuy: () => {boardsApp.ishide = false }
                 },
 
                 {
                     lvl : 5,
                     cost: {
-                        boards:30,
-                        res:100,
-                        chips:0,
-                        cpus:0,
+                        board:30,
+                        comp:100,
+                        chip:0,
+                        cpu:0,
                     },
                     name: "Unlock Chip",
                     usage: "Allows to make Chips",
                     doBuy:()=>{  chips.ishide = false }
                 },
-
                 {
                     lvl: 10,
                     cost: {
-                        boards:100,
-                        res:100,
-                        chips:30,
+                        board:100,
+                        comp:100,
+                        chip:30,
                         cpus:0,
                     },
                     name: "Unlock CPUS",
@@ -86,14 +85,17 @@ const unlocks = Vue.createApp({
     methods:{
         doUnlock(){
 
-            const {cost , doBuy} = this.listoupgrade[this.curUpgrade];
-            console.log(cost.res);
+            const {cost} = this.listoupgrade[this.curUpgrade];
             if(!DoCost(this.listoupgrade[this.curUpgrade].cost)) return
-            doBuy();
+            console.log(cost.comp);
+            this.listoupgrade[this.curUpgrade].doBuy();
             this.curUpgrade++;
+        },
+        getCost()
+        {
+            return this.listoupgrade[this.curUpgrade].cost;
         }
     },
-
     template:
         `
           <tr>
@@ -101,6 +103,10 @@ const unlocks = Vue.createApp({
             <button @click="doUnlock">
               {{listoupgrade[curUpgrade].name}}
             </button>
+             <div >COST {{getCost().board}}</div>
+    <div>COST {{getCost().cpu}}</div>
+    <div>COST {{getCost().comp}}</div>
+    <div> COST {{getCost().chip}}</div>
           </td>
           </tr>
         `
@@ -182,8 +188,7 @@ const compApp = Vue.createApp({
     <div> COST {{cost.chip}}</div>
     </div>
     `
-
-    }).mount('#comp');
+}).mount('#comp');
 
 
 
