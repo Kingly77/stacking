@@ -1,16 +1,16 @@
 
 const clickModifier = {
-    comp: 0,
-    board: 0,
-    chip: 0,
-    cpu: 0
+    comp:   0,
+    board:  0,
+    chip:   0,
+    cpu:    0
 };
 
 const perSec = {
-    comp: 0,
-    board: 0,
-    chip: 0,
-    cpu: 0
+    comp:   0,
+    board:  0,
+    chip:   0,
+    cpu:    0
 };
 
 function DoCost(cost) {
@@ -18,10 +18,10 @@ function DoCost(cost) {
     console.log(cost);
     if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) return false
 
-    chips.chips -= cost.chip;
-    boardsApp.count -= cost.board;
-    compApp.count -= cost.comp;
-    cpuApp.count -= cost.cpu
+    chips.chips -=      cost.chip;
+    boardsApp.count -=  cost.board;
+    compApp.count -=    cost.comp;
+    cpuApp.count -=     cost.cpu
     return true;
 }
 
@@ -167,20 +167,20 @@ const compApp = Vue.createApp({
         return {
             what: "Resister",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
             mod: {
-                click: 0,
-                per: 0
+                click:  0,
+                per:    0
             },
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: false,
-            isDis: false,
+            ishide:     false,
+            isDis:      false,
 
         }
 
@@ -265,20 +265,19 @@ const boardsApp = Vue.createApp({
         return {
             what: "Board",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
             mod: {
-                click: 0,
-                per: 0
+                click:  0,
+                per:    0
             },
 
-            count: 0,
-            ishide: true,
+            count:      0,
+            ishide:     true,
             curUpgrade: 0,
-            isDis:true,
 
         }
 
@@ -294,8 +293,8 @@ const boardsApp = Vue.createApp({
         },
         applyStat() {
 
-            clickModifier.board = this.mod.click;
-            perSec.board = this.mod.per;
+            clickModifier.board =   this.mod.click;
+            perSec.board =          this.mod.per;
         },
 
         DoBuy() {
@@ -356,19 +355,19 @@ const cpuApp = Vue.createApp({
         return {
             what: "Cpu",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
             mod: {
-                click: 0,
-                per: 0
+                click:  0,
+                per:    0
             },
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: true,
+            ishide:     true,
 
         }
 
@@ -385,7 +384,7 @@ const cpuApp = Vue.createApp({
         applyStat() {
 
             clickModifier.cpu = this.mod.click;
-            perSec.cpu = this.mod.per;
+            perSec.cpu =        this.mod.per;
         },
 
         DoBuy() {
@@ -446,19 +445,19 @@ const chips = Vue.createApp({
         return {
             what: "Chip",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
             mod: {
-                click: 0,
-                per: 0
+                click:  0,
+                per:    0
             },
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: true,
+            ishide:     true,
 
         }
 
@@ -536,18 +535,18 @@ const robot = Vue.createApp({
         return {
             what: "Robot",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
 
-            per: 0,
+            per:        0,
 
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: true,
+            ishide:     true,
 
         }
 
@@ -625,18 +624,18 @@ const printer = Vue.createApp({
         return {
             what: "Printer",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
 
-            per: 0,
+            per:        0,
 
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: true,
+            ishide:     true,
 
         }
 
@@ -715,18 +714,18 @@ const assembler = Vue.createApp({
         return {
             what: "Assembler",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
 
-            per: 0,
+            per:        0,
 
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: true,
+            ishide:     true,
 
         }
 
@@ -804,18 +803,18 @@ const fabricator = Vue.createApp({
         return {
             what: "Fabricator",
             cost: {
-                comp: 0,
-                board: 0,
-                chip: 0,
-                cpu: 0
+                comp:   0,
+                board:  0,
+                chip:   0,
+                cpu:    0
             },
 
-            per: 0,
+            per:        0,
 
 
-            count: 0,
+            count:      0,
             curUpgrade: 0,
-            ishide: true,
+            ishide:     true,
 
         }
 
@@ -887,14 +886,14 @@ const fabricator = Vue.createApp({
 
 function debug()
 {
-    compApp.ishide =false;
-    boardsApp.ishide =false;
-    chips.ishide =false;
-    cpuApp.ishide =false;
-    robot.ishide =false;
-    printer.ishide =false;
-    assembler.ishide =false;
-    fabricator.ishide =false;
+    compApp.ishide =    false;
+    boardsApp.ishide =  false;
+    chips.ishide =      false;
+    cpuApp.ishide =     false;
+    robot.ishide =      false;
+    printer.ishide =    false;
+    assembler.ishide =  false;
+    fabricator.ishide = false;
 }
 
 function start()
