@@ -1,16 +1,15 @@
-
 const clickModifier = {
-    comp:   0,
-    board:  0,
-    chip:   0,
-    cpu:    0
+    comp: 0,
+    board: 0,
+    chip: 0,
+    cpu: 0
 };
 
 const perSec = {
-    comp:   0,
-    board:  0,
-    chip:   0,
-    cpu:    0
+    comp: 0,
+    board: 0,
+    chip: 0,
+    cpu: 0
 };
 
 function DoCost(cost) {
@@ -18,10 +17,10 @@ function DoCost(cost) {
     console.log(cost);
     if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) return false
 
-    chips.chips -=      cost.chip;
-    boardsApp.count -=  cost.board;
-    compApp.count -=    cost.comp;
-    cpuApp.count -=     cost.cpu
+    chips.chips -= cost.chip;
+    boardsApp.count -= cost.board;
+    compApp.count -= cost.comp;
+    cpuApp.count -= cost.cpu
     return true;
 }
 
@@ -135,18 +134,19 @@ const unlocks = Vue.createApp({
 
     template:
         `
-          <tr>
+        <div class="container glass">
+        <tr>
           <td >
             <button @click="doUnlock" id="doUnlock" class="btn btn-dark">
               {{listoupgrade[curUpgrade].name}}
             </button>
-        
+            <div class="mt-1">Resister: {{getCost().comp}}</div>
   <div>Board: {{getCost().board}}</div>
-  <div>Cpu: {{getCost().cpu}}</div>
-  <div>Resister: {{getCost().comp}}</div>
   <div> Chips: {{getCost().chip}}</div>
+  <div>Cpu: {{getCost().cpu}}</div>
           </td>
           </tr>
+          </div>
         `
 
 }).mount('#unlocky')
@@ -158,20 +158,20 @@ const compApp = Vue.createApp({
         return {
             what: "Resister",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
             mod: {
-                click:  0,
-                per:    0
+                click: 0,
+                per: 0
             },
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     false,
-            isDis:      false,
+            ishide: false,
+            isDis: false,
 
         }
 
@@ -181,8 +181,8 @@ const compApp = Vue.createApp({
         updateStat() {
             this.cost.comp = (20 + this.curUpgrade) * 2;
             if (!boardsApp.ishide || this.curUpgrade > 50) this.cost.board = Math.round((5 + this.curUpgrade) * 1.5)
-            if (!chips.ishide || this.curUpgrade > 200) this.cost.chip = Math.round( (1 + this.curUpgrade) * 1.09)
-            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = Math.round( (1 + this.curUpgrade) * 1.001)
+            if (!chips.ishide || this.curUpgrade > 200) this.cost.chip = Math.round((1 + this.curUpgrade) * 1.09)
+            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.001)
             this.mod.click = Math.round(1 + this.curUpgrade * 0.9);
             this.mod.per = Math.round(this.curUpgrade * 0.05);
 
@@ -210,36 +210,37 @@ const compApp = Vue.createApp({
         addComp() {
             this.count += clickModifier.comp + 1;
         },
-        addOther(val)
-        {
+        addOther(val) {
             this.count += val;
         }
     },
 
     template: `
-    <div>
-     <div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
+   
+    <div class="container glass">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
-    <div class="col-3">
-       click: {{mod.click}}
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >Do Click</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{mod.per}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div class="col">click: {{mod.click}}</div>
+        <div class="col">per sec:{{mod.per}}</div>
     </div>
+    <div class="row mt-1">
+        <div class="col-4">
+            <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+            <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+        </div>
+<div class="col-2"></div>
+        <div class="col">
+    <div>Resisters: {{cost.comp}}</div>
+            <div >Board: {{cost.board}}</div>
+            <div> Chips: {{cost.chip}}</div>
+     <div>Cpu: {{cost.cpu}}</div>
+            
+            
+        </div>
     </div>
+</div>
+
+   
     `
 }).mount('#comp');
 
@@ -250,18 +251,18 @@ const boardsApp = Vue.createApp({
         return {
             what: "Board",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
             mod: {
-                click:  0,
-                per:    0
+                click: 0,
+                per: 0
             },
 
-            count:      0,
-            ishide:     true,
+            count: 0,
+            ishide: true,
             curUpgrade: 0,
 
         }
@@ -274,12 +275,13 @@ const boardsApp = Vue.createApp({
             if (!chips.ishide || this.curUpgrade > 200) Math.round(this.cost.chip = (1 + this.curUpgrade) * 2.5)
             if (!cpuApp.ishide || this.curUpgrade > 500)Math.round( this.cost.cpu = (1 + this.curUpgrade) * 1.1)
             this.mod.click = Math.round((1 + this.curUpgrade) * 1.1);
+
             this.mod.per = Math.round(this.curUpgrade * .07);
         },
         applyStat() {
 
-            clickModifier.board =   this.mod.click;
-            perSec.board =          this.mod.per;
+            clickModifier.board = this.mod.click;
+            perSec.board = this.mod.per;
         },
 
         DoBuy() {
@@ -296,40 +298,43 @@ const boardsApp = Vue.createApp({
         },
 
         addComp() {
-            if(compApp.count < this.count + clickModifier.board + 1 ) return;
+            if (compApp.count < this.count + clickModifier.board + 1) return;
             this.count += clickModifier.board + 1;
         }
         ,
-        addOther(val)
-        {
-            if(compApp.count < this.count + val ) return;
+        addOther(val) {
+            if (compApp.count < this.count + val) return;
             this.count += val;
         }
     },
 
     template: `
     <div v-if="!ishide">
-    <div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
+    <div class="container glass">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
-    <div class="col-3">
-       click: {{mod.click}}
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >Do Click</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{mod.per}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div class="col">click: {{mod.click}}</div>
+        <div class="col">per sec:{{mod.per}}</div>
     </div>
+    <div class="row mt-1">
+        <div class="col-4">
+            <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+            <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+        </div>
+<div class="col-2"></div>
+        <div class="col">
+    <div>Resisters: {{cost.comp}}</div>
+            <div >Board: {{cost.board}}</div>
+            <div> Chips: {{cost.chip}}</div>
+     <div>Cpu: {{cost.cpu}}</div>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+
   </div>
     `
 }).mount('#boards');
@@ -340,19 +345,19 @@ const cpuApp = Vue.createApp({
         return {
             what: "Cpu",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
             mod: {
-                click:  0,
-                per:    0
+                click: 0,
+                per: 0
             },
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     true,
+            ishide: true,
 
         }
 
@@ -369,7 +374,7 @@ const cpuApp = Vue.createApp({
         applyStat() {
 
             clickModifier.cpu = this.mod.click;
-            perSec.cpu =        this.mod.per;
+            perSec.cpu = this.mod.per;
         },
 
         DoBuy() {
@@ -386,12 +391,11 @@ const cpuApp = Vue.createApp({
         },
 
         addComp() {
-            if(chips.count < this.count + clickModifier.cpu + 1 ) return
+            if (chips.count < this.count + clickModifier.cpu + 1) return
             this.count += clickModifier.cpu + 1;
         },
-        addOther(val)
-        {
-            if(chips.count < this.count + val ) return;
+        addOther(val) {
+            if (chips.count < this.count + val) return;
             this.count += val
         }
 
@@ -399,27 +403,30 @@ const cpuApp = Vue.createApp({
 
     template: `
     <div v-if="!ishide">
-   <div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
+    <div class="container glass">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
-    <div class="col-3">
-       click: {{mod.click}}
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >Do Click</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{mod.per}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div class="col">click: {{mod.click}}</div>
+        <div class="col">per sec:{{mod.per}}</div>
     </div>
+    <div class="row mt-1">
+        <div class="col-4">
+            <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+            <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+        </div>
+<div class="col-2"></div>
+        <div class="col">
+    <div>Resisters: {{cost.comp}}</div>
+            <div >Board: {{cost.board}}</div>
+            <div> Chips: {{cost.chip}}</div>
+     <div>Cpu: {{cost.cpu}}</div>
+            
+            
+        </div>
+    </div>
+</div>
+
+
   </div>
     `
 
@@ -430,19 +437,19 @@ const chips = Vue.createApp({
         return {
             what: "Chip",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
             mod: {
-                click:  0,
-                per:    0
+                click: 0,
+                per: 0
             },
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     true,
+            ishide: true,
 
         }
 
@@ -454,6 +461,7 @@ const chips = Vue.createApp({
              this.cost.chip = Math.round((1 + this.curUpgrade) * 10)
             if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu =Math.round( (1 + this.curUpgrade) * 1.1)
             this.mod.click = Math.round((1 + this.curUpgrade) * 0.01);
+
             this.mod.per = Math.round(this.curUpgrade * 0.095);
         },
         applyStat() {
@@ -475,38 +483,39 @@ const chips = Vue.createApp({
             this.updateStat();
         },
         addComp() {
-            if(boardsApp.count <  this.count + clickModifier.chip + 1) return
+            if (boardsApp.count < this.count + clickModifier.chip + 1) return
             this.count += clickModifier.chip + 1;
         },
-        addOther(val){
-            if(boardsApp.count <  this.count + val) return
-                this.count += val;
+        addOther(val) {
+            if (boardsApp.count < this.count + val) return
+            this.count += val;
         }
     },
 
     template: `
       <div v-if="!ishide">
-      <div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
-    <div class="row">
-    <div class="col-3">
-       click: {{mod.click}}
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >Do Click</button> 
-      </div>
+      <div class="container glass">
+      <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
       <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{mod.per}}
-       <div >Board: {{cost.board}}</div>
+          <div class="col">click: {{mod.click}}</div>
+          <div class="col">per sec:{{mod.per}}</div>
+      </div>
+      <div class="row mt-1">
+          <div class="col-4">
+              <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+              <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+          </div>
+  <div class="col-2"></div>
+          <div class="col">
+      <div>Resisters: {{cost.comp}}</div>
+              <div >Board: {{cost.board}}</div>
+              <div> Chips: {{cost.chip}}</div>
        <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
-    </div>
+              
+              
+          </div>
+      </div>
+  </div>
       </div>
      
     `
@@ -520,17 +529,17 @@ const robot = Vue.createApp({
         return {
             what: "Robot",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
 
-            per:        0,
+            per: 0,
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     true,
+            ishide: true,
 
         }
 
@@ -543,10 +552,10 @@ const robot = Vue.createApp({
 
         },
         updateStat() {
-            this.cost.comp =  Math.round(1.5 * (1.09) ** this.curUpgrade);
-            if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board =  Math.round(  1.2 * (1.09) ** this.curUpgrade);
-            if (!chips.ishide || this.curUpgrade > 500) this.cost.chip =   Math.round( 1.04 * (1.09) ** this.curUpgrade)
-            if (!cpuApp.ishide || this.curUpgrade > 750)  this.cost.cpu = Math.round( 1.01 * (1.09) ** this.curUpgrade)
+            this.cost.comp = Math.round(1.5 * (1.09) ** this.curUpgrade);
+            if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board = Math.round(1.2 * (1.09) ** this.curUpgrade);
+            if (!chips.ishide || this.curUpgrade > 500) this.cost.chip = Math.round(1.04 * (1.09) ** this.curUpgrade)
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
             this.per = Math.round((this.curUpgrade + 1) * 0.2);
         },
 
@@ -563,41 +572,44 @@ const robot = Vue.createApp({
         },
 
         addComp() {
-            if (compApp.count <  this.getcost()) return
+            if (compApp.count < this.getcost()) return
             compApp.count -= this.getcost();
             this.count += 1;
 
         },
-        getcost(){
+        getcost() {
 
-            return Math.round(1.5 * 2**(1.2*this.count))
+            return Math.round(1.5 * 2 ** (1.2 * this.count))
         }
 
     },
     template:
         `
-  <div v-if="!ishide">
-<div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
-    <div class="row">
-    <div class="col-3">
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >({{getcost()}})</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{getMod()}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div v-if="!ishide">
+        <div class="container-fluid glass">
+        <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+        <div class="row "><span class="text-center"> per sec:{{getMod()}}</span></div>
+            <div class="row ">
+            <div class="col-1"></div>
+                <div class="col-3">
+                <div class="row">
+                    <button  @click='addComp' class="btn btn-dark me-2" >({{getcost()}})</button> 
+                </div>
+                <div class="row">
+                    <button @click="DoBuy" class="btn btn-light me-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+                </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col mb-2">
+                   
+                    <div>Resisters: {{cost.comp}}</div>
+                    <div >Board: {{cost.board}}</div>
+                    <div> Chips: {{cost.chip}}</div>
+                    <div>Cpu: {{cost.cpu}}</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 `
 
 }).mount('#robot');
@@ -609,18 +621,18 @@ const printer = Vue.createApp({
         return {
             what: "Printer",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
 
-            per:        0,
+            per: 0,
 
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     true,
+            ishide: true,
 
         }
 
@@ -633,11 +645,11 @@ const printer = Vue.createApp({
 
         },
         updateStat() {
-            this.cost.comp =Math.round( 1.5 * (1.09) ** (this.curUpgrade*2));
-            this.cost.board = Math.round( 1.2 * (2) ** this.curUpgrade);
-            if (!chips.ishide || this.curUpgrade > 500)   Math.round( this.cost.chip = 1.04 * (1.09) ** this.curUpgrade)
-            if (!cpuApp.ishide || this.curUpgrade > 750)  Math.round(  this.cost.cpu = 1.01 * (1.09) ** this.curUpgrade)
-            this.per = Math.round(this.curUpgrade*1.3);
+            this.cost.comp = Math.round(1.5 * (1.09) ** (this.curUpgrade * 2));
+            this.cost.board = Math.round(1.2 * (2) ** this.curUpgrade);
+            if (!chips.ishide || this.curUpgrade > 500) Math.round(this.cost.chip = 1.04 * (1.09) ** this.curUpgrade)
+            if (!cpuApp.ishide || this.curUpgrade > 750) Math.round(this.cost.cpu = 1.01 * (1.09) ** this.curUpgrade)
+            this.per = Math.round(this.curUpgrade * 1.3);
         },
 
         DoBuy() {
@@ -653,41 +665,46 @@ const printer = Vue.createApp({
         },
 
         addComp() {
-           if (boardsApp.count <  this.getcost()) return
+            if (boardsApp.count < this.getcost()) return
             boardsApp.count -= this.getcost();
             this.count += 1;
 
         },
+
         getcost(){
             return Math.round(1.4 * 2**(1.2*this.count))
+
         }
 
 
     },
     template:
         `
-  <div v-if="!ishide">
-<div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
-    <div class="row">
-    <div class="col-3">
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >({{getcost()}})</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{getMod()}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div v-if="!ishide">
+        <div class="container-fluid glass mt-1">
+        <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+        <div class="row "><span class="text-center"> per sec:{{getMod()}}</span></div>
+            <div class="row ">
+            <div class="col-1"></div>
+                <div class="col-3">
+                <div class="row">
+                    <button  @click='addComp' class="btn btn-dark me-2" >({{getcost()}})</button> 
+                </div>
+                <div class="row">
+                    <button @click="DoBuy" class="btn btn-light me-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+                </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col mb-2">
+                   
+                    <div>Resisters: {{cost.comp}}</div>
+                    <div >Board: {{cost.board}}</div>
+                    <div> Chips: {{cost.chip}}</div>
+                    <div>Cpu: {{cost.cpu}}</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 `
 
 }).mount('#printer');
@@ -699,18 +716,18 @@ const assembler = Vue.createApp({
         return {
             what: "Assembler",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
 
-            per:        0,
+            per: 0,
 
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     true,
+            ishide: true,
 
         }
 
@@ -723,11 +740,11 @@ const assembler = Vue.createApp({
 
         },
         updateStat() {
-            this.cost.comp = Math.round( 1.5 * (1.09) ** (1.1**(this.curUpgrade*1.25)));
-            this.cost.board =Math.round(  1.2 * (2) ** (1.01**(this.curUpgrade*1.25)));
-             this.cost.chip =Math.round(  1.04 * (1.09) ** (1.001**(this.curUpgrade*1.25)))
-            if (!cpuApp.ishide || this.curUpgrade > 750)   this.cost.cpu = Math.round( 1.01 * (1.09) ** this.curUpgrade)
-            this.per = Math.round( this.curUpgrade*1.3);
+            this.cost.comp = Math.round(1.5 * (1.09) ** (1.1 ** (this.curUpgrade * 1.25)));
+            this.cost.board = Math.round(1.2 * (2) ** (1.01 ** (this.curUpgrade * 1.25)));
+            this.cost.chip = Math.round(1.04 * (1.09) ** (1.001 ** (this.curUpgrade * 1.25)))
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
+            this.per = Math.round(this.curUpgrade * 1.3);
         },
 
         DoBuy() {
@@ -743,39 +760,43 @@ const assembler = Vue.createApp({
         },
 
         addComp() {
-            if (chips.count <  this.getcost()) return
+            if (chips.count < this.getcost()) return
             chips.count -= this.getcost();
             this.count += 1;
 
         },
+
         getcost(){
             return Math.round(2 *1.5**(1.1 *this.count))
         }
     },
     template:
         `
-  <div v-if="!ishide">
-<div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
-    <div class="row">
-    <div class="col-3">
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >({{getcost()}})</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{getMod()}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div v-if="!ishide">
+        <div class="container-fluid glass mt-1">
+        <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+        <div class="row "><span class="text-center"> per sec:{{getMod()}}</span></div>
+            <div class="row ">
+            <div class="col-1"></div>
+                <div class="col-3">
+                <div class="row">
+                    <button  @click='addComp' class="btn btn-dark me-2" >({{getcost()}})</button> 
+                </div>
+                <div class="row">
+                    <button @click="DoBuy" class="btn btn-light me-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+                </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col mb-2">
+                   
+                    <div>Resisters: {{cost.comp}}</div>
+                    <div >Board: {{cost.board}}</div>
+                    <div> Chips: {{cost.chip}}</div>
+                    <div>Cpu: {{cost.cpu}}</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 `
 
 }).mount('#assembler');
@@ -788,18 +809,18 @@ const fabricator = Vue.createApp({
         return {
             what: "Fabricator",
             cost: {
-                comp:   0,
-                board:  0,
-                chip:   0,
-                cpu:    0
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
             },
 
-            per:        0,
+            per: 0,
 
 
-            count:      0,
+            count: 0,
             curUpgrade: 0,
-            ishide:     true,
+            ishide: true,
 
         }
 
@@ -812,11 +833,11 @@ const fabricator = Vue.createApp({
 
         },
         updateStat() {
-            this.cost.comp = Math.round( 1.5 * (1.09) ** (1.1**(this.curUpgrade*0.25)));
-            this.cost.board =Math.round(  1.2 * (2) ** (1.01**(this.curUpgrade*0.25)));
-            this.cost.chip = Math.round( 1.04 * (1.09) ** (1.001**(this.curUpgrade*0.25)))
-            if (!cpuApp.ishide || this.curUpgrade > 750)   this.cost.cpu = Math.round( 1.01 * (1.09) ** this.curUpgrade)
-            this.per = Math.round( this.curUpgrade*1.3);
+            this.cost.comp = Math.round(1.5 * (1.09) ** (1.1 ** (this.curUpgrade * 0.25)));
+            this.cost.board = Math.round(1.2 * (2) ** (1.01 ** (this.curUpgrade * 0.25)));
+            this.cost.chip = Math.round(1.04 * (1.09) ** (1.001 ** (this.curUpgrade * 0.25)))
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
+            this.per = Math.round(this.curUpgrade * 1.3);
         },
 
         DoBuy() {
@@ -831,58 +852,59 @@ const fabricator = Vue.createApp({
         },
 
         addComp() {
-            if (cpuApp.count <  this.getcost()) return
+            if (cpuApp.count < this.getcost()) return
             cpuApp.count -= this.getcost();
             this.count += 1;
 
         },
-        getcost(){
-            return Math.round(.5 * 2**(1.2*this.count))
+        getcost() {
+            return Math.round(.5 * 2 ** (1.2 * this.count))
         }
     },
     template:
         `
-  <div v-if="!ishide">
-<div class="container">
-     <h3>{{what}}: <span class=""> {{count}}</span></h3>
-    <div class="row">
-    <div class="col-3">
-    <div class="row">
-      <button  @click='addComp' class="btn btn-light" >({{getcost()}})</button> 
-      </div>
-      <div class="row">
-      <button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
-     </div>
-     </div>
-     <div class="col">
-     per sec:{{getMod()}}
-       <div >Board: {{cost.board}}</div>
-       <div>Cpu: {{cost.cpu}}</div>
-       <div>Resisters: {{cost.comp}}</div>
-       <div> Chips: {{cost.chip}}</div>
-       </div>
-     </div>
+        <div v-if="!ishide">
+        <div class="container-fluid glass mt-1">
+        <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+        <div class="row "><span class="text-center"> per sec:{{getMod()}}</span></div>
+            <div class="row">
+            <div class="col-1"></div>
+                <div class="col-3">
+                <div class="row">
+                    <button  @click='addComp' class="btn btn-dark me-2" >({{getcost()}})</button> 
+                </div>
+                <div class="row">
+                    <button @click="DoBuy" class="btn btn-light me-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+                </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col mb-2">
+                   
+                    <div>Resisters: {{cost.comp}}</div>
+                    <div >Board: {{cost.board}}</div>
+                    <div> Chips: {{cost.chip}}</div>
+                    <div>Cpu: {{cost.cpu}}</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 `
 
 }).mount('#fabricator');
 
 
-function debug()
-{
-    compApp.ishide =    false;
-    boardsApp.ishide =  false;
-    chips.ishide =      false;
-    cpuApp.ishide =     false;
-    robot.ishide =      false;
-    printer.ishide =    false;
-    assembler.ishide =  false;
+function debug() {
+    compApp.ishide = false;
+    boardsApp.ishide = false;
+    chips.ishide = false;
+    cpuApp.ishide = false;
+    robot.ishide = false;
+    printer.ishide = false;
+    assembler.ishide = false;
     fabricator.ishide = false;
 }
 
-function start()
-{
+function start() {
 
     compApp.start();
     boardsApp.start();
@@ -896,7 +918,7 @@ function start()
 start();
 setInterval(() => {
     boardsApp.addOther(perSec.board + printer.getMod());
-    chips.addOther( perSec.chip + assembler.getMod());
+    chips.addOther(perSec.chip + assembler.getMod());
     compApp.addOther(perSec.comp + robot.getMod());
     cpuApp.addOther(perSec.cpu + fabricator.getMod());
 
