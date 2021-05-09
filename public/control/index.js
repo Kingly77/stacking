@@ -269,11 +269,11 @@ const boardsApp = Vue.createApp({
     },
     methods: {
         updateStat() {
-            this.cost.comp = 20 + this.curUpgrade * 10;
-            this.cost.board = 5 + this.curUpgrade * 5;
-            if (!chips.ishide || this.curUpgrade > 200) Math.round(this.cost.chip = 1 + this.curUpgrade * 2.5)
-            if (!cpuApp.ishide || this.curUpgrade > 500)Math.round( this.cost.cpu = 1 + this.curUpgrade * 1.1)
-            this.mod.click = Math.round(1 + this.curUpgrade * 1.1);
+            this.cost.comp = (20 + this.curUpgrade) * 10;
+            this.cost.board = (5 + this.curUpgrade) * 5;
+            if (!chips.ishide || this.curUpgrade > 200) Math.round(this.cost.chip = (1 + this.curUpgrade) * 2.5)
+            if (!cpuApp.ishide || this.curUpgrade > 500)Math.round( this.cost.cpu = (1 + this.curUpgrade) * 1.1)
+            this.mod.click = Math.round((1 + this.curUpgrade) * 1.1);
             this.mod.per = Math.round(this.curUpgrade * .07);
         },
         applyStat() {
@@ -359,11 +359,11 @@ const cpuApp = Vue.createApp({
     },
     methods: {
         updateStat() {
-            this.cost.comp = 20 + this.curUpgrade * 50;
-            this.cost.board = 5 + this.curUpgrade * 25
-            this.cost.chip = 1 + this.curUpgrade * 10
-            this.cost.cpu = Math.round(1 + this.curUpgrade * 1.5)
-            this.mod.click = Math.round(1 + this.curUpgrade * 1.1);
+            this.cost.comp = (20 + this.curUpgrade) * 50;
+            this.cost.board =( 5 + this.curUpgrade) * 25
+            this.cost.chip = (1 + this.curUpgrade) * 10
+            this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.5)
+            this.mod.click = Math.round((1 + this.curUpgrade) * 1.1);
             this.mod.per = Math.round(this.curUpgrade * 0.09);
         },
         applyStat() {
@@ -449,11 +449,11 @@ const chips = Vue.createApp({
     },
     methods: {
         updateStat() {
-            this.cost.comp = Math.round(20 + this.curUpgrade * 35);
-            this.cost.board = Math.round(5 + this.curUpgrade * 15)
-             this.cost.chip = Math.round(1 + this.curUpgrade * 10)
-            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu =Math.round( 1 + this.curUpgrade * 1.1)
-            this.mod.click = Math.round(1 + this.curUpgrade * 0.01);
+            this.cost.comp = Math.round((20 + this.curUpgrade) * 35);
+            this.cost.board = Math.round((5 + this.curUpgrade) * 15)
+             this.cost.chip = Math.round((1 + this.curUpgrade) * 10)
+            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu =Math.round( (1 + this.curUpgrade) * 1.1)
+            this.mod.click = Math.round((1 + this.curUpgrade) * 0.01);
             this.mod.per = Math.round(this.curUpgrade * 0.095);
         },
         applyStat() {
@@ -659,7 +659,7 @@ const printer = Vue.createApp({
 
         },
         getcost(){
-            return Math.round(1.4 * 2*(1.1*this.count))
+            return Math.round(1.4 * 2**(1.2*this.count))
         }
 
 
