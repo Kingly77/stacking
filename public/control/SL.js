@@ -18,7 +18,8 @@ $('#save').click(async () =>
                 robot:      robot.count,
                 assembler:  assembler.count,
                 fabricator: fabricator.count,
-                printer:    printer.count
+                printer:    printer.count,
+                unlocks:    unlocks.curUpgrade
 
             },
             click:          clickModifier,
@@ -85,6 +86,7 @@ $('#load').click((async ()=>{
     printer.curUpgrade=     data.upgrade.printerULvl
     assembler.curUpgrade=   data.upgrade.assemblerULvl
     fabricator.curUpgrade=  data.upgrade.fabricatorULvl
+       unlocks.curUpgrade=  data.u
 
 
        chips.ishide =       data.hide.chip

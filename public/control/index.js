@@ -25,7 +25,6 @@ function DoCost(cost) {
     return true;
 }
 
-//TODO ADD PER SECOND INCRESS AND BUILDINGS OR EQUIVALENT
 const unlocks = Vue.createApp({
 
     data() {
@@ -34,7 +33,6 @@ const unlocks = Vue.createApp({
             listoupgrade: [
 
                 {
-                    lvl: 1,
                     cost: {
                         board: 0,
                         comp: 100,
@@ -46,7 +44,6 @@ const unlocks = Vue.createApp({
                     doBuy: () => { robot.ishide = false; }
                 },
                 {
-                    lvl: 1,
                     cost: {
                         board: 0,
                         comp: 1000,
@@ -58,7 +55,6 @@ const unlocks = Vue.createApp({
                     doBuy: () => { boardsApp.ishide = false }
                 },
                 {
-                    lvl: 1,
                     cost: {
                         board: 1000,
                         comp: 10000,
@@ -71,7 +67,6 @@ const unlocks = Vue.createApp({
                 },
 
                 {
-                    lvl: 5,
                     cost: {
                         board: 30000,
                         comp: 100000,
@@ -84,7 +79,6 @@ const unlocks = Vue.createApp({
                 },
 
                 {
-                    lvl: 5,
                     cost: {
                         board: 30000,
                         comp: 100000,
@@ -96,9 +90,7 @@ const unlocks = Vue.createApp({
                     doBuy: () => { assembler.ishide = false }
                 },
 
-
                 {
-                    lvl: 10,
                     cost: {
                         board: 1000000,
                         comp: 10000000,
@@ -110,12 +102,11 @@ const unlocks = Vue.createApp({
                     doBuy: () => { cpuApp.ishide = false }
                 },
                 {
-                    lvl: 5,
                     cost: {
                         board: 30000,
                         comp: 100000,
-                        chip: 0,
-                        cpu: 0,
+                        chip: 10000,
+                        cpu: 100,
                     },
                     name: "Unlock Fabricator",
                     usage: "Allows to make Cpus automaticly",
