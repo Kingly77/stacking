@@ -560,7 +560,7 @@ const robot = Vue.createApp({
 
         },
         updateStat() {
-              this.cost.comp =  Math.round(1.5 * (1.09) ^ this.count);
+            this.cost.comp =  Math.round(1.5 * (1.09) ^ this.count);
             if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board =  Math.round(  1.2 * (1.09) ^ this.count);
             if (!chips.ishide || this.curUpgrade > 500) this.cost.chip =   Math.round( 1.04 * (1.09) ^ this.count)
             if (!cpuApp.ishide || this.curUpgrade > 750)  this.cost.cpu = Math.round( 1.01 * (1.09) ^ this.count)
@@ -575,6 +575,7 @@ const robot = Vue.createApp({
         },
 
         start() {
+            console.log("robot start");
             this.updateStat();
         },
 
@@ -836,7 +837,6 @@ const fabricator = Vue.createApp({
 
         DoBuy() {
             if (!DoCost(this.cost)) return;
-
             this.curUpgrade++;
             this.updateStat();
 
@@ -899,6 +899,7 @@ function debug()
 
 function start()
 {
+
     compApp.start();
     boardsApp.start();
     chips.start();

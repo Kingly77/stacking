@@ -37,7 +37,7 @@ $('#save').click(async () =>
                 chip: chips.ishide,
                 comp: compApp.ishide,
                 board:boardsApp.ishide,
-                cpu:cpuApp.ishide,
+                cpu: cpuApp.ishide,
                 robot: robot.ishide,
                 printer: printer.ishide,
                 fabricator: fabricator.ishide,
@@ -80,7 +80,7 @@ $('#load').click((async ()=>{
     chips.curUpgrade = data.upgrade.chipULvl
     compApp.curUpgrade = data.upgrade.compULvl
     robot.curUpgrade = data.upgrade.robotULvl
-    cpuApp.curUpgrade = data.upgrade.cpuULvl
+    cpuApp.curUpgrade = data.upgrade.cpuULvl,
     boardsApp.curUpgrade = data.upgrade.boardULvl
     printer.curUpgrade =data.upgrade.printerULvl
     assembler.curUpgrade =data.upgrade.assemblerULvl
@@ -89,7 +89,10 @@ $('#load').click((async ()=>{
 
        chips.ishide = data.hide.chip
        compApp.ishide = data.hide.comp
+       printer.ishide =data.hide.printer
        robot.ishide = data.hide.robot
+       assembler.ishide = data.hide.assemble
+       fabricator.ishide = data.hide.fab
        cpuApp.ishide = data.hide.cpu
        boardsApp.ishide = data.hide.board
 

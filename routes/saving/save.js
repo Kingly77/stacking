@@ -54,8 +54,8 @@ async function saveupgrade(rest)
             compULvl:rest.upgrade.comp,
             chipULvl:rest.upgrade.chip,
             cpuULVl:rest.upgrade.cpu,
-            boardsULvl:rest.upgrade.board,
-            robotsULvl:rest.upgrade.robot,
+            boardULvl:rest.upgrade.board,
+            robotULvl:rest.upgrade.robot,
             assemblerULvl:rest.upgrade.assembler,
             fabricatorULvl:rest.upgrade.fabricator,
             printerULvl:rest.upgrade.printer
@@ -69,7 +69,7 @@ async function saveunit(rest){
     const {saveID} = rest;
     const didWork = await db.save.savunit.findOne({where:{saveID}});
 
-    const {chips,comps,boards,cpus,robot,assembler,fabricator} = rest.units;
+    const {chips,comps,boards,cpus,robot,assembler,fabricator,printer} = rest.units;
 
     await didWork?.destroy();
 
@@ -80,6 +80,7 @@ async function saveunit(rest){
             boards,
             robot,
             cpus,
+            printer,
             assembler,
             fabricator
         });
@@ -91,17 +92,18 @@ async function savehide(rest){
     const {saveID} = rest;
     const didWork = await db.save.savhid.findOne({where:{saveID}});
 
-    const {chip,comp,board,cpus,robot,assembler:assemble,fabricator:fab} = rest.hide;
+    const {chip,comp,board,cpu,robot,assembler:assemble,fabricator:fab,printer} = rest.hide;
 
     await didWork?.destroy();
 
     await db.save.savhid.create({
         saveID,
         chip,
+        printer,
         comp,
         board,
         robot,
-        cpus,
+        cpu,
         assemble,
         fab
     });
