@@ -14,7 +14,7 @@ const perSec = {
 
 function DoCost(cost) {
 
-    console.log(cost);
+
     if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) return false
 
     chips.chips -= cost.chip;
@@ -122,7 +122,6 @@ const unlocks = Vue.createApp({
 
             const { cost } = this.listoupgrade[this.curUpgrade];
             if (!DoCost(this.listoupgrade[this.curUpgrade].cost)) return
-            console.log(cost.comp);
             this.listoupgrade[this.curUpgrade].doBuy();
             this.curUpgrade++;
         },
@@ -195,7 +194,6 @@ const compApp = Vue.createApp({
 
         DoBuy() {
             if (!DoCost(this.cost)) return;
-            console.log('hi')
             this.applyStat()
             this.curUpgrade++;
             this.updateStat();
@@ -286,7 +284,6 @@ const boardsApp = Vue.createApp({
 
         DoBuy() {
             if (!DoCost(this.cost)) return;
-            console.log('hi')
             this.applyStat()
             this.curUpgrade++;
             this.updateStat();
@@ -379,7 +376,6 @@ const cpuApp = Vue.createApp({
 
         DoBuy() {
             if (!DoCost(this.cost)) return;
-            console.log('hi')
             this.applyStat()
             this.curUpgrade++;
             this.updateStat();
@@ -567,7 +563,6 @@ const robot = Vue.createApp({
         },
 
         start() {
-            console.log("robot start");
             this.updateStat();
         },
 
