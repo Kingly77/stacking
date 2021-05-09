@@ -659,7 +659,7 @@ const printer = Vue.createApp({
 
         },
         getcost(){
-            return Math.round(1.5 * 1.1**(1.1*this.count))
+            return Math.round(1.4 * 2*(1.1*this.count))
         }
 
 
@@ -749,7 +749,7 @@ const assembler = Vue.createApp({
 
         },
         getcost(){
-            return Math.round(2 *1**(1.1 *this.count))
+            return Math.round(2 *1.5**(1.1 *this.count))
         }
     },
     template:
