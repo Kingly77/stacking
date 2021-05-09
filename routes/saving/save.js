@@ -53,16 +53,13 @@ async function saveupgrade(rest)
             saveID,
             compULvl:rest.upgrade.comp,
             chipULvl:rest.upgrade.chip,
-            cpusULVl:rest.upgrade.cpu,
+            cpuULVl:rest.upgrade.cpu,
             boardsULvl:rest.upgrade.board,
             robotsULvl:rest.upgrade.robot,
             assemblerULvl:rest.upgrade.assembler,
             fabricatorULvl:rest.upgrade.fabricator,
             printerULvl:rest.upgrade.printer
-
         });
-
-
 }
 
 
