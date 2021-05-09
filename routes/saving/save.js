@@ -56,9 +56,9 @@ async function saveupgrade(rest)
             cpusULVl:rest.upgrade.cpu,
             boardsULvl:rest.upgrade.board,
             robotsULvl:rest.upgrade.robot,
-            assemblerULvl:0,
-            fabricatorULvl:0,
-            printerULvl:0
+            assemblerULvl:rest.upgrade.assembler,
+            fabricatorULvl:rest.upgrade.fabricator,
+            printerULvl:rest.upgrade.printer
 
         });
 
