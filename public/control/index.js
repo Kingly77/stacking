@@ -1,8 +1,8 @@
 const clickModifier = {
-    comp: 0,
-    board: 0,
-    chip: 0,
-    cpu: 0
+    comp: 1,
+    board: 1,
+    chip: 1,
+    cpu: 1
 };
 
 const perSec = {
@@ -203,14 +203,14 @@ const compApp = Vue.createApp({
         start() {
             this.updateStat();
         },
-
-
         addComp() {
-            this.count += clickModifier.comp + 1;
+            this.count += clickModifier.comp;
         },
         addOther(val) {
             this.count += val;
-        }
+        },
+        getPerSec(){return perSec.comp},
+        getClickMod(){return clickModifier.comp}
     },
 
     template: `
@@ -218,8 +218,8 @@ const compApp = Vue.createApp({
     <div class="container glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
-        <div class="col">click: {{mod.click}}</div>
-        <div class="col">per sec:{{mod.per}}</div>
+        <div class="col">click: {{this.getClickMod()}}</div>
+        <div class="col">per sec:{{this.getPerSec()}}</div>
     </div>
     <div class="row mt-1">
         <div class="col-4">
@@ -232,8 +232,6 @@ const compApp = Vue.createApp({
             <div >Board: {{cost.board}}</div>
             <div> Chips: {{cost.chip}}</div>
      <div>Cpu: {{cost.cpu}}</div>
-            
-            
         </div>
     </div>
 </div>
@@ -295,14 +293,16 @@ const boardsApp = Vue.createApp({
         },
 
         addComp() {
-            if (compApp.count < this.count + clickModifier.board + 1) return;
-            this.count += clickModifier.board + 1;
+            if (compApp.count < this.count + clickModifier.board ) return;
+            this.count += clickModifier.board ;
         }
         ,
         addOther(val) {
             if (compApp.count < this.count + val) return;
             this.count += val;
-        }
+        },
+        getPerSec(){return perSec.board},
+        getClickMod(){return clickModifier.board}
     },
 
     template: `
@@ -310,8 +310,8 @@ const boardsApp = Vue.createApp({
     <div class="container glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
-        <div class="col">click: {{mod.click}}</div>
-        <div class="col">per sec:{{mod.per}}</div>
+      <div class="col">click: {{this.getClickMod()}}</div>
+      <div class="col">per sec:{{this.getPerSec()}}</div>
     </div>
     <div class="row mt-1">
         <div class="col-4">
@@ -324,14 +324,9 @@ const boardsApp = Vue.createApp({
             <div >Board: {{cost.board}}</div>
             <div> Chips: {{cost.chip}}</div>
      <div>Cpu: {{cost.cpu}}</div>
-            
-            
         </div>
     </div>
 </div>
-
-
-
   </div>
     `
 }).mount('#boards');
@@ -387,13 +382,15 @@ const cpuApp = Vue.createApp({
         },
 
         addComp() {
-            if (chips.count < this.count + clickModifier.cpu + 1) return
-            this.count += clickModifier.cpu + 1;
+            if (chips.count < this.count + clickModifier.cpu ) return
+            this.count += clickModifier.cpu ;
         },
         addOther(val) {
             if (chips.count < this.count + val) return;
             this.count += val
-        }
+        },
+        getPerSec(){return perSec.cpu},
+        getClickMod(){return clickModifier.cpu}
 
     },
 
@@ -402,8 +399,8 @@ const cpuApp = Vue.createApp({
     <div class="container glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
-        <div class="col">click: {{mod.click}}</div>
-        <div class="col">per sec:{{mod.per}}</div>
+        <div class="col">click: {{this.getClickMod()}}</div>
+        <div class="col">per sec:{{this.getPerSec()}}</div>
     </div>
     <div class="row mt-1">
         <div class="col-4">
@@ -457,7 +454,6 @@ const chips = Vue.createApp({
              this.cost.chip = Math.round((1 + this.curUpgrade) * 10)
             if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu =Math.round( (1 + this.curUpgrade) * 1.1)
             this.mod.click = Math.round((1 + this.curUpgrade) * 0.01);
-
             this.mod.per = Math.round(this.curUpgrade * 0.095);
         },
         applyStat() {
@@ -479,13 +475,15 @@ const chips = Vue.createApp({
             this.updateStat();
         },
         addComp() {
-            if (boardsApp.count < this.count + clickModifier.chip + 1) return
-            this.count += clickModifier.chip + 1;
+            if (boardsApp.count < this.count + clickModifier.chip) return
+            this.count += clickModifier.chip;
         },
         addOther(val) {
             if (boardsApp.count < this.count + val) return
             this.count += val;
-        }
+        },
+        getPerSec(){return perSec.chip},
+        getClickMod(){return clickModifier.chip}
     },
 
     template: `
@@ -493,8 +491,8 @@ const chips = Vue.createApp({
       <div class="container glass">
       <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
       <div class="row">
-          <div class="col">click: {{mod.click}}</div>
-          <div class="col">per sec:{{mod.per}}</div>
+          <div class="col">click: {{this.getClickMod()}}</div>
+          <div class="col">per sec:{{this.getPerSec()}}</div>
       </div>
       <div class="row mt-1">
           <div class="col-4">
