@@ -115,8 +115,9 @@ const unlocks = Vue.createApp({
 
     template:
         `
+        <div class="container glass">
        <div class="row">
-            <button @click="doUnlock" id="doUnlock" class="btn btn-dark">
+            <button @click="doUnlock" id="doUnlock" class="btn btn-dark mt-2">
               {{listoupgrade[curUpgrade].name}}
             </button>
             </div>
@@ -127,6 +128,7 @@ const unlocks = Vue.createApp({
   <div> Chips: {{getCost().chip}}</div>
           </td>
           </tr>
+          </div>
         `
 
 }).mount('#unlocky')
@@ -190,7 +192,7 @@ const compApp = Vue.createApp({
     },
 
     template: `
-    <div class="container-fluid mybox">
+    <div class="container-fluid glass">
         <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
         <div class="row">
             <div class="col">click: {{mod.click}} </div>
@@ -275,7 +277,7 @@ const boardsApp = Vue.createApp({
     template: `
     
     <div v-if="!ishide">
-    <div class="container-fluid mybox mt-5">
+    <div class="container-fluid mybox mt-5 glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
         <div class="col">click: {{mod.click}} </div>
@@ -357,7 +359,7 @@ const cpuApp = Vue.createApp({
 
     template: `
     <div v-if="!ishide">
-    <div class="container-fluid mybox mt-5">
+    <div class="container-fluid mybox mt-5 glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
         <div class="col">click: {{mod.click}} </div>
@@ -448,7 +450,7 @@ const chips = Vue.createApp({
 
     template: `
       <div v-if="!ishide">
-      <div class="container-fluid mybox mt-5">
+      <div class="container-fluid mybox mt-5 glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
     <div class="row">
         <div class="col">click: {{mod.click}} </div>
@@ -534,7 +536,7 @@ const robot = Vue.createApp({
     template:
         `
   <div v-if="!ishide">
-  <div class="container-fluid mybox mt-5">
+  <div class="container-fluid mybox mt-5 glass">
   <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
   <div class="row">
       <div class="col">click: {{mod.click}} </div>

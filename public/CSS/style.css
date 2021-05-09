@@ -90,7 +90,7 @@
     font-family: cursive;
     font-weight: bold;*/
     color: white; 
-    background: linear-gradient(to right, #322e3a, #68acda); 
+    background: linear-gradient(to right, #35313d, #68acda); 
 }
 #load:hover,#save:hover{
 	background: linear-gradient(to right, #45b2a3, #4545b2); 
@@ -115,7 +115,21 @@
 	margin-top: 25px;
 	padding: 50px;
 	box-shadow:2px 2px 2px #0B0A1E;
+	/* background: linear-gradient(to right bottom, #0b0a1e5e,#4a1139e8); */
+	/* backdrop-filter: blur(0.5rem); */
+	border-radius: 2rem;
+	z-index: 2;
+	/* border-right: 1px solid rgba(44,13,44,0.5); */
+	/* border-top: 1px solid rgba(44,13,44,0.5); */
 	/* border:1px solid #401f44; */
+}
+.glass{
+	background: linear-gradient(to right bottom, #0b0a1e5e,#4a1139e8);
+	backdrop-filter: blur(0.5rem);
+	border-radius: 1rem;
+	z-index: 2;
+	border-right: 1px solid rgba(44,13,44,0.5); 
+	border-top: 1px solid rgba(44,13,44,0.5);
 }
 .upgrade{
     width:25px;
