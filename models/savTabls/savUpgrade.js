@@ -17,7 +17,7 @@ savUpgrade.init({
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        cpuULVl:{
+        cpuULvl:{
             defaultValue:0,
             type:DataTypes.INTEGER
         },
