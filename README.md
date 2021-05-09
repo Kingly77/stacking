@@ -40,7 +40,7 @@ Once everything has been set up, the application can be launched by running the 
 ## Credits
 
 This application was completed by:
-                                  Shellby Jordan(Scrum-Master)
+                                  Shelby Jordan(Scrum-Master)
                                   Jesus Ramirez Arroyo(Driver)
                                   Cynthia Mohan(Driver)
                                   Senait Gerezgiher(Driver)
@@ -62,7 +62,7 @@ sqlite3 -  allows the user to manually enter and execute SQL statements against 
 
 ## License
                           GPL V2
-    				Copyright (C) 2021  Shellby-Jordan
+    				Copyright (C) 2021  Shelby-Jordan
                                         Cynthia-Mohan
                                         Jesus-Ramirez-Arroyo
                                         Senait-Gerezgiher
@@ -93,7 +93,7 @@ N/A
 
 -   For any questions related to this applicaiton, please contact us at:
 
--   Please use this link to access our Github Profile: [GitHub-Shellby-Jordan](https://github.com/Kingly77)
+-   Please use this link to access our Github Profile: [GitHub-Shelby-Jordan](https://github.com/Kingly77)
                                                        [GitHub-Cynthia](https://github.com/CynthiaMohan)
                                                        [GitHub-Jesus-Ramirez-Arroyo](https://github.com/JR1994-CA)
                                                        [GitHub-Senait-Gerezgiher](https://github.com/senait77)

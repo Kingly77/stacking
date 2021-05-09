@@ -49,7 +49,7 @@ const unlocks = Vue.createApp({
                     lvl: 1,
                     cost: {
                         board: 0,
-                        comp: 100,
+                        comp: 1000,
                         chip: 0,
                         cpu: 0,
                     },
@@ -60,8 +60,8 @@ const unlocks = Vue.createApp({
                 {
                     lvl: 1,
                     cost: {
-                        board: 0,
-                        comp: 100,
+                        board: 1000,
+                        comp: 10000,
                         chip: 0,
                         cpu: 0,
                     },
@@ -73,8 +73,8 @@ const unlocks = Vue.createApp({
                 {
                     lvl: 5,
                     cost: {
-                        board: 30,
-                        comp: 100,
+                        board: 30000,
+                        comp: 100000,
                         chip: 0,
                         cpu: 0,
                     },
@@ -86,14 +86,13 @@ const unlocks = Vue.createApp({
                 {
                     lvl: 10,
                     cost: {
-                        board: 100,
-                        comp: 100,
-                        chip: 30,
+                        board: 1000000,
+                        comp: 10000000,
+                        chip: 30000,
                         cpus: 0,
                     },
                     name: "Unlock CPUS",
                     usage: "Allows to make Cpus",
-                    // TODO ADD WHEN IMPLEMENTED
                     doBuy: () => { cpuApp.ishide = false }
                 }
             ],
@@ -158,18 +157,18 @@ const compApp = Vue.createApp({
     methods: {
 
         updateStat() {
-            this.cost.comp = 20 + this.curUpgrade * 1.5;
-            if (!boardsApp.ishide || this.curUpgrade > 50) this.cost.board = 5 + this.curUpgrade * 1.6
-            if (!chips.ishide || this.curUpgrade > 200) this.cost.chip = 1 + this.curUpgrade * 1.1
-            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = 1 + this.curUpgrade * 1.001
-            this.mod.click = 1 + this.curUpgrade * 1.1;
-            this.mod.per = this.curUpgrade * 1.01;
+            this.cost.comp = (20 + this.curUpgrade) * 2;
+            if (!boardsApp.ishide || this.curUpgrade > 50) this.cost.board = Math.round((5 + this.curUpgrade) * 1.5)
+            if (!chips.ishide || this.curUpgrade > 200) this.cost.chip = Math.round( (1 + this.curUpgrade) * 1.09)
+            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = Math.round( (1 + this.curUpgrade) * 1.001)
+            this.mod.click = Math.round(1 + this.curUpgrade * 0.9);
+            this.mod.per = Math.round(this.curUpgrade * 0.02);
 
         },
         applyStat() {
 
-            clickModifier.comp += this.mod.click;
-            perSec.comp += this.mod.per;
+            clickModifier.comp = this.mod.click;
+            perSec.comp = this.mod.per;
         },
 
         DoBuy() {
@@ -233,7 +232,7 @@ const boardsApp = Vue.createApp({
             },
 
             count: 0,
-            ishide: false,
+            ishide: true,
             curUpgrade: 0,
 
 
@@ -242,17 +241,17 @@ const boardsApp = Vue.createApp({
     },
     methods: {
         updateStat() {
-            this.cost.comp = 20 + this.curUpgrade * 1.5;
-            this.cost.board = 5 + this.curUpgrade * 1.6
-            if (!chips.ishide || this.curUpgrade > 200) this.cost.chip = 1 + this.curUpgrade * 1.1
-            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = 1 + this.curUpgrade * 1.001
-            this.mod.click = 1 + this.curUpgrade * 1.1;
-            this.mod.per = this.curUpgrade * 1.01;
+            this.cost.comp = 20 + this.curUpgrade * 10;
+            this.cost.board = 5 + this.curUpgrade * 5;
+            if (!chips.ishide || this.curUpgrade > 200) Math.round(this.cost.chip = 1 + this.curUpgrade * 2.5)
+            if (!cpuApp.ishide || this.curUpgrade > 500)Math.round( this.cost.cpu = 1 + this.curUpgrade * 1.1)
+            this.mod.click = Math.round(1 + this.curUpgrade * 1.1);
+            this.mod.per = Math.round(this.curUpgrade * 1.01);
         },
         applyStat() {
 
-            clickModifier.board += this.mod.click;
-            perSec.board += this.mod.per;
+            clickModifier.board = this.mod.click;
+            perSec.board = this.mod.per;
         },
 
         DoBuy() {
@@ -315,17 +314,17 @@ const cpuApp = Vue.createApp({
     },
     methods: {
         updateStat() {
-            this.cost.comp = 20 + this.curUpgrade * 1.5;
-            this.cost.board = 5 + this.curUpgrade * 1.6
-            this.cost.chip = 1 + this.curUpgrade * 1.1
-            this.cost.cpu = 1 + this.curUpgrade * 1.001
-            this.mod.click = 1 + this.curUpgrade * 1.1;
-            this.mod.per = this.curUpgrade * 1.01;
+            this.cost.comp = 20 + this.curUpgrade * 50;
+            this.cost.board = 5 + this.curUpgrade * 25
+            this.cost.chip = 1 + this.curUpgrade * 10
+            this.cost.cpu = Math.round(1 + this.curUpgrade * 1.5)
+            this.mod.click = Math.round(1 + this.curUpgrade * 1.1);
+            this.mod.per = Math.round(this.curUpgrade * 0.02);
         },
         applyStat() {
 
-            clickModifier.cpu += this.mod.click;
-            perSec.cpu += this.mod.per;
+            clickModifier.cpu = this.mod.click;
+            perSec.cpu = this.mod.per;
         },
 
         DoBuy() {
@@ -390,24 +389,24 @@ const chips = Vue.createApp({
 
             count: 0,
             curUpgrade: 0,
-            ishide: false,
+            ishide: true,
 
         }
 
     },
     methods: {
         updateStat() {
-            this.cost.comp = 20 + this.curUpgrade * 1.5;
-            this.cost.board = 5 + this.curUpgrade * 1.6
-            this.cost.chip = 1 + this.curUpgrade * 1.1
-            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = 1 + this.curUpgrade * 1.001
-            this.mod.click = 1 + this.curUpgrade * 1.1;
-            this.mod.per = this.curUpgrade * 1.01;
+            this.cost.comp = Math.round(20 + this.curUpgrade * 35);
+            this.cost.board = Math.round(5 + this.curUpgrade * 15)
+             this.cost.chip = Math.round(1 + this.curUpgrade * 10)
+            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu =Math.round( 1 + this.curUpgrade * 1.1)
+            this.mod.click = Math.round(1 + this.curUpgrade * 0.01);
+            this.mod.per = Math.round(this.curUpgrade * 0.001);
         },
         applyStat() {
 
-            clickModifier.chip += this.mod.click;
-            perSec.chip += this.mod.per;
+            clickModifier.chip = this.mod.click;
+            perSec.chip = this.mod.per;
         },
 
         DoBuy() {
@@ -478,14 +477,14 @@ const robot = Vue.createApp({
 
         },
         updateStat() {
-            this.cost.comp = 1.5 * (1.09) ^ this.count;
-            this.cost.board = 1.2 * (1.09) ^ this.count;
-            this.cost.chip = 1.04 * (1.09) ^ this.count
-            this.cost.cpu = 1.01 * (1.09) ^ this.count
+              this.cost.comp = 1.5 * (1.09) ^ this.count;
+            if (!boardsApp.ishide || this.curUpgrade > 100)   this.cost.board = 1.2 * (1.09) ^ this.count;
+            if (!chips.ishide || this.curUpgrade > 500)   this.cost.chip = 1.04 * (1.09) ^ this.count
+            if (!cpuApp.ishide || this.curUpgrade > 750)   this.cost.cpu = 1.01 * (1.09) ^ this.count
             this.per = this.curUpgrade;
         },
         applyStat() {
-            perSec.comp += this.mod.per;
+            perSec.comp = this.mod.per;
         },
 
         DoBuy() {
@@ -513,9 +512,9 @@ const robot = Vue.createApp({
   </div>
   <div v-if="!ishide">
 <button @click="DoBuy" class="btn btn-light me-md-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> UPGRADE {{what}}</button>
-   <p>click: {{mod.click}}</p>
-      <p>per sec: {{mod.per}}</p>
-       <div >Board: {{cost.board}}</div>
+   <p>click: {{getMod()}}</p>
+      <p>per sec: {{getMod()}}</p>
+       <div>Board: {{cost.board}}</div>
        <div>Cpu: {{cost.cpu}}</div>
        <div>Resisters: {{cost.comp}}</div>
        <div> Chips: {{cost.chip}}</div>
