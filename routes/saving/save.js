@@ -47,7 +47,7 @@ async function saveupgrade(rest)
     const {saveID} = rest;
     console.log(rest);
     const didwork = await db.save.savUp.findOne({where:{saveID}});
-     const {comp:compULvl , chip:chipULvl, cpu:cpuULvl, board:boardULvl,robot:robotULvl,assembler:assemblerULvl,fabricator:fabricatorULvl, printer:printerULvl} =  rest.upgrade
+     const {comp:compULvl , chip:chipULvl, cpu:cpuULvl, board:boardULvl,robot:robotULvl,assembler:assemblerULvl,fabricator:fabricatorULvl, printer:printerULvl,unlocks} =  rest.upgrade
     await didwork?.destroy();
         await db.save.savUp.create({
             saveID,
@@ -58,7 +58,8 @@ async function saveupgrade(rest)
             robotULvl,
             assemblerULvl,
             fabricatorULvl,
-            printerULvl
+            printerULvl,
+            unlocks
         });
 }
 
