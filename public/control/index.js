@@ -569,7 +569,7 @@ const robot = Vue.createApp({
 
         },
         getcost(){
-            console.log( Math.round(1.5 * 2**(1.2*this.count)));
+
             return Math.round(1.5 * 2**(1.2*this.count))
         }
 
@@ -659,7 +659,7 @@ const printer = Vue.createApp({
 
         },
         getcost(){
-            return 1.5 * (1.09) ** this.count
+            return Math.round(1.5 * (1.09) ** this.count)
         }
 
 
@@ -749,7 +749,7 @@ const assembler = Vue.createApp({
 
         },
         getcost(){
-            return 1.5 * (1.09) ** this.count
+            return Math.round(1.5 * (1.09) ** this.count)
         }
     },
     template:
@@ -837,7 +837,7 @@ const fabricator = Vue.createApp({
 
         },
         getcost(){
-            return 1.5 * (1.09) ** this.count
+            return Math.round(1.5 * (1.09) ** this.count)
         }
     },
     template:
