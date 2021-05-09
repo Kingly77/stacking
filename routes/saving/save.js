@@ -47,18 +47,19 @@ async function saveupgrade(rest)
     const {saveID} = rest;
     console.log(rest);
     const didwork = await db.save.savUp.findOne({where:{saveID}});
-
+     const {comp:compULvl , chip:chipULvl, cpu:cpuULvl, board:boardULvl,robot:robotULvl,assembler:assemblerULvl,fabricator:fabricatorULvl, printer:printerULvl,unlocks} =  rest.upgrade
     await didwork?.destroy();
         await db.save.savUp.create({
             saveID,
-            compULvl:rest.upgrade.comp,
-            chipULvl:rest.upgrade.chip,
-            cpuULVl:rest.upgrade.cpu,
-            boardULvl:rest.upgrade.board,
-            robotULvl:rest.upgrade.robot,
-            assemblerULvl:rest.upgrade.assembler,
-            fabricatorULvl:rest.upgrade.fabricator,
-            printerULvl:rest.upgrade.printer
+            compULvl,
+            chipULvl,
+            cpuULvl,
+            boardULvl,
+            robotULvl,
+            assemblerULvl,
+            fabricatorULvl,
+            printerULvl,
+            unlocks
         });
 }
 

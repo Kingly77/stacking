@@ -9,6 +9,10 @@ savUpgrade.init({
             type:DataTypes.STRING(15),
             allowNull:false
         },
+        unlocks:{
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
         compULvl:{
             defaultValue:0,
             type:DataTypes.INTEGER
