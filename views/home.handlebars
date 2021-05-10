@@ -1,22 +1,17 @@
-<div class="container">
+<div class="container-fluid">
 
-  {{!-- <div class="click"> --}}
+  {{>navbar}}
 
+  <div class=" block shadow p-3 mb-5">
+    <div class="row">
 
-    {{>navbar}}
-    {{!-- {{>doSave}} --}}
-    <div class=" block shadow p-3 mb-5">
-      <div class="row">
-        {{!-- <div class="col"> --}}
-          <div id="button-div">
-            {{>doClick}}
-          </div>
-          {{!--
-        </div> --}}
-        <div class="col"></div>
+      <div id="button-div">
+        {{>doClick}}
       </div>
+
+      <div class="col"></div>
     </div>
-    {{>animation}}
-    {{!--
-  </div> --}}
+  </div>
+  {{>animation}}
+
 </div>

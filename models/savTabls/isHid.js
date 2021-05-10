@@ -22,6 +22,10 @@ savHid.init({
             defaultValue:0,
             type:DataTypes.BOOLEAN
         },
+        robot: {
+            defaultValue:0,
+            type:DataTypes.BOOLEAN
+        },
         printer: {
             defaultValue:0,
             type:DataTypes.BOOLEAN

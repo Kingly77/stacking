@@ -47,22 +47,20 @@ async function saveupgrade(rest)
     const {saveID} = rest;
     console.log(rest);
     const didwork = await db.save.savUp.findOne({where:{saveID}});
-
+     const {comp:compULvl , chip:chipULvl, cpu:cpuULvl, board:boardULvl,robot:robotULvl,assembler:assemblerULvl,fabricator:fabricatorULvl, printer:printerULvl,unlocks} =  rest.upgrade
     await didwork?.destroy();
         await db.save.savUp.create({
             saveID,
-            compULvl:rest.upgrade.comp,
-            chipULvl:rest.upgrade.chip,
-            cpusULVl:rest.upgrade.cpu,
-            boardsULvl:rest.upgrade.board,
-            robotsULvl:rest.upgrade.robot,
-            assemblerULvl:0,
-            fabricatorULvl:0,
-            printerULvl:0
-
+            compULvl,
+            chipULvl,
+            cpuULvl,
+            boardULvl,
+            robotULvl,
+            assemblerULvl,
+            fabricatorULvl,
+            printerULvl,
+            unlocks
         });
-
-
 }
 
 
@@ -72,7 +70,7 @@ async function saveunit(rest){
     const {saveID} = rest;
     const didWork = await db.save.savunit.findOne({where:{saveID}});
 
-    const {chips,comps,boards,cpus,robot,assembler,fabricator} = rest.units;
+    const {chips,comps,boards,cpus,robot,assembler,fabricator,printer} = rest.units;
 
     await didWork?.destroy();
 
@@ -83,6 +81,7 @@ async function saveunit(rest){
             boards,
             robot,
             cpus,
+            printer,
             assembler,
             fabricator
         });
@@ -94,17 +93,18 @@ async function savehide(rest){
     const {saveID} = rest;
     const didWork = await db.save.savhid.findOne({where:{saveID}});
 
-    const {chip,comp,board,cpus,robot,assembler:assemble,fabricator:fab} = rest.hide;
+    const {chip,comp,board,cpu,robot,assembler:assemble,fabricator:fab,printer} = rest.hide;
 
     await didWork?.destroy();
 
     await db.save.savhid.create({
         saveID,
         chip,
+        printer,
         comp,
         board,
         robot,
-        cpus,
+        cpu,
         assemble,
         fab
     });
