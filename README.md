@@ -17,7 +17,7 @@ A clicker game consisting of incressing numbers.
 -   [License](#license)
 -   [Contributing](#contributing)
 -   [Questions](#questions)
--  [How to Play](#HOW TO PLAY)
+-   [How to Play](#HOW-TO-PLAY)
 -   [Play](https://silicon-clicker.herokuapp.com/)
 ## Installation
 
