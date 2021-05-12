@@ -4,63 +4,41 @@ const db = require('../../models');
 async function saveperclick(rest)
 {
     const {saveID} = rest;
-    const didwork = await db.save.savPerSec.findOne({where:{saveID}});
+    const didwork = await db.save.savpc.findOne({where:{saveID}});
 
-    const { chip:chipPc, comp:compPc, board:boardPc, cpu:cpuPc} = rest.click;
+    const { chip, comp, board, cpu} = rest.click;
 
-    if(didwork === null)
-    {
-        await db.save.savps.create({
+    await didwork?.destroy();
+
+        await db.save.savpc.create({
             saveID,
-            chipPc,
-            compPc,
-            boardPc,
-            cpuPc
+            chip,
+            comp,
+            board,
+            cpu
         });
         console.log("testing")
-        return;
-        //create new data
-    }
-    await didwork.save(
-        {
-            saveID,
-            chipPc,
-            compPc,
-            boardPc,
-            cpuPc
-        }
-    );
 
 }
 
 async function savepersec(rest)
 {
     const {saveID} = rest;
-    const didwork = await db.save.savpc.findOne({where:{saveID}});
+    const didwork = await db.save.savps.findOne({where:{saveID}});
 
-    const {chips:chipsPS,board:boardPS,comps:compsPS, cpu:cpuPS} = rest.persec;
+    const {chip,board,comp, cpu} = rest.persec;
 
-    if(didwork === null)
-    {
+    await didwork?.destroy();
         await db.save.savps.create({
             saveID,
-            chipsPS,
-            compsPS,
-            boardPS,
-            cpuPS,
+            chip,
+            comp,
+            board,
+            cpu,
 
         });
         console.log("testing")
-        return;
-        //create new data
-    }
-    await didwork.save({
-        saveID,
-        chipsPS,
-        compsPS,
-        boardPS,
-        cpuPS,
-    });
+
 
 }
 
@@ -68,47 +46,34 @@ async function saveupgrade(rest)
 {
     const {saveID} = rest;
     console.log(rest);
-    const didWork = await db.save.savUp.findOne({where:{saveID}});
-
-    if(didWork === null)
-    {
+    const didwork = await db.save.savUp.findOne({where:{saveID}});
+     const {comp:compULvl , chip:chipULvl, cpu:cpuULvl, board:boardULvl,robot:robotULvl,assembler:assemblerULvl,fabricator:fabricatorULvl, printer:printerULvl,unlocks} =  rest.upgrade
+    await didwork?.destroy();
         await db.save.savUp.create({
             saveID,
-            compULvl:rest.upgrade.comp,
-            chipULvl:rest.upgrade.chip,
-            cpusULVl:0,
-            boardsULvl:0,
-            robotsULvl:0,
-            assemblerULvl:0,
-            fabricatorULvl:0,
-            printerULvl:0
-
+            compULvl,
+            chipULvl,
+            cpuULvl,
+            boardULvl,
+            robotULvl,
+            assemblerULvl,
+            fabricatorULvl,
+            printerULvl,
+            unlocks
         });
-        return;
-    }
-
-    await didWork.save({
-        chipULvl:rest.upgrade.chip,
-        compULvl:rest.upgrade.comp,
-        cpusULVl:0,
-        boardsULvl:0,
-        robotsULvl:0,
-        assemblerULvl:0,
-        fabricatorULvl:0,
-        printerULvl:0
-
-    });
 }
 
 
 
 async function saveunit(rest){
+
+    const {saveID} = rest;
     const didWork = await db.save.savunit.findOne({where:{saveID}});
 
-    const {chips,comps,boards,cpus,robot,assembler,fabricator} = rest.units;
+    const {chips,comps,boards,cpus,robot,assembler,fabricator,printer} = rest.units;
 
-    if(didWork === null)
-    {
+    await didWork?.destroy();
+
         await db.save.savunit.create({
             saveID,
             chips,
@@ -116,26 +81,34 @@ async function saveunit(rest){
             boards,
             robot,
             cpus,
+            printer,
             assembler,
             fabricator
         });
 
-        await saveupgrade(rest);
-        await savepersec(rest);
-        res.status(200);
-        return;
-    }
+}
 
-    await didWork.save({
+
+async function savehide(rest){
+    const {saveID} = rest;
+    const didWork = await db.save.savhid.findOne({where:{saveID}});
+
+    const {chip,comp,board,cpu,robot,assembler:assemble,fabricator:fab,printer} = rest.hide;
+
+    await didWork?.destroy();
+
+    await db.save.savhid.create({
         saveID,
-        chips,
-        comps,
-        boards,
+        chip,
+        printer,
+        comp,
+        board,
         robot,
-        cpus,
-        assembler,
-        fabricator
+        cpu,
+        assemble,
+        fab
     });
+
 }
 
 rSave.post('/',(async (req,res)=>{
@@ -149,6 +122,7 @@ rSave.post('/',(async (req,res)=>{
     await saveupgrade(rest);
     await saveperclick(rest);
     await savepersec(rest);
+    await savehide(rest);
     res.status(200);
 
 }));

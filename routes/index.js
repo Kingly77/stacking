@@ -1,6 +1,6 @@
 const index = require('express').Router();
 const saves = require('./saving')
-const load = require('./loading');
+const load  = require('./loading');
 const reset = require('./reset');
 
 index.use('/api',saves);

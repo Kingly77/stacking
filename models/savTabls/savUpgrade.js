@@ -9,6 +9,10 @@ savUpgrade.init({
             type:DataTypes.STRING(15),
             allowNull:false
         },
+        unlocks:{
+            defaultValue:0,
+            type:DataTypes.INTEGER
+        },
         compULvl:{
             defaultValue:0,
             type:DataTypes.INTEGER
@@ -17,15 +21,15 @@ savUpgrade.init({
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        cpusULVl:{
+        cpuULvl:{
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        boardsULvl: {
+        boardULvl: {
             defaultValue:0,
             type:DataTypes.INTEGER
         },
-        robotsULvl:{
+        robotULvl:{
             defaultValue:0,
             type:DataTypes.INTEGER
         },

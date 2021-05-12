@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon"
+    "start": "node index.js",
+    "debug": "nodemon"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^8.3.0"
+  },
   "dependencies": {
-    "dotenv": "^8.3.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.1",
     "express-session": "^1.17.1",
