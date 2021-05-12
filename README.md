@@ -6,11 +6,8 @@
 
 ## Description
 
+A clicker game consisting of incressing numbers.
 
-
-## WALK-THROUGH VIDEO
-
-[Wall-Through-Video]()
 
 ## Table of Contents
 
@@ -20,6 +17,7 @@
 -   [License](#license)
 -   [Contributing](#contributing)
 -   [Questions](#questions)
+-  [How to Play](#HOW TO PLAY)
 -   [Play](https://silicon-clicker.herokuapp.com/)
 ## Installation
 
@@ -36,6 +34,13 @@ Once this has been completed, you are ready to use the application!
 ## Usage
 
 Once everything has been set up, the application can be launched by running the command `nodemon index.js` or `npm start`. Then the application is running on port http://localhost:3001/
+
+
+## HOW TO PLAY
+
+- collect components buy upgrades advance along the tech line.
+- Get to the end of the tech to WIN.
+- playtime ~ 100hr 
 
 ## Credits
 

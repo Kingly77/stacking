@@ -659,8 +659,8 @@ const printer = Vue.createApp({
         updateStat() {
             this.cost.comp = Math.round(1.5 * (1.09) ** (this.curUpgrade * 2));
             this.cost.board = Math.round(1.2 * (2) ** this.curUpgrade);
-            if (!chips.ishide || this.curUpgrade > 500) Math.round(this.cost.chip = 1.04 * (1.09) ** this.curUpgrade)
-            if (!cpuApp.ishide || this.curUpgrade > 750) Math.round(this.cost.cpu = 1.01 * (1.09) ** this.curUpgrade)
+            if (!chips.ishide || this.curUpgrade > 500) this.cost.chip =  Math.round(1.04 * (1.09) ** this.curUpgrade)
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu =  Math.round(1.01 * (1.09) ** this.curUpgrade)
             this.per = Math.round(this.curUpgrade * 1.3);
         },
 
