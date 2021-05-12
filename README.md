@@ -6,11 +6,12 @@
 
 ## Description
 
-
+## Live-Version
+ [Live-version](https://silicon-clicker.herokuapp.com/)
 
 ## WALK-THROUGH VIDEO
 
-[Wall-Through-Video]()
+[Walk-Through-Video]()
 
 ## Table of Contents
 
@@ -20,8 +21,9 @@
 -   [License](#license)
 -   [Contributing](#contributing)
 -   [Questions](#questions)
--   [Play](https://silicon-clicker.herokuapp.com/)
+-  
 ## Installation
+
 
 To install this application, first, branch the Github Repo and clone the repo to your local machine. Then, you will need to install the node dependencies which can be done by running the `npm install` command in your terminal/bash shell.
 
