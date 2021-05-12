@@ -1,15 +1,15 @@
 const clickModifier = {
-    comp: 1,
-    board: 1,
-    chip: 1,
-    cpu: 1
+    comp:   1,
+    board:  1,
+    chip:   1,
+    cpu:    1
 };
 
 const perSec = {
-    comp: 0,
-    board: 0,
-    chip: 0,
-    cpu: 0
+    comp:   0,
+    board:  0,
+    chip:   0,
+    cpu:    0
 };
 
 function DoCost(cost) {
@@ -35,8 +35,8 @@ const unlocks = Vue.createApp({
                     cost: {
                         board: 0,
                         comp: 100,
-                        chip: 0,
-                        cpu: 0,
+                        chip:   0,
+                        cpu:    0,
                     },
                     name: "Unlock Robots",
                     usage: "Allows to make boards",
@@ -47,8 +47,8 @@ const unlocks = Vue.createApp({
                     cost: {
                         board: 0,
                         comp: 1000,
-                        chip: 0,
-                        cpu: 0,
+                        chip:   0,
+                        cpu:    0,
                     },
                     name: "Unlock Chip",
                     usage: "Allows to make Chips",
@@ -59,7 +59,7 @@ const unlocks = Vue.createApp({
                         board: 0,
                         comp: 10000,
                         chip: 100,
-                        cpu: 0,
+                        cpu:    0,
                     },
                     name: "Unlock Assembler",
                     usage: "Allows to make Chips",
@@ -71,7 +71,7 @@ const unlocks = Vue.createApp({
                         board: 0,
                         comp: 10000,
                         chip: 1000,
-                        cpu: 0,
+                        cpu:    0,
                     },
                     name: "Unlock Boards",
                     usage: "Allows to make boards",
@@ -82,7 +82,7 @@ const unlocks = Vue.createApp({
                         board: 500,
                         comp: 100000,
                         chip: 1000,
-                        cpu: 0,
+                        cpu:    0,
                     },
                     name: "Unlock Printing",
                     usage: "Allows to make boards automatically faster",
@@ -134,8 +134,6 @@ const unlocks = Vue.createApp({
     },
     methods: {
         doUnlock() {
-
-            const { cost } = this.listoupgrade[this.curUpgrade];
             if (!DoCost(this.listoupgrade[this.curUpgrade].cost)) return
             this.listoupgrade[this.curUpgrade].doBuy();
             this.curUpgrade++;
@@ -307,12 +305,12 @@ const boardsApp = Vue.createApp({
         },
 
         addComp() {
-            if (compApp.count < this.count + clickModifier.board ) return;
+            if (chips.count < this.count + clickModifier.board ) return;
             this.count += clickModifier.board ;
         }
         ,
         addOther(val) {
-            if (compApp.count < this.count + val) return;
+            if (chips.count < this.count + val) return;
             this.count += val;
         },
         getPerSec(){return perSec.board},
@@ -489,11 +487,11 @@ const chips = Vue.createApp({
             this.updateStat();
         },
         addComp() {
-            if (boardsApp.count < this.count + clickModifier.chip) return
+            if (compApp.count < this.count + clickModifier.chip) return
             this.count += clickModifier.chip;
         },
         addOther(val) {
-            if (boardsApp.count < this.count + val) return
+            if (compApp.count < this.count + val) return
             this.count += val;
         },
         getPerSec(){return perSec.chip},
@@ -930,4 +928,4 @@ setInterval(() => {
     compApp.addOther(perSec.comp + robot.getMod());
     cpuApp.addOther(perSec.cpu + fabricator.getMod());
 
-}, 1000)
+},1000)
