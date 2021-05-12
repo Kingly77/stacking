@@ -24,9 +24,9 @@ const list = [
         lvl: 5,
         cost: 20,
         name: "Unlock CPUS",
-        usage: "Makes +5 Chip per Click"
+        usage: "Makes +5 Chip per Click",
         mod: 1
-    }
+    },
     {
         lvl: 10,
         cost: 100
