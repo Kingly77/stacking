@@ -5,8 +5,7 @@ $('#save').click(async () => {
         start();
         return
     }
-    $('#id').val("");
-    $('#save').text("Saved");
+
     await $.post('/api/save', {
         rest: {
             saveID: $('#id').val(),
