@@ -94,7 +94,7 @@ const unlocks = Vue.createApp({
                         board: 100000,
                         comp: 100000,
                         chip: 30000,
-                        cpus: 0,
+                        cpu: 0,
                     },
                     name: "Unlock CPUS",
                     usage: "Allows to make Cpus",
