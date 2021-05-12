@@ -5,10 +5,16 @@ $('#save').click(async () => {
         start();
         return
     }
-
+    let idVal = $('#id').val();
+    $('#id').val('');
+    $('#save').text('Saved');
+    setTimeout(() => {
+        $('#save').text('Save');
+    }, 5000);
     await $.post('/api/save', {
         rest: {
-            saveID: $('#id').val(),
+            // saveID: $('#id').val(),
+            saveID: idVal,
             units: {
                 chips: chips.count,
                 boards: boardsApp.count,
@@ -45,6 +51,7 @@ $('#save').click(async () => {
                 assembler: assembler.ishide,
             }
         }
+
     }, () => {
 
     })
