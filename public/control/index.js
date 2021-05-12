@@ -195,7 +195,7 @@ const compApp = Vue.createApp({
             if (!boardsApp.ishide || this.curUpgrade > 50) this.cost.board = Math.round((5 + this.curUpgrade) * 1.5)
             if (!chips.ishide || this.curUpgrade > 200) this.cost.chip = Math.round((1 + this.curUpgrade) * 1.09)
             if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.001)
-            this.mod.click = Math.round(1 + this.curUpgrade * 0.9);
+            this.mod.click = Math.round(1 + (this.curUpgrade * 0.9));
             this.mod.per = Math.round(this.curUpgrade * 0.05);
 
         },
@@ -215,6 +215,7 @@ const compApp = Vue.createApp({
 
         start() {
             this.updateStat();
+            this.applyStat();
         },
         addComp() {
             this.count += clickModifier.comp;
@@ -283,7 +284,7 @@ const boardsApp = Vue.createApp({
             this.cost.board = (5 + this.curUpgrade) * 5;
              this.cost.chip = Math.round((1 + this.curUpgrade) * 2.5)
             if (!cpuApp.ishide || this.curUpgrade > 500)this.cost.cpu = Math.round( (1 + this.curUpgrade) * 1.1)
-            this.mod.click = Math.round((1 + this.curUpgrade) * 1.1);
+            this.mod.click = Math.round(1 +( this.curUpgrade * 1.1));
             this.mod.per = Math.round(this.curUpgrade * .07);
         },
         applyStat() {
@@ -302,6 +303,7 @@ const boardsApp = Vue.createApp({
 
         start() {
             this.updateStat();
+            this.applyStat();
         },
 
         addComp() {
@@ -372,7 +374,7 @@ const cpuApp = Vue.createApp({
             this.cost.board =( 5 + this.curUpgrade)
             this.cost.chip = (1 + this.curUpgrade) * 5;
             this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.5)
-            this.mod.click = Math.round((1 + this.curUpgrade) * 1.1);
+            this.mod.click = Math.round(1 +( this.curUpgrade * 1.1));
             this.mod.per = Math.round(this.curUpgrade * 0.09);
         },
         applyStat() {
@@ -391,6 +393,7 @@ const cpuApp = Vue.createApp({
 
         start() {
             this.updateStat();
+            this.applyStat();
         },
 
         addComp() {
@@ -485,11 +488,14 @@ const chips = Vue.createApp({
 
         start() {
             this.updateStat();
+            this.applyStat();
         },
         addComp() {
             if (compApp.count < this.count + clickModifier.chip) return
             this.count += clickModifier.chip;
-        },
+            console.log(clickModifier.chip);
+
+            },
         addOther(val) {
             if (compApp.count < this.count + val) return
             this.count += val;
@@ -574,6 +580,7 @@ const robot = Vue.createApp({
 
         start() {
             this.updateStat();
+
         },
 
         addComp() {
