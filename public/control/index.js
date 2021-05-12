@@ -465,7 +465,7 @@ const chips = Vue.createApp({
             if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board = Math.round((5 + this.curUpgrade) * 15)
             this.cost.chip = Math.round((1 + this.curUpgrade) * 10)
             if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu =Math.round( (1 + this.curUpgrade) * 1.1)
-            this.mod.click = Math.round((1 + this.curUpgrade) * 0.01);
+            this.mod.click = Math.round(1+(this.curUpgrade * 0.01));
             this.mod.per = Math.round(this.curUpgrade * 0.095);
         },
         applyStat() {
