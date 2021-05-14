@@ -6,12 +6,21 @@
     <div class="row">
 
       <div id="button-div">
-        {{>doClick}}
+
+        <div id="full">
+          <unlocky></unlocky>
+          <compapp what="Transistor" :locked="this.isLocked['comp']"></compapp>
+          <compapp what="Chip" :locked="this.isLocked['chip']"></compapp>
+          <compapp what="Board" :locked="this.isLocked['board']"></compapp>
+          <compapp what="Cpu" :locked="this.isLocked['cpu']"></compapp>
+
+        </div>
+
       </div>
 
       <div class="col"></div>
     </div>
   </div>
-  {{>animation}}
+{{>animation}}
 
 </div>
