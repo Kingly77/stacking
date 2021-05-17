@@ -1,4 +1,4 @@
-// require('dotenv').config();
+
 const expr = require('express')
 const session = require('express-session')
 const hdbar = require('express-handlebars');
@@ -17,6 +17,7 @@ app.use(expr.json())
 app.use(expr.static(path.join(__dirname, 'public')));
 app.use(expr.static(path.join(__dirname, 'public/control')));
 
+require('dotenv').config();
 
 // app.use(session({
 //     resave: false,

@@ -283,14 +283,20 @@ full.component('cpuApp', {
     props: ['what', 'locked'],
     data() {
         return {
+            what: "Cpu",
             count: 0,
             curUpgrade: 0,
+            ishide: true,
 
             cost: {
                 comp: 0,
                 cpu: 0,
                 chip: 0,
                 board: 0
+            },
+            mod: {
+                click: 0,
+                per: 0
             }
         }
     },
@@ -303,14 +309,30 @@ full.component('cpuApp', {
             this.mod.click = Math.round(1 + (this.curUpgrade * 1.1));
             this.mod.per = Math.round(this.curUpgrade * 0.09);
         },
+        applyStat() {
+
+            clickModifier.cpu = this.mod.click;
+            perSec.cpu = this.mod.per;
+        },
+        DoBuy() {
+            if (!DoCost(this.cost)) return;
+            this.applyStat()
+            this.curUpgrade++;
+            this.updateStat();
+
+        },
+        start() {
+            this.updateStat();
+            this.applyStat();
+        },
         add() {
             this.count++
         },
         addOther(x) {
             this.count += x;
         },
-        getClickMod() { },
-        getPerSec() { }
+        getPerSec() { return perSec.cpu },
+        getClickMod() { return clickModifier.cpu }
 
 
     },
