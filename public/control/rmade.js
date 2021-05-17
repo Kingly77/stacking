@@ -1,59 +1,59 @@
-const full= Vue.createApp(
-{
+const full = Vue.createApp(
+    {
 
-    data(){
-    return{
-        isLocked:
-        {
-            comp:false,
-            chip:false,
-            board:true,
-            cpu:true,
-            robot:true,
-            fabricator:true,
-            assembler:true,
-            printer:true,
+        data() {
+            return {
+                isLocked:
+                {
+                    comp: false,
+                    chip: false,
+                    board: true,
+                    cpu: true,
+                    robot: true,
+                    fabricator: true,
+                    assembler: true,
+                    printer: true,
 
+
+                },
+                clickModifier:
+                {
+                    comp: 1,
+                    board: 1,
+                    chip: 1,
+                    cpu: 1
+                },
+                perSec:
+                {
+                    comp: 0,
+                    board: 0,
+                    chip: 0,
+                    cpu: 0
+
+                }
+            }
 
         },
-        clickModifier:
-        {
-            comp:1,
-            board:1,
-            chip:1,
-            cpu: 1
-        },
-        perSec:
-        {
-            comp:0,
-            board:0,
-            chip: 0,
-            cpu: 0
+        methods: {
+            DoCost(cost) {
 
+                if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) {
+                    return false;
+                }
+
+                chips.chips -= cost.chip;
+                boardsApp.count -= cost.board;
+                compApp.count -= cost.comp;
+                cpuApp.count -= cost.cpu
+                return true;
+
+
+            }
         }
-        }
-
-    },
-    methods:{
-        DoCost(cost){
-
-            if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) {
-                return false;
-            } 
-
-            chips.chips -= cost.chip;
-            boardsApp.count -= cost.board;
-            compApp.count -= cost.comp;
-            cpuApp.count -= cost.cpu
-            return true;
+    });
 
 
-        }
-    }
-});
-
-
-full.component('unlocky',{
+full.component('unlocky', {
 
     data() {
         return {
@@ -115,7 +115,7 @@ full.component('unlocky',{
                     },
                     name: "Unlock Printing",
                     usage: "Allows to make boards automatically faster",
-                    doBuy: () => { this.printer= false; }
+                    doBuy: () => { this.printer = false; }
                 },
                 {
                     cost: {
@@ -162,8 +162,10 @@ full.component('unlocky',{
     },
     methods: {
         doUnlock() {
-
+            if (!DoCost(this.listoupgrade[this.curUpgrade].cost)) return
+            this.listoupgrade[this.curUpgrade].doBuy();
             this.curUpgrade++;
+
         },
         getCost() {
             return this.listoupgrade[this.curUpgrade].cost;
@@ -191,19 +193,21 @@ full.component('unlocky',{
 });
 
 
-full.component('compapp',{
+full.component('compapp', {
 
-    props:['what', 'locked'],
-    data(){
-        return{
-            count:0,
-            curUpgrade:0,
+    props: ['what', 'locked'],
+    data() {
+        return {
+            what: "Transistor",
+            count: 0,
+            curUpgrade: 0,
+            ishide: false,
 
-            cost:{
-                comp:0,
-                cpu:0,
-                chip:0,
-                board:0
+            cost: {
+                comp: 0,
+                cpu: 0,
+                chip: 0,
+                board: 0
             },
             mod: {
                 click: 0,
@@ -211,7 +215,7 @@ full.component('compapp',{
             }
         }
     },
-    methods:{
+    methods: {
         updateStat() {
             this.cost.comp = (20 + this.curUpgrade) * 2;
             if (!boardsApp.ishide || this.curUpgrade > 50) this.cost.board = Math.round((5 + this.curUpgrade) * 1.5)
@@ -221,23 +225,34 @@ full.component('compapp',{
             this.mod.per = Math.round(this.curUpgrade * 0.05);
 
         },
-        applyStat(){
+        applyStat() {
+            clickModifier.comp = this.mod.click;
+            perSec.comp = this.mod.per;
 
-        }
-        add()
-        {
+        },
+        DoBuy() {
+            if (!DoCost(this.cost)) return;
+            this.applyStat()
+            this.curUpgrade++;
+            this.updateStat();
+
+        },
+        start() {
+            this.updateStat();
+            this.applyStat();
+        },
+        add() {
             this.count++
         },
-        addOther(x)
-        {
-            this.count+=x;
+        addOther(x) {
+            this.count += x;
         },
-        getClickMod(){},
-        getPerSec(){}
+        getClickMod() { return perSec.comp},
+        getPerSec() { return clickModifier.comp }
 
 
     },
-    template:`
+    template: `
       
       <div class="container glass" v-if="!locked">
       <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -263,23 +278,23 @@ full.component('compapp',{
     `
 });
 
-full.component('cpuApp',{
+full.component('cpuApp', {
 
-    props:['what', 'locked'],
-    data(){
-        return{
-            count:0,
-            curUpgrade:0,
+    props: ['what', 'locked'],
+    data() {
+        return {
+            count: 0,
+            curUpgrade: 0,
 
-            cost:{
-                comp:0,
-                cpu:0,
-                chip:0,
-                board:0
+            cost: {
+                comp: 0,
+                cpu: 0,
+                chip: 0,
+                board: 0
             }
         }
     },
-    methods:{
+    methods: {
         updateStat() {
             this.cost.comp = (20 + this.curUpgrade) * 500;
             this.cost.board = (5 + this.curUpgrade)
@@ -288,20 +303,18 @@ full.component('cpuApp',{
             this.mod.click = Math.round(1 + (this.curUpgrade * 1.1));
             this.mod.per = Math.round(this.curUpgrade * 0.09);
         },
-        add()
-        {
+        add() {
             this.count++
         },
-        addOther(x)
-        {
-            this.count+=x;
+        addOther(x) {
+            this.count += x;
         },
-        getClickMod(){},
-        getPerSec(){}
+        getClickMod() { },
+        getPerSec() { }
 
 
     },
-    template:`
+    template: `
     <div v-if="!ishide">
     <div class="container glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -331,23 +344,23 @@ full.component('cpuApp',{
     `
 });
 
-full.component('chipsApp',{
+full.component('chipsApp', {
 
-    props:['what', 'locked'],
-    data(){
-        return{
-            count:0,
-            curUpgrade:0,
+    props: ['what', 'locked'],
+    data() {
+        return {
+            count: 0,
+            curUpgrade: 0,
 
-            cost:{
-                comp:0,
-                cpu:0,
-                chip:0,
-                board:0
+            cost: {
+                comp: 0,
+                cpu: 0,
+                chip: 0,
+                board: 0
             }
         }
     },
-    methods:{
+    methods: {
         updateStat() {
             this.cost.comp = Math.round((20 + this.curUpgrade) * 15);
             if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board = Math.round((5 + this.curUpgrade) * 15)
@@ -356,20 +369,18 @@ full.component('chipsApp',{
             this.mod.click = Math.round(1 + (this.curUpgrade * 0.01));
             this.mod.per = Math.round(this.curUpgrade * 0.095);
         },
-        add()
-        {
+        add() {
             this.count++
         },
-        addOther(x)
-        {
-            this.count+=x;
+        addOther(x) {
+            this.count += x;
         },
-        getClickMod(){},
-        getPerSec(){}
+        getClickMod() { },
+        getPerSec() { }
 
 
     },
-    template:  `
+    template: `
     <div v-if="!ishide">
     <div class="container glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -399,23 +410,23 @@ full.component('chipsApp',{
 });
 
 
-full.component('boardsApp',{
+full.component('boardsApp', {
 
-    props:['what', 'locked'],
-    data(){
-        return{
-            count:0,
-            curUpgrade:0,
+    props: ['what', 'locked'],
+    data() {
+        return {
+            count: 0,
+            curUpgrade: 0,
 
-            cost:{
-                comp:0,
-                cpu:0,
-                chip:0,
-                board:0
+            cost: {
+                comp: 0,
+                cpu: 0,
+                chip: 0,
+                board: 0
             }
         }
     },
-    methods:{
+    methods: {
         updateStat() {
             this.cost.comp = (20 + this.curUpgrade) * 45;
             this.cost.board = (5 + this.curUpgrade) * 5;
@@ -424,20 +435,18 @@ full.component('boardsApp',{
             this.mod.click = Math.round(1 + (this.curUpgrade * 1.1));
             this.mod.per = Math.round(this.curUpgrade * .07);
         },
-        add()
-        {
+        add() {
             this.count++
         },
-        addOther(x)
-        {
-            this.count+=x;
+        addOther(x) {
+            this.count += x;
         },
-        getClickMod(){},
-        getPerSec(){}
+        getClickMod() { },
+        getPerSec() { }
 
 
     },
-    template:  `
+    template: `
     <div v-if="!ishide">
     <div class="container glass">
     <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -467,7 +476,7 @@ full.component('boardsApp',{
 full.component('robotApp', {
     props: ['what', 'locked'],
     data() {
-        return{
+        return {
             count: 0,
             curUpgrade: 0,
             per: 0,
@@ -478,7 +487,7 @@ full.component('robotApp', {
                 board: 0,
                 chip: 0,
                 cpu: 0
-            
+
             }
         }
 
