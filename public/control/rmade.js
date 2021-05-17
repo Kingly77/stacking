@@ -202,6 +202,7 @@ full.component('compapp', {
             count: 0,
             curUpgrade: 0,
             ishide: false,
+            
 
             cost: {
                 comp: 0,
@@ -288,6 +289,7 @@ full.component('cpuApp', {
             curUpgrade: 0,
             ishide: true,
 
+
             cost: {
                 comp: 0,
                 cpu: 0,
@@ -371,15 +373,22 @@ full.component('chipsApp', {
     props: ['what', 'locked'],
     data() {
         return {
+            what: "Chip",
             count: 0,
             curUpgrade: 0,
+            ishide: true,
+
 
             cost: {
                 comp: 0,
                 cpu: 0,
                 chip: 0,
                 board: 0
-            }
+            },
+            mod: {
+                click: 0,
+                per: 0
+            },
         }
     },
     methods: {
@@ -391,15 +400,33 @@ full.component('chipsApp', {
             this.mod.click = Math.round(1 + (this.curUpgrade * 0.01));
             this.mod.per = Math.round(this.curUpgrade * 0.095);
         },
+        applyStat() {
+
+            clickModifier.chip = this.mod.click;
+            perSec.chip = this.mod.per;
+        },
+
+        DoBuy() {
+            if (!DoCost(this.cost)) return;
+            console.log('hi')
+            this.applyStat()
+            this.curUpgrade++;
+            this.updateStat();
+
+        },
+
+        start() {
+            this.updateStat();
+            this.applyStat();
+        },
         add() {
             this.count++
         },
         addOther(x) {
             this.count += x;
         },
-        getClickMod() { },
-        getPerSec() { }
-
+        getPerSec() { return perSec.chip },
+        getClickMod() { return clickModifier.chip }
 
     },
     template: `
@@ -437,14 +464,20 @@ full.component('boardsApp', {
     props: ['what', 'locked'],
     data() {
         return {
+            what: "Board",
             count: 0,
             curUpgrade: 0,
+            ishide: true,
 
             cost: {
                 comp: 0,
                 cpu: 0,
                 chip: 0,
                 board: 0
+            },
+            mod: {
+                click: 0,
+                per: 0
             }
         }
     },
@@ -457,14 +490,33 @@ full.component('boardsApp', {
             this.mod.click = Math.round(1 + (this.curUpgrade * 1.1));
             this.mod.per = Math.round(this.curUpgrade * .07);
         },
+        applyStat() {
+
+            clickModifier.board = this.mod.click;
+            perSec.board = this.mod.per;
+        },
+
+        DoBuy() {
+            if (!DoCost(this.cost)) return;
+            this.applyStat()
+            this.curUpgrade++;
+            this.updateStat();
+
+        },
+
+        start() {
+            this.updateStat();
+            this.applyStat();
+        },
+
         add() {
             this.count++
         },
         addOther(x) {
             this.count += x;
         },
-        getClickMod() { },
-        getPerSec() { }
+        getPerSec() { return perSec.board },
+        getClickMod() { return clickModifier.board }
 
 
     },
