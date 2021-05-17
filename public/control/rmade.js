@@ -15,12 +15,44 @@ const full= Vue.createApp(
             printer:true,
 
 
+        },
+        clickModifier:
+        {
+            comp:1,
+            board:1,
+            chip:1,
+            cpu: 1
+        },
+        perSec:
+        {
+            comp:0,
+            board:0,
+            chip: 0,
+            cpu: 0
+
+        }
         }
 
-    }
-},
+    },
+    methods:{
+        DoCost(cost){
 
+            if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) {
+                return false;
+            } 
+
+            chips.chips -= cost.chip;
+            boardsApp.count -= cost.board;
+            compApp.count -= cost.comp;
+            cpuApp.count -= cost.cpu
+            return true;
+
+
+        }
+    }
 });
+
+
 full.component('unlocky',{
 
     data() {
@@ -172,6 +204,10 @@ full.component('compapp',{
                 cpu:0,
                 chip:0,
                 board:0
+            },
+            mod: {
+                click: 0,
+                per: 0
             }
         }
     },
@@ -185,6 +221,9 @@ full.component('compapp',{
             this.mod.per = Math.round(this.curUpgrade * 0.05);
 
         },
+        applyStat(){
+
+        }
         add()
         {
             this.count++
