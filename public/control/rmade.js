@@ -1,3 +1,5 @@
+import {unlocky} from './comps/unlocky'
+
 const full= Vue.createApp(
 {
 
@@ -6,7 +8,7 @@ const full= Vue.createApp(
         isLocked:
         {
             comp:false,
-            chip:false,
+            chip:true,
             board:true,
             cpu:true,
             robot:true,
@@ -14,153 +16,16 @@ const full= Vue.createApp(
             assembler:true,
             printer:true,
 
-
         }
 
     }
 },
 
 });
-full.component('unlocky',{
-
-    data() {
-        return {
-            curUpgrade: 0,
-            listoupgrade: [
-
-                {
-                    cost: {
-                        board: 0,
-                        comp: 100,
-                        chip: 0,
-                        cpu: 0,
-                    },
-                    name: "Unlock Robots",
-                    usage: "Allows to make boards",
-                    doBuy: () => { this.robot = false; }
-                },
-
-                {
-                    cost: {
-                        board: 0,
-                        comp: 1000,
-                        chip: 0,
-                        cpu: 0,
-                    },
-                    name: "Unlock Chip",
-                    usage: "Allows to make Chips",
-                    doBuy: () => { this.chip = false }
-                },
-                {
-                    cost: {
-                        board: 0,
-                        comp: 10000,
-                        chip: 100,
-                        cpu: 0,
-                    },
-                    name: "Unlock Assembler",
-                    usage: "Allows to make Chips",
-                    doBuy: () => { this.assembler = false }
-                },
-
-                {
-                    cost: {
-                        board: 0,
-                        comp: 10000,
-                        chip: 1000,
-                        cpu: 0,
-                    },
-                    name: "Unlock Boards",
-                    usage: "Allows to make boards",
-                    doBuy: () => { this.boards = false }
-                },
-                {
-                    cost: {
-                        board: 500,
-                        comp: 100000,
-                        chip: 1000,
-                        cpu: 0,
-                    },
-                    name: "Unlock Printing",
-                    usage: "Allows to make boards automatically faster",
-                    doBuy: () => { this.printer= false; }
-                },
-                {
-                    cost: {
-                        board: 100000,
-                        comp: 100000,
-                        chip: 30000,
-                        cpu: 0,
-                    },
-                    name: "Unlock CPUS",
-                    usage: "Allows to make Cpus",
-                    doBuy: () => { cpuApp.ishide = false }
-                },
-                {
-                    cost: {
-                        board: 30000,
-                        comp: 1000000,
-                        chip: 10000,
-                        cpu: 100,
-                    },
-                    name: "Unlock Fabricator",
-                    usage: "Allows to make Cpus automaticly",
-                    doBuy: () => { this.fabricator = false }
-                },
-                {
-                    cost: {
-                        board: 1000000,
-                        comp: 1000000,
-                        chip: 10000000,
-                        cpu: 1000000,
-                    },
-                    name: "WIN",
-                    usage: "Allows to make Cpus automaticly",
-                    doBuy: () => {
-                        perSec.comp += 10000
-                        perSec.board += 10000
-                        perSec.chip += 10000
-                        perSec.cpu += 10000
-                        this.curUpgrade--;
-                    }
-                },
-
-            ],
-        }
-    },
-    methods: {
-        doUnlock() {
-
-            this.curUpgrade++;
-        },
-        getCost() {
-            return this.listoupgrade[this.curUpgrade].cost;
-        },
-
-    },
-
-    template:
-        `
-        <div class="container glass">
-        <tr>
-          <td >
-            <button @click="doUnlock" id="doUnlock" class="btn btn-dark">
-              {{listoupgrade[curUpgrade].name}}
-            </button>
-            <div class="mt-1">Transistor: {{getCost().comp}}</div>
-  <div>Board: {{getCost().board}}</div>
-  <div> Chips: {{getCost().chip}}</div>
-  <div>Cpu: {{getCost().cpu}}</div>
-          </td>
-          </tr>
-          </div>
-        `
-
-});
 
 
 full.component('compapp',{
-
+    components: {unlocky},
     props:['what', 'locked'],
     data(){
         return{
@@ -200,7 +65,7 @@ full.component('compapp',{
     },
     template:`
       
-      <div class="container glass" v-if="!locked">
+      <div class="container glass" v-if=!isLocked[what]>
       <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
       <div class="row">
         <div class="col">click: {{this.getClickMod()}}</div>
@@ -225,3 +90,4 @@ full.component('compapp',{
 });
 
 full.mount('#full');
+
