@@ -202,7 +202,7 @@ full.component('compapp', {
             count: 0,
             curUpgrade: 0,
             ishide: false,
-            
+
 
             cost: {
                 comp: 0,
@@ -248,7 +248,7 @@ full.component('compapp', {
         addOther(x) {
             this.count += x;
         },
-        getClickMod() { return perSec.comp},
+        getClickMod() { return perSec.comp },
         getPerSec() { return clickModifier.comp }
 
 
@@ -604,7 +604,7 @@ full.component('robotApp', {
 
     },
     template:
-    `
+        `
     <div v-if="!ishide">
     <div class="container-fluid glass">
     <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -695,7 +695,7 @@ full.component('printerApp', {
 
     },
     template:
-    `
+        `
     <div v-if="!ishide">
     <div class="container-fluid glass mt-1">
     <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -783,7 +783,7 @@ full.component('assemblerApp', {
         }
     },
     template:
-    `
+        `
     <div v-if="!ishide">
     <div class="container-fluid glass mt-1">
     <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
@@ -812,7 +812,101 @@ full.component('assemblerApp', {
 `
 });
 
+full.component('fabricatorApp', {
+    props: ['what', 'locked'],
+    data() {
+        return {
+            what: "Fabricator",
+            count: 0,
+            curUpgrade: 0,
+            per: 0,
+            ishide: true,
 
+            cost: {
 
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
+
+            }
+        }
+
+    },
+    methods: {
+
+        getMod() {
+            return this.per * this.count;
+
+        },
+        updateStat() {
+            this.cost.comp = Math.round(1.5 * (1.09) ** (1.1 ** (this.curUpgrade * 0.25)));
+            this.cost.board = Math.round(1.2 * (2) ** (1.01 ** (this.curUpgrade * 0.25)));
+            this.cost.chip = Math.round(1.04 * (1.09) ** (1.001 ** (this.curUpgrade * 0.25)))
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
+            this.per = Math.round(this.curUpgrade * 1.3);
+        },
+
+        DoBuy() {
+            if (!DoCost(this.cost)) return;
+            this.curUpgrade++;
+            this.updateStat();
+
+        },
+
+        start() {
+            this.updateStat();
+        },
+
+        addComp() {
+            if (cpuApp.count < this.getcost()) return
+            cpuApp.count -= this.getcost();
+            this.count += 1;
+
+        },
+        getcost() {
+            return Math.round(.5 * 2 ** (1.2 * this.count))
+        }
+    },
+    template:
+        `
+        <div v-if="!ishide">
+        <div class="container-fluid glass mt-1">
+        <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+        <div class="row "><span class="text-center"> per sec:{{getMod()}}</span></div>
+            <div class="row">
+            <div class="col-1"></div>
+                <div class="col-3">
+                <div class="row">
+                    <button  @click='addComp' class="btn btn-dark me-2" >({{getcost()}})</button> 
+                </div>
+                <div class="row">
+                    <button @click="DoBuy" class="btn btn-light me-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+                </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col mb-2">
+                   
+                    <div>Transistors: {{cost.comp}}</div>
+                    <div >Board: {{cost.board}}</div>
+                    <div> Chips: {{cost.chip}}</div>
+                    <div>Cpu: {{cost.cpu}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+`
+});
+
+full.component('calculating', function (resolve, reject) {
+    setTimeout(function () {
+        boardsApp.addOther(perSec.board + printerApp.getMod());
+        chipsApp.addOther(perSec.chip + assemblerApp.getMod());
+        compapp.addOther(perSec.comp + robotApp.getMod());
+        cpuApp.addOther(perSec.cpu + fabricatorApp.getMod());
+        
+
+    })
+}, 1000); 
 
 full.mount('#full');
