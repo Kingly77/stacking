@@ -224,4 +224,241 @@ full.component('compapp',{
     `
 });
 
+full.component('cpuApp',{
+
+    props:['what', 'locked'],
+    data(){
+        return{
+            count:0,
+            curUpgrade:0,
+
+            cost:{
+                comp:0,
+                cpu:0,
+                chip:0,
+                board:0
+            }
+        }
+    },
+    methods:{
+        updateStat() {
+            this.cost.comp = (20 + this.curUpgrade) * 500;
+            this.cost.board = (5 + this.curUpgrade)
+            this.cost.chip = (1 + this.curUpgrade) * 5;
+            this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.5)
+            this.mod.click = Math.round(1 + (this.curUpgrade * 1.1));
+            this.mod.per = Math.round(this.curUpgrade * 0.09);
+        },
+        add()
+        {
+            this.count++
+        },
+        addOther(x)
+        {
+            this.count+=x;
+        },
+        getClickMod(){},
+        getPerSec(){}
+
+
+    },
+    template:`
+    <div v-if="!ishide">
+    <div class="container glass">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row">
+        <div class="col">click: {{this.getClickMod()}}</div>
+        <div class="col">per sec:{{this.getPerSec()}}</div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-4">
+            <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+            <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+        </div>
+<div class="col-2"></div>
+        <div class="col">
+    <div>Transistors: {{cost.comp}}</div>
+            <div >Board: {{cost.board}}</div>
+            <div> Chips: {{cost.chip}}</div>
+     <div>Cpu: {{cost.cpu}}</div>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+  </div>
+    `
+});
+
+full.component('chipsApp',{
+
+    props:['what', 'locked'],
+    data(){
+        return{
+            count:0,
+            curUpgrade:0,
+
+            cost:{
+                comp:0,
+                cpu:0,
+                chip:0,
+                board:0
+            }
+        }
+    },
+    methods:{
+        updateStat() {
+            this.cost.comp = Math.round((20 + this.curUpgrade) * 15);
+            if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board = Math.round((5 + this.curUpgrade) * 15)
+            this.cost.chip = Math.round((1 + this.curUpgrade) * 10)
+            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.1)
+            this.mod.click = Math.round(1 + (this.curUpgrade * 0.01));
+            this.mod.per = Math.round(this.curUpgrade * 0.095);
+        },
+        add()
+        {
+            this.count++
+        },
+        addOther(x)
+        {
+            this.count+=x;
+        },
+        getClickMod(){},
+        getPerSec(){}
+
+
+    },
+    template:  `
+    <div v-if="!ishide">
+    <div class="container glass">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row">
+        <div class="col">click: {{this.getClickMod()}}</div>
+        <div class="col">per sec:{{this.getPerSec()}}</div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-4">
+            <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+            <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+        </div>
+<div class="col-2"></div>
+        <div class="col">
+    <div>Transistors: {{cost.comp}}</div>
+            <div >Board: {{cost.board}}</div>
+            <div> Chips: {{cost.chip}}</div>
+     <div>Cpu: {{cost.cpu}}</div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+   
+  `
+});
+
+
+full.component('boardsApp',{
+
+    props:['what', 'locked'],
+    data(){
+        return{
+            count:0,
+            curUpgrade:0,
+
+            cost:{
+                comp:0,
+                cpu:0,
+                chip:0,
+                board:0
+            }
+        }
+    },
+    methods:{
+        updateStat() {
+            this.cost.comp = (20 + this.curUpgrade) * 45;
+            this.cost.board = (5 + this.curUpgrade) * 5;
+            this.cost.chip = Math.round((1 + this.curUpgrade) * 2.5)
+            if (!cpuApp.ishide || this.curUpgrade > 500) this.cost.cpu = Math.round((1 + this.curUpgrade) * 1.1)
+            this.mod.click = Math.round(1 + (this.curUpgrade * 1.1));
+            this.mod.per = Math.round(this.curUpgrade * .07);
+        },
+        add()
+        {
+            this.count++
+        },
+        addOther(x)
+        {
+            this.count+=x;
+        },
+        getClickMod(){},
+        getPerSec(){}
+
+
+    },
+    template:  `
+    <div v-if="!ishide">
+    <div class="container glass">
+    <div class="row text-center"><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row">
+      <div class="col">click: {{this.getClickMod()}}</div>
+      <div class="col">per sec:{{this.getPerSec()}}</div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-4">
+            <div class="row"><button  @click='addComp' class="btn btn-dark" >Do Click</button> </div>
+            <div class="row"><button @click="DoBuy" class="btn btn-light"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button></div>
+        </div>
+<div class="col-2"></div>
+        <div class="col">
+    <div>Transistors: {{cost.comp}}</div>
+            <div >Board: {{cost.board}}</div>
+            <div> Chips: {{cost.chip}}</div>
+     <div>Cpu: {{cost.cpu}}</div>
+        </div>
+    </div>
+</div>
+  </div>
+    `
+});
+
+
+full.component('robotApp', {
+    props: ['what', 'locked'],
+    data() {
+        return{
+            count: 0,
+            curUpgrade: 0,
+            per: 0,
+
+            cost: {
+
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
+            
+            }
+        }
+
+    },
+    methods: {
+        updateStat() {
+            this.cost.comp = Math.round(1.5 * (1.09) ** this.curUpgrade);
+            if (!boardsApp.ishide || this.curUpgrade > 100) this.cost.board = Math.round(1.2 * (1.09) ** this.curUpgrade);
+            if (!chips.ishide || this.curUpgrade > 500) this.cost.chip = Math.round(1.04 * (1.09) ** this.curUpgrade)
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
+            this.per = Math.round((this.curUpgrade + 1) * 0.2);
+        },
+
+    }
+
+})
+
+
+
+
+
 full.mount('#full');
