@@ -635,6 +635,94 @@ full.component('robotApp', {
 
 });
 
+full.component('printerApp', {
+    props: ['what', 'locked'],
+    data() {
+        return {
+            what: "Printer",
+            count: 0,
+            curUpgrade: 0,
+            per: 0,
+            ishide: true,
+
+            cost: {
+
+                comp: 0,
+                board: 0,
+                chip: 0,
+                cpu: 0
+
+            }
+        }
+
+    },
+    methods: {
+        getMod() {
+            return this.per * this.count;
+
+        },
+        updateStat() {
+            this.cost.comp = Math.round(1.5 * (1.09) ** (this.curUpgrade * 2));
+            this.cost.board = Math.round(1.2 * (2) ** this.curUpgrade);
+            if (!chips.ishide || this.curUpgrade > 500) this.cost.chip = Math.round(1.04 * (1.09) ** this.curUpgrade)
+            if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
+            this.per = Math.round(this.curUpgrade * 1.3);
+        },
+
+        DoBuy() {
+            if (!DoCost(this.cost)) return;
+
+            this.curUpgrade++;
+            this.updateStat();
+
+        },
+
+        start() {
+            this.updateStat();
+        },
+
+        addComp() {
+            if (boardsApp.count < this.getcost()) return
+            boardsApp.count -= this.getcost();
+            this.count += 1;
+
+        },
+
+        getcost() {
+            return Math.round(1.4 * 2 ** (1.2 * this.count))
+
+        }
+
+    },
+    template:
+    `
+    <div v-if="!ishide">
+    <div class="container-fluid glass mt-1">
+    <div class="row text-center "><h3>{{what}}: <span class=""> {{count}}</span></h3></div>
+    <div class="row "><span class="text-center"> per sec:{{getMod()}}</span></div>
+        <div class="row ">
+        <div class="col-1"></div>
+            <div class="col-3">
+            <div class="row">
+                <button  @click='addComp' class="btn btn-dark me-2" >({{getcost()}})</button> 
+            </div>
+            <div class="row">
+                <button @click="DoBuy" class="btn btn-light me-2"><img src="./image/upgrade.jpg" alt="Upgrade arrow" class="upgrade"> </button>
+            </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col mb-2">
+               
+                <div>Transistors: {{cost.comp}}</div>
+                <div >Board: {{cost.board}}</div>
+                <div> Chips: {{cost.chip}}</div>
+                <div>Cpu: {{cost.cpu}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+`
+});
 
 
 
