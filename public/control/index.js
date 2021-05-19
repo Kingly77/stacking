@@ -17,7 +17,7 @@ function DoCost(cost) {
 
     if (!(chips.count >= cost.chip && boardsApp.count >= cost.board && compApp.count >= cost.comp && cpuApp.count >= cost.cpu)) return false
 
-    chips.chips -= cost.chip;
+    chips.count -= cost.chip;
     boardsApp.count -= cost.board;
     compApp.count -= cost.comp;
     cpuApp.count -= cost.cpu
