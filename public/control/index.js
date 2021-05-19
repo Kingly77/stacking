@@ -753,7 +753,7 @@ const assembler = Vue.createApp({
         },
         updateStat() {
             this.cost.comp = Math.round(1.5 * (1.09) ** (1.1 ** (this.curUpgrade * 1.25)));
-            this.cost.board = Math.round(1.2 * (2) ** (1.01 ** (this.curUpgrade * 1.25)));
+            if (!boardsApp.ishide || this.curUpgrade > 750)this.cost.board = Math.round(1.2 * (2) ** (1.01 ** (this.curUpgrade * 1.25)));
             this.cost.chip = Math.round(1.04 * (1.09) ** (1.001 ** (this.curUpgrade * 1.25)))
             if (!cpuApp.ishide || this.curUpgrade > 750) this.cost.cpu = Math.round(1.01 * (1.09) ** this.curUpgrade)
             this.per = Math.round(this.curUpgrade * 1.3);
